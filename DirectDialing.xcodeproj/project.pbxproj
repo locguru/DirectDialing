@@ -1,0 +1,422 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7C2B40241492EA2E00D09F93 /* AccessNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2B40221492EA2E00D09F93 /* AccessNumber.m */; };
+		7C2B40251492EA2E00D09F93 /* AccessNumber.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2B40231492EA2E00D09F93 /* AccessNumber.xib */; };
+		7C41E96414DE1E3A000036F9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C41E96614DE1E3A000036F9 /* Localizable.strings */; };
+		7C4927B414912333007A0AFA /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4927B214912333007A0AFA /* AddressBook.framework */; };
+		7C4927B514912333007A0AFA /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4927B314912333007A0AFA /* AddressBookUI.framework */; };
+		7C6871ED14DF9BAC0033F4E9 /* newbackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C6871EC14DF9BAC0033F4E9 /* newbackground.png */; };
+		7CB9F3E5148FFC9A00F9F804 /* tab-keypad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F3E4148FFC9A00F9F804 /* tab-keypad.png */; };
+		7CB9F3F6149002C200F9F804 /* tel-0-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F3E8149002C200F9F804 /* tel-0-pressed.png */; };
+		7CB9F3F7149002C200F9F804 /* tel-1-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F3E9149002C200F9F804 /* tel-1-pressed.png */; };
+		7CB9F3F8149002C200F9F804 /* tel-2-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F3EA149002C200F9F804 /* tel-2-pressed.png */; };
+		7CB9F3F9149002C200F9F804 /* tel-3-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F3EB149002C200F9F804 /* tel-3-pressed.png */; };
+		7CB9F3FA149002C200F9F804 /* tel-4-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F3EC149002C200F9F804 /* tel-4-pressed.png */; };
+		7CB9F3FB149002C200F9F804 /* tel-5-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F3ED149002C200F9F804 /* tel-5-pressed.png */; };
+		7CB9F3FC149002C200F9F804 /* tel-6-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F3EE149002C200F9F804 /* tel-6-pressed.png */; };
+		7CB9F3FD149002C200F9F804 /* tel-7-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F3EF149002C200F9F804 /* tel-7-pressed.png */; };
+		7CB9F3FE149002C200F9F804 /* tel-8-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F3F0149002C200F9F804 /* tel-8-pressed.png */; };
+		7CB9F3FF149002C200F9F804 /* tel-9-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F3F1149002C200F9F804 /* tel-9-pressed.png */; };
+		7CB9F400149002C200F9F804 /* tel-back-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F3F2149002C200F9F804 /* tel-back-pressed.png */; };
+		7CB9F401149002C200F9F804 /* tel-call-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F3F3149002C200F9F804 /* tel-call-pressed.png */; };
+		7CB9F402149002C200F9F804 /* tel-numeral-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F3F4149002C200F9F804 /* tel-numeral-pressed.png */; };
+		7CB9F403149002C200F9F804 /* tel-star-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F3F5149002C200F9F804 /* tel-star-pressed.png */; };
+		7CB9F405149002D900F9F804 /* tel-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F404149002D900F9F804 /* tel-normal.png */; };
+		7CB9F407149002FB00F9F804 /* caller-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F406149002FB00F9F804 /* caller-background.png */; };
+		7CB9F4091490030900F9F804 /* tab-contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F4081490030900F9F804 /* tab-contacts.png */; };
+		7CBE75DD1495327000086AE9 /* AddNewAccessNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE75DB1495327000086AE9 /* AddNewAccessNumber.m */; };
+		7CBE75DE1495327000086AE9 /* AddNewAccessNumber.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE75DC1495327000086AE9 /* AddNewAccessNumber.xib */; };
+		7CE9D7E9148FB9CD006FC6B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE9D7E8148FB9CD006FC6B7 /* UIKit.framework */; };
+		7CE9D7EB148FB9CD006FC6B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE9D7EA148FB9CD006FC6B7 /* Foundation.framework */; };
+		7CE9D7ED148FB9CD006FC6B7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE9D7EC148FB9CD006FC6B7 /* CoreGraphics.framework */; };
+		7CE9D7F3148FB9CD006FC6B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7CE9D7F1148FB9CD006FC6B7 /* InfoPlist.strings */; };
+		7CE9D7F5148FB9CD006FC6B7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE9D7F4148FB9CD006FC6B7 /* main.m */; };
+		7CE9D7F9148FB9CD006FC6B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE9D7F8148FB9CD006FC6B7 /* AppDelegate.m */; };
+		7CE9D7FC148FB9CD006FC6B7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE9D7FB148FB9CD006FC6B7 /* ViewController.m */; };
+		7CE9D7FF148FB9CD006FC6B7 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE9D7FD148FB9CD006FC6B7 /* ViewController.xib */; };
+		7CE9D842148FBB8D006FC6B7 /* SettingsTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE9D840148FBB8D006FC6B7 /* SettingsTabViewController.m */; };
+		7CE9D843148FBB8D006FC6B7 /* SettingsTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE9D841148FBB8D006FC6B7 /* SettingsTabViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7C2B40211492EA2E00D09F93 /* AccessNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AccessNumber.h; path = ../AccessNumber.h; sourceTree = "<group>"; };
+		7C2B40221492EA2E00D09F93 /* AccessNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AccessNumber.m; path = ../AccessNumber.m; sourceTree = "<group>"; };
+		7C2B40231492EA2E00D09F93 /* AccessNumber.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AccessNumber.xib; path = ../AccessNumber.xib; sourceTree = "<group>"; };
+		7C41E96514DE1E3A000036F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7C41E96714DE1E5F000036F9 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7C41E96814DE1EF6000036F9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7C4927B214912333007A0AFA /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		7C4927B314912333007A0AFA /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		7C6871EC14DF9BAC0033F4E9 /* newbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newbackground.png; sourceTree = "<group>"; };
+		7CB9F3E4148FFC9A00F9F804 /* tab-keypad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-keypad.png"; path = "DirectDialing/tab-keypad.png"; sourceTree = "<group>"; };
+		7CB9F3E8149002C200F9F804 /* tel-0-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-0-pressed.png"; sourceTree = "<group>"; };
+		7CB9F3E9149002C200F9F804 /* tel-1-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-1-pressed.png"; sourceTree = "<group>"; };
+		7CB9F3EA149002C200F9F804 /* tel-2-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-2-pressed.png"; sourceTree = "<group>"; };
+		7CB9F3EB149002C200F9F804 /* tel-3-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-3-pressed.png"; sourceTree = "<group>"; };
+		7CB9F3EC149002C200F9F804 /* tel-4-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-4-pressed.png"; sourceTree = "<group>"; };
+		7CB9F3ED149002C200F9F804 /* tel-5-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-5-pressed.png"; sourceTree = "<group>"; };
+		7CB9F3EE149002C200F9F804 /* tel-6-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-6-pressed.png"; sourceTree = "<group>"; };
+		7CB9F3EF149002C200F9F804 /* tel-7-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-7-pressed.png"; sourceTree = "<group>"; };
+		7CB9F3F0149002C200F9F804 /* tel-8-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-8-pressed.png"; sourceTree = "<group>"; };
+		7CB9F3F1149002C200F9F804 /* tel-9-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-9-pressed.png"; sourceTree = "<group>"; };
+		7CB9F3F2149002C200F9F804 /* tel-back-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-back-pressed.png"; sourceTree = "<group>"; };
+		7CB9F3F3149002C200F9F804 /* tel-call-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-call-pressed.png"; sourceTree = "<group>"; };
+		7CB9F3F4149002C200F9F804 /* tel-numeral-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-numeral-pressed.png"; sourceTree = "<group>"; };
+		7CB9F3F5149002C200F9F804 /* tel-star-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-star-pressed.png"; sourceTree = "<group>"; };
+		7CB9F404149002D900F9F804 /* tel-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-normal.png"; sourceTree = "<group>"; };
+		7CB9F406149002FB00F9F804 /* caller-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "caller-background.png"; sourceTree = "<group>"; };
+		7CB9F4081490030900F9F804 /* tab-contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-contacts.png"; sourceTree = "<group>"; };
+		7CBE75DA1495327000086AE9 /* AddNewAccessNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddNewAccessNumber.h; path = ../AddNewAccessNumber.h; sourceTree = "<group>"; };
+		7CBE75DB1495327000086AE9 /* AddNewAccessNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddNewAccessNumber.m; path = ../AddNewAccessNumber.m; sourceTree = "<group>"; };
+		7CBE75DC1495327000086AE9 /* AddNewAccessNumber.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddNewAccessNumber.xib; path = ../AddNewAccessNumber.xib; sourceTree = "<group>"; };
+		7CE9D7E4148FB9CD006FC6B7 /* DirectDialing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DirectDialing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CE9D7E8148FB9CD006FC6B7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7CE9D7EA148FB9CD006FC6B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7CE9D7EC148FB9CD006FC6B7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7CE9D7F0148FB9CD006FC6B7 /* DirectDialing-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DirectDialing-Info.plist"; sourceTree = "<group>"; };
+		7CE9D7F2148FB9CD006FC6B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7CE9D7F4148FB9CD006FC6B7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7CE9D7F6148FB9CD006FC6B7 /* DirectDialing-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DirectDialing-Prefix.pch"; sourceTree = "<group>"; };
+		7CE9D7F7148FB9CD006FC6B7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7CE9D7F8148FB9CD006FC6B7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7CE9D7FA148FB9CD006FC6B7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		7CE9D7FB148FB9CD006FC6B7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7CE9D7FE148FB9CD006FC6B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		7CE9D83F148FBB8D006FC6B7 /* SettingsTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTabViewController.h; sourceTree = "<group>"; };
+		7CE9D840148FBB8D006FC6B7 /* SettingsTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTabViewController.m; sourceTree = "<group>"; };
+		7CE9D841148FBB8D006FC6B7 /* SettingsTabViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsTabViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7CE9D7E1148FB9CD006FC6B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7C4927B414912333007A0AFA /* AddressBook.framework in Frameworks */,
+				7C4927B514912333007A0AFA /* AddressBookUI.framework in Frameworks */,
+				7CE9D7E9148FB9CD006FC6B7 /* UIKit.framework in Frameworks */,
+				7CE9D7EB148FB9CD006FC6B7 /* Foundation.framework in Frameworks */,
+				7CE9D7ED148FB9CD006FC6B7 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7CB9F3E7149002AA00F9F804 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				7CB9F406149002FB00F9F804 /* caller-background.png */,
+				7C6871EC14DF9BAC0033F4E9 /* newbackground.png */,
+				7CB9F4081490030900F9F804 /* tab-contacts.png */,
+				7CB9F3E4148FFC9A00F9F804 /* tab-keypad.png */,
+				7CB9F3E8149002C200F9F804 /* tel-0-pressed.png */,
+				7CB9F3E9149002C200F9F804 /* tel-1-pressed.png */,
+				7CB9F3EA149002C200F9F804 /* tel-2-pressed.png */,
+				7CB9F3EB149002C200F9F804 /* tel-3-pressed.png */,
+				7CB9F3EC149002C200F9F804 /* tel-4-pressed.png */,
+				7CB9F3ED149002C200F9F804 /* tel-5-pressed.png */,
+				7CB9F3EE149002C200F9F804 /* tel-6-pressed.png */,
+				7CB9F3EF149002C200F9F804 /* tel-7-pressed.png */,
+				7CB9F3F0149002C200F9F804 /* tel-8-pressed.png */,
+				7CB9F3F1149002C200F9F804 /* tel-9-pressed.png */,
+				7CB9F3F2149002C200F9F804 /* tel-back-pressed.png */,
+				7CB9F3F3149002C200F9F804 /* tel-call-pressed.png */,
+				7CB9F3F4149002C200F9F804 /* tel-numeral-pressed.png */,
+				7CB9F3F5149002C200F9F804 /* tel-star-pressed.png */,
+				7CB9F404149002D900F9F804 /* tel-normal.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		7CE9D7D9148FB9CC006FC6B7 = {
+			isa = PBXGroup;
+			children = (
+				7C41E96614DE1E3A000036F9 /* Localizable.strings */,
+				7CB9F3E7149002AA00F9F804 /* Images */,
+				7CE9D7EE148FB9CD006FC6B7 /* DirectDialing */,
+				7CE9D7E7148FB9CD006FC6B7 /* Frameworks */,
+				7CE9D7E5148FB9CD006FC6B7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7CE9D7E5148FB9CD006FC6B7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7CE9D7E4148FB9CD006FC6B7 /* DirectDialing.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7CE9D7E7148FB9CD006FC6B7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7C4927B214912333007A0AFA /* AddressBook.framework */,
+				7C4927B314912333007A0AFA /* AddressBookUI.framework */,
+				7CE9D7E8148FB9CD006FC6B7 /* UIKit.framework */,
+				7CE9D7EA148FB9CD006FC6B7 /* Foundation.framework */,
+				7CE9D7EC148FB9CD006FC6B7 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7CE9D7EE148FB9CD006FC6B7 /* DirectDialing */ = {
+			isa = PBXGroup;
+			children = (
+				7CE9D7F7148FB9CD006FC6B7 /* AppDelegate.h */,
+				7CE9D7F8148FB9CD006FC6B7 /* AppDelegate.m */,
+				7C2B40211492EA2E00D09F93 /* AccessNumber.h */,
+				7C2B40221492EA2E00D09F93 /* AccessNumber.m */,
+				7C2B40231492EA2E00D09F93 /* AccessNumber.xib */,
+				7CE9D83F148FBB8D006FC6B7 /* SettingsTabViewController.h */,
+				7CE9D840148FBB8D006FC6B7 /* SettingsTabViewController.m */,
+				7CE9D841148FBB8D006FC6B7 /* SettingsTabViewController.xib */,
+				7CE9D7FA148FB9CD006FC6B7 /* ViewController.h */,
+				7CE9D7FB148FB9CD006FC6B7 /* ViewController.m */,
+				7CE9D7FD148FB9CD006FC6B7 /* ViewController.xib */,
+				7CBE75DA1495327000086AE9 /* AddNewAccessNumber.h */,
+				7CBE75DB1495327000086AE9 /* AddNewAccessNumber.m */,
+				7CBE75DC1495327000086AE9 /* AddNewAccessNumber.xib */,
+				7CE9D7EF148FB9CD006FC6B7 /* Supporting Files */,
+			);
+			path = DirectDialing;
+			sourceTree = "<group>";
+		};
+		7CE9D7EF148FB9CD006FC6B7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7CE9D7F0148FB9CD006FC6B7 /* DirectDialing-Info.plist */,
+				7CE9D7F1148FB9CD006FC6B7 /* InfoPlist.strings */,
+				7CE9D7F4148FB9CD006FC6B7 /* main.m */,
+				7CE9D7F6148FB9CD006FC6B7 /* DirectDialing-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7CE9D7E3148FB9CD006FC6B7 /* DirectDialing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7CE9D802148FB9CD006FC6B7 /* Build configuration list for PBXNativeTarget "DirectDialing" */;
+			buildPhases = (
+				7CE9D7E0148FB9CD006FC6B7 /* Sources */,
+				7CE9D7E1148FB9CD006FC6B7 /* Frameworks */,
+				7CE9D7E2148FB9CD006FC6B7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DirectDialing;
+			productName = DirectDialing;
+			productReference = 7CE9D7E4148FB9CD006FC6B7 /* DirectDialing.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7CE9D7DB148FB9CC006FC6B7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 7CE9D7DE148FB9CC006FC6B7 /* Build configuration list for PBXProject "DirectDialing" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				he,
+				es,
+			);
+			mainGroup = 7CE9D7D9148FB9CC006FC6B7;
+			productRefGroup = 7CE9D7E5148FB9CD006FC6B7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7CE9D7E3148FB9CD006FC6B7 /* DirectDialing */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7CE9D7E2148FB9CD006FC6B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CE9D7F3148FB9CD006FC6B7 /* InfoPlist.strings in Resources */,
+				7CE9D7FF148FB9CD006FC6B7 /* ViewController.xib in Resources */,
+				7CE9D843148FBB8D006FC6B7 /* SettingsTabViewController.xib in Resources */,
+				7CB9F3E5148FFC9A00F9F804 /* tab-keypad.png in Resources */,
+				7CB9F3F6149002C200F9F804 /* tel-0-pressed.png in Resources */,
+				7CB9F3F7149002C200F9F804 /* tel-1-pressed.png in Resources */,
+				7CB9F3F8149002C200F9F804 /* tel-2-pressed.png in Resources */,
+				7CB9F3F9149002C200F9F804 /* tel-3-pressed.png in Resources */,
+				7CB9F3FA149002C200F9F804 /* tel-4-pressed.png in Resources */,
+				7CB9F3FB149002C200F9F804 /* tel-5-pressed.png in Resources */,
+				7CB9F3FC149002C200F9F804 /* tel-6-pressed.png in Resources */,
+				7CB9F3FD149002C200F9F804 /* tel-7-pressed.png in Resources */,
+				7CB9F3FE149002C200F9F804 /* tel-8-pressed.png in Resources */,
+				7CB9F3FF149002C200F9F804 /* tel-9-pressed.png in Resources */,
+				7CB9F400149002C200F9F804 /* tel-back-pressed.png in Resources */,
+				7CB9F401149002C200F9F804 /* tel-call-pressed.png in Resources */,
+				7CB9F402149002C200F9F804 /* tel-numeral-pressed.png in Resources */,
+				7CB9F403149002C200F9F804 /* tel-star-pressed.png in Resources */,
+				7CB9F405149002D900F9F804 /* tel-normal.png in Resources */,
+				7CB9F407149002FB00F9F804 /* caller-background.png in Resources */,
+				7CB9F4091490030900F9F804 /* tab-contacts.png in Resources */,
+				7C2B40251492EA2E00D09F93 /* AccessNumber.xib in Resources */,
+				7CBE75DE1495327000086AE9 /* AddNewAccessNumber.xib in Resources */,
+				7C41E96414DE1E3A000036F9 /* Localizable.strings in Resources */,
+				7C6871ED14DF9BAC0033F4E9 /* newbackground.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7CE9D7E0148FB9CD006FC6B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CE9D7F5148FB9CD006FC6B7 /* main.m in Sources */,
+				7CE9D7F9148FB9CD006FC6B7 /* AppDelegate.m in Sources */,
+				7CE9D7FC148FB9CD006FC6B7 /* ViewController.m in Sources */,
+				7CE9D842148FBB8D006FC6B7 /* SettingsTabViewController.m in Sources */,
+				7C2B40241492EA2E00D09F93 /* AccessNumber.m in Sources */,
+				7CBE75DD1495327000086AE9 /* AddNewAccessNumber.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7C41E96614DE1E3A000036F9 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7C41E96514DE1E3A000036F9 /* en */,
+				7C41E96714DE1E5F000036F9 /* he */,
+				7C41E96814DE1EF6000036F9 /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		7CE9D7F1148FB9CD006FC6B7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7CE9D7F2148FB9CD006FC6B7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		7CE9D7FD148FB9CD006FC6B7 /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7CE9D7FE148FB9CD006FC6B7 /* en */,
+			);
+			name = ViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7CE9D800148FB9CD006FC6B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		7CE9D801148FB9CD006FC6B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7CE9D803148FB9CD006FC6B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DirectDialing/DirectDialing-Prefix.pch";
+				INFOPLIST_FILE = "DirectDialing/DirectDialing-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		7CE9D804148FB9CD006FC6B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DirectDialing/DirectDialing-Prefix.pch";
+				INFOPLIST_FILE = "DirectDialing/DirectDialing-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7CE9D7DE148FB9CC006FC6B7 /* Build configuration list for PBXProject "DirectDialing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CE9D800148FB9CD006FC6B7 /* Debug */,
+				7CE9D801148FB9CD006FC6B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7CE9D802148FB9CD006FC6B7 /* Build configuration list for PBXNativeTarget "DirectDialing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CE9D803148FB9CD006FC6B7 /* Debug */,
+				7CE9D804148FB9CD006FC6B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7CE9D7DB148FB9CC006FC6B7 /* Project object */;
+}
