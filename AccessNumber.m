@@ -221,7 +221,7 @@
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 
     if (buttonIndex == 0)
-    {
+    {       
         NSLog(@"cancel");
     }
     else
@@ -243,6 +243,9 @@
 //    NSLog(@"listOfItems %@", listOfItems);    
 //    NSLog(@"trasnferedNumber.length: %d", trasnferedNumber.length);
 
+    if (trasnferedNumber.length != 0) 
+    {
+        
     if (trasnferedNumber.length < 9)
     {
     NSString *formattedString = trasnferedNumber;
@@ -272,6 +275,7 @@
      }
  
     [tblSimpleTable reloadData];
+    }
 }
 
 //***** ADDRESS BOOK DELEGATE METHODS *****//
@@ -461,7 +465,7 @@
         NSLog(@"listOfItems %@", listOfItems);    
 
         if ([section count] == 0) {
-            self.navigationItem.rightBarButtonItem = nil;
+            //self.navigationItem.rightBarButtonItem = nil;
             //        self.navigationItem.rightBarButtonItem.enabled = NO;  
             sectionIndicator = NO;
             NSLog(@"listOfItems %@", listOfItems);    
@@ -472,6 +476,7 @@
             
             NSLog(@"listOfItems %@", listOfItems);    
 
+            //[self setEditing:YES animated:YES];  
         }
         else
         {
@@ -493,7 +498,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-  //  NSLog(@"****************** entering tableView:didSelectRowAtIndexPath");
+  NSLog(@"****************** entering tableView:didSelectRowAtIndexPath");
    
     //Delesect selected cell 
    [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -552,6 +557,9 @@
 
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    NSLog(@"****************** entering tableView:canEditRowAtIndexPath");
+    
     // Replace 0 with whichever section you want editable
     if (indexPath.section == 0 && sectionIndicator == YES) {
         return YES;
@@ -562,8 +570,13 @@
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     
+    NSLog(@"****************** entering setEditing:animated");
+    
     [super setEditing:editing animated:animated];
     [tblSimpleTable setEditing:editing animated:animated];
+    
+    
+    self.navigationItem.rightBarButtonItem = nil;
     
 //    if (editing) {
 //         editButton.enabled = NO;
@@ -575,6 +588,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
+    NSLog(@"****************** entering tableView:titleForHeaderInSection");
 //    NSLog(@"section is %d", section);
 //    NSLog(@"sectionIndicator %d", sectionIndicator);
 
@@ -601,6 +615,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+        NSLog(@"****************** entering tableView:didEndEditingRowAtIndexPath");
         [tblSimpleTable reloadData];
 }
 
