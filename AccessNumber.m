@@ -26,6 +26,11 @@
 @synthesize phoneNumber;
 @synthesize fullNumber;
 @synthesize accessNumber;
+@synthesize lastIndexPath;
+@synthesize selectedIndexPath;
+
+@synthesize cellLabel1;
+@synthesize cellLabel2;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,6 +47,9 @@
         phoneNumber = [[NSString alloc] initWithString:@""];
         fullNumber = [[NSString alloc] initWithString:@""];
         accessNumber = [[NSString alloc] initWithString:@""];
+        cellLabel1 = [[UILabel alloc] init];
+        cellLabel2 = [[UILabel alloc] init];
+
     }
     return self;
 }
@@ -60,7 +68,9 @@
 {
     [super viewDidLoad];
     
-    accessNumberChecked = NO;  
+    accessNumberChecked = NO; 
+    cellLabel1.text = @"Access Number Name";
+    cellLabel2.text = @"Access Number";
     
 //    //ADDING BACKGROUND IMAGE 
 //    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
@@ -147,6 +157,7 @@
     [listOfItems addObject:addNewAccessNumberLabel];
     [listOfItems addObject:launchABArray];
 
+    selectedIndexPath = nil;
 }
 
 
@@ -209,11 +220,28 @@
     
     NSString *myMessage = [NSString stringWithFormat:@"Please confirm dialing to:%@ with the access code:%@", phoneNumber , accessNumber];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Direct Dialing" 
+    NSLog(@"accessNumber is: %@", accessNumber);
+    NSLog(@"phone number is: %@", phoneNumber);
+
+    UIAlertView *alert;
+    
+    if([accessNumber length] == 0 | [phoneNumber length] == 0)
+    {
+    alert = [[UIAlertView alloc] initWithTitle:@"Direct Dialing" 
+                                                        message:@"Please enter an Access Number and try again"
+                                                       delegate:self 
+                                              cancelButtonTitle:@"Ok" 
+                                              otherButtonTitles:nil, nil];
+ 
+    }
+    else
+    {
+    alert = [[UIAlertView alloc] initWithTitle:@"Direct Dialing" 
                                        message:myMessage
                                       delegate:self 
                              cancelButtonTitle:@"Cancel" 
                              otherButtonTitles:@"Ok", nil];
+    }
     [alert show];
 }
 
@@ -331,19 +359,46 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
 
+        //cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier]; //try here diff styles
+        //cell = [self getCellContentView:CellIdentifier];
+    
+    //3 Section case
+    if ( sectionIndicator == YES) {
+        if (indexPath.section == 0) {      
+            cell = [self getCellContentView:CellIdentifier];
+            cellLabel1 = (UILabel *)[cell viewWithTag:1];
+            cellLabel2 = (UILabel *)[cell viewWithTag:2];
+            cellLabel1.text = @"Sub Value1";
+            cellLabel1.backgroundColor = [UIColor clearColor];
+            cellLabel2.text = @"Sub Value2";
+            cellLabel2.backgroundColor = [UIColor clearColor];
+
+        }   
+        else {    
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier]; //try here diff styles
+            NSArray *array = [[NSArray alloc] init];
+            array = [listOfItems objectAtIndex:indexPath.section];
+            cell.textLabel.text = [array objectAtIndex:indexPath.row];
+            cell.textLabel.font = [UIFont systemFontOfSize:14];
+            cell.textLabel.textColor = [UIColor colorWithRed:.196 green:0.3098 blue:0.52 alpha:1.0];
+        }
+    }
+    //2 Section Case
+    else
+    {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier]; //try here diff styles
+        NSArray *array = [[NSArray alloc] init];
+        array = [listOfItems objectAtIndex:indexPath.section];
+        cell.textLabel.text = [array objectAtIndex:indexPath.row];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.textLabel.textColor = [UIColor colorWithRed:.196 green:0.3098 blue:0.52 alpha:1.0];
+
     }
 
-    NSArray *array = [[NSArray alloc] init];
-    array = [listOfItems objectAtIndex:indexPath.section];
-    NSString *cellValue = [array objectAtIndex:indexPath.row];
-    cell.textLabel.text = cellValue;
-    cell.textLabel.font = [UIFont systemFontOfSize:14];
-    cell.textLabel.textColor = [UIColor colorWithRed:.196 green:0.3098 blue:0.52 alpha:1.0];
     
- //   NSLog(@"array %@", array);
- //   NSLog(@"cellValue %@", cellValue);
-
+    }
+    
+    //Determine accessory indicators 
     if (sectionIndicator == YES){
 
         if (indexPath.section == 0) {
@@ -359,9 +414,12 @@
         if (indexPath.section == 0) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         }
-        else if (indexPath.section == 1) {
+        else
+        {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryType = UITableViewCellAccessoryNone;
         }
     }
     
@@ -405,32 +463,7 @@
 }
 
 
-- (UITableViewCell *) getCellContentView:(NSString *)cellIdentifier {
-	
-    NSLog(@"****************** entering getCellContentView");
 
-    //	CGRect CellFrame = CGRectMake(0, 0, 300, 60);
-	CGRect Label1Frame = CGRectMake(10, 10, 290, 25);
-	CGRect Label2Frame = CGRectMake(10, 33, 290, 25);
-	UILabel *lblTemp;
-	
-    //	UITableViewCell *cell = [[[UITableViewCell alloc] initWithFrame:CellFrame reuseIdentifier:cellIdentifier] autorelease];
-	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier ];
-	
-	//Initialize Label with tag 1.
-	lblTemp = [[UILabel alloc] initWithFrame:Label1Frame];
-	lblTemp.tag = 1;
-	[cell.contentView addSubview:lblTemp];
-	
-	//Initialize Label with tag 2.
-	lblTemp = [[UILabel alloc] initWithFrame:Label2Frame];
-	lblTemp.tag = 2;
-	lblTemp.font = [UIFont boldSystemFontOfSize:12];
-	lblTemp.textColor = [UIColor lightGrayColor];
-	[cell.contentView addSubview:lblTemp];
-	
-	return cell;
-}
 
 
 // Update the data model according to edit actions delete or insert.
@@ -476,6 +509,9 @@
             
             NSLog(@"listOfItems %@", listOfItems);    
 
+            NSLog(@"indexPath.section %d", indexPath.section);
+            [tblSimpleTable reloadData];
+            //[tblSimpleTable reloadSections:[NSIndexSet indexSetWithIndex:[section count]] withRowAnimation:UITableViewRowAnimationNone];
             //[self setEditing:YES animated:YES];  
         }
         else
@@ -500,6 +536,24 @@
     
   NSLog(@"****************** entering tableView:didSelectRowAtIndexPath");
    
+    //Selecting Checkmark based on selection
+    if (indexPath.section == 0 && sectionIndicator == YES) {
+          
+        int newRow = [indexPath row];
+        int oldRow = [lastIndexPath row];
+        
+        if (newRow != oldRow)
+        {
+            UITableViewCell *newCell = [tableView cellForRowAtIndexPath: indexPath];
+            newCell.accessoryType = UITableViewCellAccessoryCheckmark;
+            
+            UITableViewCell *oldCell = [tableView cellForRowAtIndexPath: lastIndexPath];
+            oldCell.accessoryType = UITableViewCellAccessoryNone;
+            
+            lastIndexPath = indexPath;
+        }
+    }
+    
     //Delesect selected cell 
    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -532,6 +586,58 @@
 //    return 20.0;
 //}
 
+- (UITableViewCell *) getCellContentView:(NSString *)cellIdentifier {
+	
+    NSLog(@"****************** entering getCellContentView");
+    
+    CGRect CellFrame = CGRectMake(0, 0, 300, 60);
+	CGRect Label1Frame = CGRectMake(10, 10, 290, 20);
+	CGRect Label2Frame = CGRectMake(10, 33, 290, 20);
+	UILabel *lblTemp;
+	
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithFrame:CellFrame reuseIdentifier:cellIdentifier];
+	//UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier ];
+	
+	//Initialize Label with tag 1.
+	lblTemp = [[UILabel alloc] initWithFrame:Label1Frame];
+	lblTemp.tag = 1;
+	[cell.contentView addSubview:lblTemp];
+	
+	//Initialize Label with tag 2.
+	lblTemp = [[UILabel alloc] initWithFrame:Label2Frame];
+	lblTemp.tag = 2;
+	lblTemp.font = [UIFont boldSystemFontOfSize:12];
+	lblTemp.textColor = [UIColor lightGrayColor];
+	[cell.contentView addSubview:lblTemp];
+	
+	return cell;
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+    if ( sectionIndicator == YES) {
+        if (indexPath.section == 0) {        
+            return 60;
+        }   
+        else if (indexPath.section == 1) {
+            return 44;
+        }     
+        else
+            return 44;
+    }
+    else
+    {
+        if (indexPath.section == 0) {        
+            return 44;
+        }     
+        else
+            return 44;
+    }
+
+	return 60;
+}
+
 -(CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section
 {
     if ( sectionIndicator == YES) {
@@ -539,7 +645,7 @@
             return 20;
         }   
         else if (section == 1) {
-            return 50;
+            return 30;
         }     
         else
             return 80;
@@ -547,7 +653,7 @@
     else
     {
         if (section == 0) {        
-            return 50;
+            return 30;
         }     
         else
             return 80;
@@ -558,7 +664,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    NSLog(@"****************** entering tableView:canEditRowAtIndexPath");
+   // NSLog(@"****************** entering tableView:canEditRowAtIndexPath");
     
     // Replace 0 with whichever section you want editable
     if (indexPath.section == 0 && sectionIndicator == YES) {
@@ -576,7 +682,7 @@
     [tblSimpleTable setEditing:editing animated:animated];
     
     
-    self.navigationItem.rightBarButtonItem = nil;
+    //self.navigationItem.rightBarButtonItem = nil;
     
 //    if (editing) {
 //         editButton.enabled = NO;
@@ -588,7 +694,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    NSLog(@"****************** entering tableView:titleForHeaderInSection");
+  //  NSLog(@"****************** entering tableView:titleForHeaderInSection");
 //    NSLog(@"section is %d", section);
 //    NSLog(@"sectionIndicator %d", sectionIndicator);
 
@@ -615,7 +721,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
-        NSLog(@"****************** entering tableView:didEndEditingRowAtIndexPath");
+   //     NSLog(@"****************** entering tableView:didEndEditingRowAtIndexPath");
         [tblSimpleTable reloadData];
 }
 

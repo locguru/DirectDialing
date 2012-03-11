@@ -32,6 +32,12 @@
     NSString *phoneNumber;
     NSString *fullNumber;
     NSString *accessNumber;
+    
+    NSIndexPath *lastIndexPath;
+    NSIndexPath *selectedIndexPath;
+    
+    UILabel *cellLabel1;
+    UILabel *cellLabel2;
 
 }
 
@@ -49,6 +55,10 @@
 @property (nonatomic, retain) NSString *fullNumber;
 @property (nonatomic, retain) NSString *accessNumber;
 @property (nonatomic, retain) UIScrollView *mainScrollView;
+@property (nonatomic, retain) NSIndexPath *lastIndexPath;
+@property (nonatomic, retain) NSIndexPath *selectedIndexPath;
+@property (nonatomic, retain) UILabel *cellLabel1;
+@property (nonatomic, retain) UILabel *cellLabel2;
 
 - (IBAction)dialNumber:(NSString *)phoneNum;
 - (IBAction)launchDialer:(id)sender;
