@@ -9,12 +9,25 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "AccessNumber.m"
-         timestampString = "353103458.277336"
+         timestampString = "353179366.181232"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "395"
-         endingLineNumber = "395"
+         startingLineNumber = "528"
+         endingLineNumber = "528"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DirectDialing/SettingsTabViewController.m"
+         timestampString = "353139510.537608"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "165"
+         endingLineNumber = "165"
+         landmarkName = "-dismissKeyboard:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

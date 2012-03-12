@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import "NumberDataObj.h"
 
 //#import "SettingsTabViewController.h"
 
@@ -24,7 +25,9 @@
     NSMutableArray *listOfItems;
     BOOL accessNumberChecked;
     BOOL sectionIndicator;
+    
     NSMutableArray *accessNumbers;
+    NumberDataObj *numDataObj;
     
     UIScrollView *mainScrollView;
     NSString *firstName;
@@ -59,6 +62,7 @@
 @property (nonatomic, retain) NSIndexPath *selectedIndexPath;
 @property (nonatomic, retain) UILabel *cellLabel1;
 @property (nonatomic, retain) UILabel *cellLabel2;
+@property (nonatomic, retain) NumberDataObj *numDataObj;
 
 - (IBAction)dialNumber:(NSString *)phoneNum;
 - (IBAction)launchDialer:(id)sender;

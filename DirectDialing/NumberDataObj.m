@@ -8,6 +8,21 @@
 
 #import "NumberDataObj.h"
 
-@implementation NumberDataObj
+@implementation NumberDataObj 
+
+@synthesize inputNum;
+@synthesize inputName;
+
+- (id)init
+{
+    self = [super init];
+    
+    if (self != nil) {
+        inputNum = [[NSString alloc] init];
+        inputName = [[NSString alloc] init];
+    }
+    
+    return self;
+}
 
 @end

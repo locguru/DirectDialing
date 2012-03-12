@@ -13,9 +13,11 @@
 @implementation SettingsTabViewController
 
 @synthesize textField;
+@synthesize nameTextField;
 @synthesize firstName;
 @synthesize lastName;
 @synthesize number;
+@synthesize accessNumberName;
 @synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -26,6 +28,7 @@
        // self.title = @"Settings";
         self.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemContacts tag:1];
         number = [[NSString alloc] init];
+        accessNumberName = [[NSString alloc] init];
     }
     return self;
 }
@@ -63,8 +66,17 @@
 
 
     //LABELS
-    UILabel *myLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 40, 280, 20)];
-	myLabel.text = @"Enter your access number:";
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 280, 20)];
+	nameLabel.text = @"Contact name:";
+	nameLabel.backgroundColor = [UIColor clearColor]; // [UIColor brownColor];
+    nameLabel.font = [UIFont boldSystemFontOfSize:16];;
+    nameLabel.textColor =  [UIColor colorWithRed:0.265 green:0.294 blue:0.367 alpha:1.0];
+    nameLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+    nameLabel.shadowOffset = CGSizeMake(0, 1);
+	[self.view addSubview:nameLabel];
+    
+    UILabel *myLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 110, 280, 20)];
+	myLabel.text = @"Access number:";
 	myLabel.backgroundColor = [UIColor clearColor]; // [UIColor brownColor];
     myLabel.font = [UIFont boldSystemFontOfSize:16];;
     myLabel.textColor =  [UIColor colorWithRed:0.265 green:0.294 blue:0.367 alpha:1.0];
@@ -72,9 +84,6 @@
     myLabel.shadowOffset = CGSizeMake(0, 1);
 	[self.view addSubview:myLabel];
 
-    
-    
-	[self.view addSubview:myLabel];
     
 //    UILabel *myLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(140, 150, 280, 40)];
 //	myLabel1.text = @"OR";
@@ -90,10 +99,22 @@
 
     
     //TEXT FIELD
-    textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 70, 300, 40)];
+    nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 45, 300, 40)];
+    nameTextField.borderStyle = UITextBorderStyleRoundedRect;
+    nameTextField.font = [UIFont systemFontOfSize:15];
+    nameTextField.placeholder = @"contact name";
+    nameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+    nameTextField.keyboardType = UIKeyboardTypeEmailAddress; // UIKeyboardTypePhonePad;
+    nameTextField.returnKeyType = UIReturnKeyNext;
+    nameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    nameTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;    
+    nameTextField.delegate = self;
+    [self.view addSubview:nameTextField];
+
+    textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 135, 300, 40)];
     textField.borderStyle = UITextBorderStyleRoundedRect;
     textField.font = [UIFont systemFontOfSize:15];
-    textField.placeholder = @"your access number";
+    textField.placeholder = @"access number";
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
     textField.keyboardType = UIKeyboardTypePhonePad; // UIKeyboardTypePhonePad;
     textField.returnKeyType = UIReturnKeyDone;
@@ -102,7 +123,7 @@
     textField.delegate = self;
     [self.view addSubview:textField];
 
-
+    
 //    //ADDING DIAL BUTTON
 //    UIButton *dialButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //    [dialButton addTarget:self action:@selector(showPicker:) forControlEvents:UIControlEventTouchUpInside];
@@ -115,7 +136,6 @@
 {
     ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
     picker.peoplePickerDelegate = self;
-    
     [self presentModalViewController:picker animated:YES];
 }
 
@@ -142,11 +162,14 @@
     [textField resignFirstResponder];
     
     number = textField.text;
+    accessNumberName = nameTextField.text;
 
     NSLog(@"number: %@", number);
     NSLog(@"textField1 is: %@", textField.text);
     
-    [self.delegate refreshTableView:number];
+//    [self.delegate refreshTableView:number:@"Itai"];
+    [self.delegate refreshTableView:number:accessNumberName];
+
 
 //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];            
 //    [defaults setObject:textField.text forKey:@"accessNumber"];

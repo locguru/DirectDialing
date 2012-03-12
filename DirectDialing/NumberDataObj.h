@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NumberDataObj : NSObject
+@interface NumberDataObj : NSObject {
+    
+    NSString *inputName;
+    NSString *inputNum;
+    
+}
+
+@property (nonatomic, retain) NSString *inputName;
+@property (nonatomic, retain) NSString *inputNum;
 
 @end

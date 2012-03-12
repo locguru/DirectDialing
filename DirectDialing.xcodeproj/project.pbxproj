@@ -33,6 +33,7 @@
 		7CB9F4091490030900F9F804 /* tab-contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F4081490030900F9F804 /* tab-contacts.png */; };
 		7CBE75DD1495327000086AE9 /* AddNewAccessNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE75DB1495327000086AE9 /* AddNewAccessNumber.m */; };
 		7CBE75DE1495327000086AE9 /* AddNewAccessNumber.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE75DC1495327000086AE9 /* AddNewAccessNumber.xib */; };
+		7CC6EA8F150C1C2900F20ED2 /* NumberDataObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC6EA8E150C1C2900F20ED2 /* NumberDataObj.m */; };
 		7CE9D7E9148FB9CD006FC6B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE9D7E8148FB9CD006FC6B7 /* UIKit.framework */; };
 		7CE9D7EB148FB9CD006FC6B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE9D7EA148FB9CD006FC6B7 /* Foundation.framework */; };
 		7CE9D7ED148FB9CD006FC6B7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE9D7EC148FB9CD006FC6B7 /* CoreGraphics.framework */; };
@@ -76,6 +77,8 @@
 		7CBE75DA1495327000086AE9 /* AddNewAccessNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddNewAccessNumber.h; path = ../AddNewAccessNumber.h; sourceTree = "<group>"; };
 		7CBE75DB1495327000086AE9 /* AddNewAccessNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddNewAccessNumber.m; path = ../AddNewAccessNumber.m; sourceTree = "<group>"; };
 		7CBE75DC1495327000086AE9 /* AddNewAccessNumber.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddNewAccessNumber.xib; path = ../AddNewAccessNumber.xib; sourceTree = "<group>"; };
+		7CC6EA8D150C1C2900F20ED2 /* NumberDataObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberDataObj.h; sourceTree = "<group>"; };
+		7CC6EA8E150C1C2900F20ED2 /* NumberDataObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberDataObj.m; sourceTree = "<group>"; };
 		7CE9D7E4148FB9CD006FC6B7 /* DirectDialing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DirectDialing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CE9D7E8148FB9CD006FC6B7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7CE9D7EA148FB9CD006FC6B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -175,6 +178,8 @@
 				7C2B40211492EA2E00D09F93 /* AccessNumber.h */,
 				7C2B40221492EA2E00D09F93 /* AccessNumber.m */,
 				7C2B40231492EA2E00D09F93 /* AccessNumber.xib */,
+				7CC6EA8D150C1C2900F20ED2 /* NumberDataObj.h */,
+				7CC6EA8E150C1C2900F20ED2 /* NumberDataObj.m */,
 				7CE9D83F148FBB8D006FC6B7 /* SettingsTabViewController.h */,
 				7CE9D840148FBB8D006FC6B7 /* SettingsTabViewController.m */,
 				7CE9D841148FBB8D006FC6B7 /* SettingsTabViewController.xib */,
@@ -293,6 +298,7 @@
 				7CE9D842148FBB8D006FC6B7 /* SettingsTabViewController.m in Sources */,
 				7C2B40241492EA2E00D09F93 /* AccessNumber.m in Sources */,
 				7CBE75DD1495327000086AE9 /* AddNewAccessNumber.m in Sources */,
+				7CC6EA8F150C1C2900F20ED2 /* NumberDataObj.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
