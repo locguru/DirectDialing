@@ -7,8 +7,9 @@
 //
 
 #import "SettingsTabViewController.h"
-#import <AddressBook/AddressBook.h>
-#import "AccessNumber.h"
+//#import <AddressBook/AddressBook.h>
+//#import "AccessNumber.h"
+
 
 @implementation SettingsTabViewController
 
@@ -124,12 +125,14 @@
     [self.view addSubview:textField];
 
     
+
 //    //ADDING DIAL BUTTON
 //    UIButton *dialButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //    [dialButton addTarget:self action:@selector(showPicker:) forControlEvents:UIControlEventTouchUpInside];
 //    dialButton.frame = CGRectMake(70, 280, 180, 40.0);
 //    dialButton.contentMode = UIViewContentModeScaleToFill;
 //    [self.view addSubview:dialButton];
+    
 }
 
 - (IBAction)showPicker:(id)sender 
@@ -157,20 +160,34 @@
     self.navigationItem.leftBarButtonItem.enabled = NO;
 }
 
-- (IBAction)dismissKeyboard:(id)sender{
+- (IBAction)dismissKeyboard:(UITextField *)textField1 {
     
-    [textField resignFirstResponder];
+ //   [textField resignFirstResponder];
+    
+//    if (textField1 == nameTextField) {
+        [textField resignFirstResponder];        
+//        
+//    } else {
+        [nameTextField resignFirstResponder];
+//    }   
+
     
     number = textField.text;
     accessNumberName = nameTextField.text;
 
     NSLog(@"number: %@", number);
     NSLog(@"textField1 is: %@", textField.text);
-    
-//    [self.delegate refreshTableView:number:@"Itai"];
+    NSLog(@"accessNumberName is: %@", accessNumberName);
+
+
+    //Adding new info to main view controller 
     [self.delegate refreshTableView:number:accessNumberName];
+    
+    //Adding new info to History table view
+   // [self.delegate1 addNewItem:@"itai" withNewBrand:@"Ram"];
 
-
+    
+    
 //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];            
 //    [defaults setObject:textField.text forKey:@"accessNumber"];
 
@@ -238,8 +255,14 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField1 {
+
+    if (textField1 == nameTextField) {
+        [textField becomeFirstResponder];        
+        
+    } else {
+        [nameTextField resignFirstResponder];
+    }   
     
-    [textField1 resignFirstResponder];
     return NO;
 }
 

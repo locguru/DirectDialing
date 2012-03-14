@@ -16,6 +16,7 @@
 - (void) refreshTableView:(NSString *) trasnferedNumber: (NSString *) transferedNumberName;
 @end
 
+
 @interface SettingsTabViewController : UIViewController <UITextFieldDelegate, ABPeoplePickerNavigationControllerDelegate, SettingsTabViewControllerDelegate> {
     
     UITextField *textField;
@@ -25,10 +26,10 @@
     IBOutlet UILabel *lastName;
     NSString *number;
     NSString *accessNumberName;
-
-     id <SettingsTabViewControllerDelegate> delegate;
     
+     id <SettingsTabViewControllerDelegate> delegate;
 }
+
 @property (nonatomic, retain) id delegate;
 @property (nonatomic, retain) UITextField *textField;
 @property (nonatomic, retain) UITextField *nameTextField;
@@ -41,7 +42,7 @@
 - (IBAction)showPicker:(id)sender;
 - (IBAction)cancelView:(id)sender;
 - (IBAction)continueView:(id)sender;
-- (IBAction)dismissKeyboard:(id)sender;
+- (IBAction)dismissKeyboard:(UITextField *)textField1;
 - (IBAction)dismissScreen:(id)sender;
 
 @end

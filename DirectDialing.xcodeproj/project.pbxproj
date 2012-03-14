@@ -31,9 +31,9 @@
 		7CB9F405149002D900F9F804 /* tel-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F404149002D900F9F804 /* tel-normal.png */; };
 		7CB9F407149002FB00F9F804 /* caller-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F406149002FB00F9F804 /* caller-background.png */; };
 		7CB9F4091490030900F9F804 /* tab-contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9F4081490030900F9F804 /* tab-contacts.png */; };
-		7CBE75DD1495327000086AE9 /* AddNewAccessNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE75DB1495327000086AE9 /* AddNewAccessNumber.m */; };
-		7CBE75DE1495327000086AE9 /* AddNewAccessNumber.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE75DC1495327000086AE9 /* AddNewAccessNumber.xib */; };
 		7CC6EA8F150C1C2900F20ED2 /* NumberDataObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC6EA8E150C1C2900F20ED2 /* NumberDataObj.m */; };
+		7CE59DD6150EA77E005BCC29 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE59DD4150EA77E005BCC29 /* History.m */; };
+		7CE59DD7150EA77E005BCC29 /* History.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE59DD5150EA77E005BCC29 /* History.xib */; };
 		7CE9D7E9148FB9CD006FC6B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE9D7E8148FB9CD006FC6B7 /* UIKit.framework */; };
 		7CE9D7EB148FB9CD006FC6B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE9D7EA148FB9CD006FC6B7 /* Foundation.framework */; };
 		7CE9D7ED148FB9CD006FC6B7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE9D7EC148FB9CD006FC6B7 /* CoreGraphics.framework */; };
@@ -56,6 +56,7 @@
 		7C4927B214912333007A0AFA /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		7C4927B314912333007A0AFA /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		7C6871EC14DF9BAC0033F4E9 /* newbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newbackground.png; sourceTree = "<group>"; };
+		7C718616150F012D00F3C906 /* AccessNumber.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccessNumber.m; sourceTree = "<group>"; };
 		7CB9F3E4148FFC9A00F9F804 /* tab-keypad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab-keypad.png"; path = "DirectDialing/tab-keypad.png"; sourceTree = "<group>"; };
 		7CB9F3E8149002C200F9F804 /* tel-0-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-0-pressed.png"; sourceTree = "<group>"; };
 		7CB9F3E9149002C200F9F804 /* tel-1-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-1-pressed.png"; sourceTree = "<group>"; };
@@ -74,11 +75,11 @@
 		7CB9F404149002D900F9F804 /* tel-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tel-normal.png"; sourceTree = "<group>"; };
 		7CB9F406149002FB00F9F804 /* caller-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "caller-background.png"; sourceTree = "<group>"; };
 		7CB9F4081490030900F9F804 /* tab-contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab-contacts.png"; sourceTree = "<group>"; };
-		7CBE75DA1495327000086AE9 /* AddNewAccessNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddNewAccessNumber.h; path = ../AddNewAccessNumber.h; sourceTree = "<group>"; };
-		7CBE75DB1495327000086AE9 /* AddNewAccessNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddNewAccessNumber.m; path = ../AddNewAccessNumber.m; sourceTree = "<group>"; };
-		7CBE75DC1495327000086AE9 /* AddNewAccessNumber.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddNewAccessNumber.xib; path = ../AddNewAccessNumber.xib; sourceTree = "<group>"; };
 		7CC6EA8D150C1C2900F20ED2 /* NumberDataObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberDataObj.h; sourceTree = "<group>"; };
 		7CC6EA8E150C1C2900F20ED2 /* NumberDataObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberDataObj.m; sourceTree = "<group>"; };
+		7CE59DD3150EA77E005BCC29 /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
+		7CE59DD4150EA77E005BCC29 /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
+		7CE59DD5150EA77E005BCC29 /* History.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = History.xib; sourceTree = "<group>"; };
 		7CE9D7E4148FB9CD006FC6B7 /* DirectDialing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DirectDialing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CE9D7E8148FB9CD006FC6B7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7CE9D7EA148FB9CD006FC6B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -139,9 +140,21 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		7CE59DCD150D807C005BCC29 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				7CE9D7F7148FB9CD006FC6B7 /* AppDelegate.h */,
+				7CE9D7F8148FB9CD006FC6B7 /* AppDelegate.m */,
+				7CC6EA8D150C1C2900F20ED2 /* NumberDataObj.h */,
+				7CC6EA8E150C1C2900F20ED2 /* NumberDataObj.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 		7CE9D7D9148FB9CC006FC6B7 = {
 			isa = PBXGroup;
 			children = (
+				7C718616150F012D00F3C906 /* AccessNumber.m */,
 				7C41E96614DE1E3A000036F9 /* Localizable.strings */,
 				7CB9F3E7149002AA00F9F804 /* Images */,
 				7CE9D7EE148FB9CD006FC6B7 /* DirectDialing */,
@@ -173,22 +186,19 @@
 		7CE9D7EE148FB9CD006FC6B7 /* DirectDialing */ = {
 			isa = PBXGroup;
 			children = (
-				7CE9D7F7148FB9CD006FC6B7 /* AppDelegate.h */,
-				7CE9D7F8148FB9CD006FC6B7 /* AppDelegate.m */,
+				7CE59DCD150D807C005BCC29 /* Classes */,
 				7C2B40211492EA2E00D09F93 /* AccessNumber.h */,
 				7C2B40221492EA2E00D09F93 /* AccessNumber.m */,
 				7C2B40231492EA2E00D09F93 /* AccessNumber.xib */,
-				7CC6EA8D150C1C2900F20ED2 /* NumberDataObj.h */,
-				7CC6EA8E150C1C2900F20ED2 /* NumberDataObj.m */,
+				7CE59DD3150EA77E005BCC29 /* History.h */,
+				7CE59DD4150EA77E005BCC29 /* History.m */,
+				7CE59DD5150EA77E005BCC29 /* History.xib */,
 				7CE9D83F148FBB8D006FC6B7 /* SettingsTabViewController.h */,
 				7CE9D840148FBB8D006FC6B7 /* SettingsTabViewController.m */,
 				7CE9D841148FBB8D006FC6B7 /* SettingsTabViewController.xib */,
 				7CE9D7FA148FB9CD006FC6B7 /* ViewController.h */,
 				7CE9D7FB148FB9CD006FC6B7 /* ViewController.m */,
 				7CE9D7FD148FB9CD006FC6B7 /* ViewController.xib */,
-				7CBE75DA1495327000086AE9 /* AddNewAccessNumber.h */,
-				7CBE75DB1495327000086AE9 /* AddNewAccessNumber.m */,
-				7CBE75DC1495327000086AE9 /* AddNewAccessNumber.xib */,
 				7CE9D7EF148FB9CD006FC6B7 /* Supporting Files */,
 			);
 			path = DirectDialing;
@@ -279,9 +289,9 @@
 				7CB9F407149002FB00F9F804 /* caller-background.png in Resources */,
 				7CB9F4091490030900F9F804 /* tab-contacts.png in Resources */,
 				7C2B40251492EA2E00D09F93 /* AccessNumber.xib in Resources */,
-				7CBE75DE1495327000086AE9 /* AddNewAccessNumber.xib in Resources */,
 				7C41E96414DE1E3A000036F9 /* Localizable.strings in Resources */,
 				7C6871ED14DF9BAC0033F4E9 /* newbackground.png in Resources */,
+				7CE59DD7150EA77E005BCC29 /* History.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,13 +302,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C2B40241492EA2E00D09F93 /* AccessNumber.m in Sources */,
 				7CE9D7F5148FB9CD006FC6B7 /* main.m in Sources */,
 				7CE9D7F9148FB9CD006FC6B7 /* AppDelegate.m in Sources */,
 				7CE9D7FC148FB9CD006FC6B7 /* ViewController.m in Sources */,
 				7CE9D842148FBB8D006FC6B7 /* SettingsTabViewController.m in Sources */,
-				7C2B40241492EA2E00D09F93 /* AccessNumber.m in Sources */,
-				7CBE75DD1495327000086AE9 /* AddNewAccessNumber.m in Sources */,
 				7CC6EA8F150C1C2900F20ED2 /* NumberDataObj.m in Sources */,
+				7CE59DD6150EA77E005BCC29 /* History.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,8 +350,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Itai Ram";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Itai Ram";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ITAI RAM (C8VWQ56ELU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ITAI RAM (C8VWQ56ELU)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -356,6 +366,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PROVISIONING_PROFILE = "BE408E1E-7A1F-406E-A383-AB3F84A34FD6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BE408E1E-7A1F-406E-A383-AB3F84A34FD6";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -366,8 +378,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Itai Ram";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Itai Ram";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ITAI RAM (C8VWQ56ELU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ITAI RAM (C8VWQ56ELU)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -376,6 +388,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "BE408E1E-7A1F-406E-A383-AB3F84A34FD6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BE408E1E-7A1F-406E-A383-AB3F84A34FD6";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

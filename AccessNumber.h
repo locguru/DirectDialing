@@ -10,14 +10,19 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "NumberDataObj.h"
+//#import "History.h"
 
-//#import "SettingsTabViewController.h"
+
+//@protocol AddItemHistoryDelegate 
+//@required
+////- (void) addNewItem:(NSString *)newProduct withNewBrand:(NSString *)newBrand;
+//- (void) processSuccessful;
+//@end
 
 
-@interface AccessNumber : UIViewController <UITableViewDelegate, UITableViewDataSource, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate> {
+@interface AccessNumber : UIViewController < UITableViewDelegate, UITableViewDataSource, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate> {
     
     NSString *selectedAccessNumber;
-//    NSString *newAccessNumber;
     NSString *directNumber;
     UIButton *manualDial;
     UIButton *selectNumber;
@@ -34,7 +39,7 @@
     NSString *lastName;
     NSString *phoneNumber;
     NSString *fullNumber;
-    NSString *accessNumber;
+    NumberDataObj *accessObj;
     
     NSIndexPath *lastIndexPath;
     NSIndexPath *selectedIndexPath;
@@ -42,10 +47,12 @@
     UILabel *cellLabel1;
     UILabel *cellLabel2;
 
+   // id <AddItemHistoryDelegate> delegate;
+
 }
+//@property (nonatomic, retain) id delegate;
 
 @property (nonatomic, retain) NSString *selectedAccessNumber;
-//@property (nonatomic, retain) NSString *newAccessNumber;
 @property (nonatomic, retain) NSString *directNumber;
 @property (nonatomic, retain) IBOutlet UIButton *manualDial;
 @property (nonatomic, retain) IBOutlet UIButton *selectNumber;
@@ -56,7 +63,7 @@
 @property (nonatomic, retain) NSString *lastName;
 @property (nonatomic, retain) NSString *phoneNumber;
 @property (nonatomic, retain) NSString *fullNumber;
-@property (nonatomic, retain) NSString *accessNumber;
+@property (nonatomic, retain) NumberDataObj *accessObj;
 @property (nonatomic, retain) UIScrollView *mainScrollView;
 @property (nonatomic, retain) NSIndexPath *lastIndexPath;
 @property (nonatomic, retain) NSIndexPath *selectedIndexPath;

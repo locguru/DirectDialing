@@ -7,8 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
-#import "SettingsTabViewController.h"
+//#import "ViewController.h"
+//#import "SettingsTabViewController.h"
 #import "AccessNumber.h"
 
 @implementation AppDelegate

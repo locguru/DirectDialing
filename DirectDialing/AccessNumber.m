@@ -8,7 +8,9 @@
 
 #import "AccessNumber.h"
 #import "ViewController.h"
+#import "AddNewAccessNumber.h"
 #import "SettingsTabViewController.h"
+#import "NumberDataObj.h"
 #import "History.h"
 
 @implementation AccessNumber
@@ -20,8 +22,10 @@
 @synthesize tblSimpleTable;
 @synthesize listOfItems;
 @synthesize mainScrollView;
+
 @synthesize accessNumbers;
 @synthesize numDataObj;
+
 @synthesize firstName;
 @synthesize lastName;
 @synthesize phoneNumber;
@@ -29,10 +33,12 @@
 @synthesize accessObj;
 @synthesize lastIndexPath;
 @synthesize selectedIndexPath;
+
 @synthesize cellLabel1;
 @synthesize cellLabel2;
 
-//@synthesize delegate;
+@synthesize historyObj;
+@synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,9 +56,8 @@
         accessObj = [[NumberDataObj alloc] init];
         cellLabel1 = [[UILabel alloc] init];
         cellLabel2 = [[UILabel alloc] init];
-        //numDataObj = [[NumberDataObj alloc] init];
         numDataObj = [[NumberDataObj alloc] init];
-        lastIndexPath = [[NSIndexPath alloc] init];
+        historyObj = [[History alloc] init];
     }
     return self;
 }
@@ -72,7 +77,9 @@
     self.navigationItem.leftBarButtonItem = leftButton;
     //    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.navigationItem.rightBarButtonItem = nil;
+
     
+    accessNumberChecked = NO; 
     cellLabel1.text = @"Access Number Name";
     cellLabel2.text = @"Access Number";
     
@@ -88,6 +95,8 @@
 //    CGSize scrollViewContentSize = CGSizeMake(280, 380);
 //    [mainScrollView setContentSize:scrollViewContentSize];
 //    //scrollview.bounces = NO;
+
+    
 
     //STEP 1 LABEL
 //    UILabel *myLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 280, 20)];
@@ -122,46 +131,9 @@
     [self.view addSubview:tblSimpleTable];
  //   [mainView addSubview:tblSimpleTable];
 
-    //LOAD DATA FROM NSUSERDEFAULTS
+    //TABLE DATA
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];     
-    NSData *archivedSavedData = [[NSData alloc] init];    
-    NSData *archivedlastIndexPath = [[NSData alloc] init];    
-
-    archivedSavedData = [defaults dataForKey:@"listOfAccessNumbers"];
-    archivedlastIndexPath = [defaults dataForKey:@"lastIndexPath"];
-    accessNumberChecked = [defaults boolForKey:@"accessNumberChecked"];
-
-    lastIndexPath = [NSKeyedUnarchiver unarchiveObjectWithData:archivedlastIndexPath];
-    
-    NSLog(@"lastIndexPath lastIndexPath  %@", lastIndexPath );
-    NSLog(@"lastIndexPath lastIndexPath.row  %d", lastIndexPath.row );
-
-    
-    NSNumber *number = [defaults objectForKey:@"lastIndexPathRow"];
-    NSLog(@"number  %@", number );
-    
-    
-//    NSLog(@"accessNumbers %@", accessNumbers);
-//    NSLog(@"archivedSavedData %@", archivedSavedData);
-    NSLog(@"archivedSavedData length %d", [archivedSavedData length] );
-
-    if ([archivedSavedData length] == 0 ){
-
-   //     NSLog(@"archivedSavedData is nil");
-    }
-    //Unarchieve 
-    else  
-    {
-
-        NSMutableArray *savedArray = [[NSMutableArray alloc] init];
-        savedArray = [NSKeyedUnarchiver unarchiveObjectWithData:archivedSavedData];
-        accessNumbers = savedArray;
-     //   NSLog(@"oldSavedArray %@", oldSavedArray);    
-    }
-    
-   //  NSLog(@"accessNumbers %@", accessNumbers);
-    
-    
+    accessNumbers = [defaults objectForKey:@"listOfAccessNumbers"];
     //NSLog(@"accessNumbers  %@", accessNumbers);
 //    NSLog(@"accessNumbers size %d", [accessNumbers count]);
 
@@ -191,6 +163,8 @@
 
     selectedIndexPath = nil;
     
+    [[self delegate] processSuccessful:YES];
+
 }
 
 
@@ -221,14 +195,6 @@
 
 - (IBAction)history:(id)sender {  
     
-//    History *historytemp = [[History alloc] initWithNibName:@"History" bundle:[NSBundle mainBundle]];
-//    [historytemp setDelegate:self];
-//    
-//    UINavigationController *historyNavigationController = [[UINavigationController alloc] initWithRootViewController:historytemp];
-//    historyNavigationController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;    
-//    [self presentModalViewController:historyNavigationController animated:YES];
-
-
     History *historyViewController = [[History alloc] initWithNibName:nil bundle:nil];
     UINavigationController *historyNavigationController = [[UINavigationController alloc] initWithRootViewController:historyViewController];
     historyNavigationController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;    
@@ -305,10 +271,6 @@
 
 - (void) refreshTableView:(NSString *) trasnferedNumber: (NSString *) transferedNumberName{
 
-    //Adding data to history
-  //  [[self delegate] processSuccessful];
-
-    
 //    NSLog(@"entering refreshTableView");
 //    NSLog(@"transferedNumberName %@", transferedNumberName);
 //    NSLog(@"Process completed");
@@ -344,15 +306,9 @@
 
         }
 
-        //Saving/Updating NSUserDefaults 
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; 
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:accessNumbers];
-       [defaults setObject:data forKey:@"listOfAccessNumbers"];    
-//        NSData *dataRepresentingSavedArray = [defaults objectForKey:@"listOfAccessNumbers"];
-//        NSMutableArray *oldSavedArray = [NSKeyedUnarchiver unarchiveObjectWithData:dataRepresentingSavedArray];
-//        NSLog(@"dataRepresentingSavedArray %@", dataRepresentingSavedArray);
-//        NSLog(@"objectArray %@", oldSavedArray);
-         
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];            
+        [defaults setObject:accessNumbers forKey:@"listOfAccessNumbers"];
+        
         self.navigationItem.rightBarButtonItem = self.editButtonItem;
         
         if (sectionIndicator == NO)
@@ -421,7 +377,7 @@
 	static NSString *CellIdentifier2 = @"Cell_Section_2";
     UITableViewCell *cell;
     
-    //3 Sections
+    
     if ( sectionIndicator == YES ) 
     {
         if (indexPath.section == 0) 
@@ -437,17 +393,6 @@
             tempObj = [array objectAtIndex:indexPath.row];
             cellLabel1.text = tempObj.inputName;
             cellLabel2.text = tempObj.inputNum;
-            
-            NSLog(@" lastIndexPath is: %d", lastIndexPath.row);
-            NSLog(@" indexpath.row is: %d", indexPath.row);
-
-
-            if (lastIndexPath != nil)
-            {
-                if (indexPath.row == lastIndexPath.row && accessNumberChecked == YES)
-                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            }
-            
         }   
         else //sections 1 and 2
         {    
@@ -459,7 +404,7 @@
             cell.textLabel.textColor = [UIColor colorWithRed:.196 green:0.3098 blue:0.52 alpha:1.0];
         }
     }
-    //2 Sections
+    //2 Section Case
     else
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier1]; 
@@ -471,6 +416,37 @@
 
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 //    UITableViewCell *cell; // = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 //    if (cell == nil) {
 //        
@@ -577,29 +553,27 @@
 
 
     
-    //Determine accessory touch selection 
+    //Determine accessory indicators 
     if (sectionIndicator == YES){
 
-        if (indexPath.section == 0) 
-        {
+        if (indexPath.section == 0) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        //    cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.accessoryType = UITableViewCellAccessoryNone;
         }
-        else if (indexPath.section == 1) 
-        {
+        else if (indexPath.section == 1) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     }
     else
     {
-        if (indexPath.section == 0) 
-        {
+        if (indexPath.section == 0) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-           // cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         }
-        else 
+        else
         {
-           // cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
     }
@@ -638,6 +612,35 @@
 	return cell;
 }
 
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+//    NSLog(@"****************** entering willSelectRowAtIndexPath");
+
+    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if (indexPath.section == 0) 
+    {
+        //Checking an access number that was selected 
+        if (selectedCell.accessoryType == UITableViewCellAccessoryNone && accessNumberChecked == NO)
+        {
+            selectedCell.accessoryType=UITableViewCellAccessoryCheckmark;
+            accessNumberChecked = YES;
+            NSArray *array = [[NSArray alloc] init];
+            array = [listOfItems objectAtIndex:indexPath.section];
+            NSString *cellValue = [array objectAtIndex:indexPath.row];
+            selectedAccessNumber = cellValue;
+            accessObj = cellValue;
+        }
+        //Unchecking an access number 
+        else  if (selectedCell.accessoryType == UITableViewCellAccessoryCheckmark)     
+        {
+            selectedCell.accessoryType=UITableViewCellAccessoryNone;
+            accessNumberChecked = NO;
+        }
+    }
+    
+    return indexPath;
+}
 
 - (void)tableView:(UITableView *)aTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	
@@ -679,132 +682,27 @@
 
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    //    NSLog(@"****************** entering willSelectRowAtIndexPath");
-    
-    int newRow = [indexPath row];
-    int oldRow = [lastIndexPath row];
-
-        NSLog(@" newRow is: %d", newRow);
-        NSLog(@" oldRow is: %d", oldRow);
-    
-    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
-    
-    if (indexPath.section == 0) 
-    {
-        //Checking an access number for the first time 
-        if (selectedCell.accessoryType == UITableViewCellAccessoryNone && accessNumberChecked == NO)
-        {
-            selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
-            accessNumberChecked = YES;
-            NSArray *array = [[NSArray alloc] init];
-            array = [listOfItems objectAtIndex:indexPath.section];
-            
-//            NSLog(@" array is: %@", array);
-            
-            
-            
-            NSString *cellValue = [array objectAtIndex:indexPath.row];
-            
-//            NSLog(@" cellValue is: %@", cellValue);
-            
-            selectedAccessNumber = cellValue;
-            accessObj = (NumberDataObj *)cellValue;
-            
-//            NSLog(@" accessObj is: %@", accessObj.inputNum);
-//            NSLog(@" accessObj is: %@", accessObj.inputName);
-            
-            lastIndexPath = indexPath;
-            
-            //SAVE DATA IN NSUSERDEFAULTS
-
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; 
-            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:indexPath];
-            NSNumber *number = [NSNumber numberWithInt:indexPath.row];
-            [defaults setObject:data forKey:@"lastIndexPath"];    
-            [defaults setObject:number  forKey:@"lastIndexPathRow"];  
-            [defaults setBool:accessNumberChecked  forKey:@"accessNumberChecked"];  
-
-            
-
-
-        }
-        //Switching a checked cell 
-        else  if (accessNumberChecked == YES && (newRow != oldRow))     
-        {
-            selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
-            UITableViewCell *oldCell = [tableView cellForRowAtIndexPath: lastIndexPath];
-            oldCell.accessoryType = UITableViewCellAccessoryNone;
-
-            lastIndexPath = indexPath;
-            
-            //SAVE DATA IN NSUSERDEFAULTS
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; 
-            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:indexPath];
-            NSNumber *number = [NSNumber numberWithInt:indexPath.row];
-            [defaults setObject:data forKey:@"lastIndexPath"];    
-            [defaults setObject:number  forKey:@"lastIndexPathRow"];    
-            [defaults setBool:accessNumberChecked  forKey:@"accessNumberChecked"];  
-            
-            NSLog(@" indexPath is: %@", indexPath);
-            NSLog(@" number is: %@", number);
-
-            NSNumber *temp = [defaults objectForKey:@"lastIndexPathRow"];
-            NSLog(@"number  %@", temp );
-
-        }
-        //Unchecking a checked cell
-        else if (selectedCell.accessoryType == UITableViewCellAccessoryCheckmark && (newRow == oldRow))
-        {
-            selectedCell.accessoryType = UITableViewCellAccessoryNone;
-            accessNumberChecked = NO;
-            lastIndexPath = nil;
-            
-            //SAVE DATA IN NSUSERDEFAULTS
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; 
-            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:indexPath];
-            NSNumber *number = [NSNumber numberWithInt:indexPath.row];
-            [defaults setObject:data forKey:@"lastIndexPath"];  
-            [defaults setObject:number  forKey:@"lastIndexPathRow"];    
-            [defaults setBool:accessNumberChecked  forKey:@"accessNumberChecked"];  
-
-        }
-    }
-    
-    return indexPath;
-}
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
  // NSLog(@"****************** entering tableView:didSelectRowAtIndexPath");
    
-//    NSLog(@" sectionIndicator %d", sectionIndicator);
-//    NSLog(@" indexPath.section %d", indexPath.section);
-//    NSLog(@" lastIndexPath %@", lastIndexPath);
-//
-//    //Selecting Checkmark based on selection
-//    if (indexPath.section == 0 && sectionIndicator == YES) {
-//          
-//        int newRow = [indexPath row];
-//        int oldRow = [lastIndexPath row];
-//        
-//        NSLog(@" newRow is: %d", newRow);
-//        NSLog(@" oldRow is: %d", oldRow);
-//
-//        
-//        if (newRow != oldRow)
-//        {
-//            UITableViewCell *newCell = [tableView cellForRowAtIndexPath: indexPath];
-//            newCell.accessoryType = UITableViewCellAccessoryCheckmark;
-//            
-//            UITableViewCell *oldCell = [tableView cellForRowAtIndexPath: lastIndexPath];
-//            oldCell.accessoryType = UITableViewCellAccessoryNone;
-//            
-//            lastIndexPath = indexPath;
-//        }
-//    }
+    //Selecting Checkmark based on selection
+    if (indexPath.section == 0 && sectionIndicator == YES) {
+          
+        int newRow = [indexPath row];
+        int oldRow = [lastIndexPath row];
+        
+        if (newRow != oldRow)
+        {
+            UITableViewCell *newCell = [tableView cellForRowAtIndexPath: indexPath];
+            newCell.accessoryType = UITableViewCellAccessoryCheckmark;
+            
+            UITableViewCell *oldCell = [tableView cellForRowAtIndexPath: lastIndexPath];
+            oldCell.accessoryType = UITableViewCellAccessoryNone;
+            
+            lastIndexPath = indexPath;
+        }
+    }
     
     //Delesect selected cell 
    [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -952,6 +850,8 @@
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
     return @"Delete";
 }
+
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
