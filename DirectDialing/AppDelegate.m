@@ -10,6 +10,7 @@
 //#import "ViewController.h"
 //#import "SettingsTabViewController.h"
 #import "AccessNumber.h"
+#import "FlurryAnalytics.h"
 
 @implementation AppDelegate
 
@@ -17,27 +18,28 @@
 @synthesize viewController = _viewController;
 @synthesize tabBarController = _tabBarController;
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //FLURRY SUPPORT 
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    [FlurryAnalytics startSession:@"TQUTDLIUNA8LEXWIQMJN"];
+        
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    
-//    UIViewController *viewController1 = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-//    UIViewController *viewController2 = [[SettingsTabViewController alloc] initWithNibName:@"SettingsTabViewController" bundle:nil];
-//    self.tabBarController = [[UITabBarController alloc] init];
-//    self.tabBarController.viewControllers = [NSArray arrayWithObjects:viewController1, viewController2, nil];
-//    self.window.rootViewController = self.tabBarController;
-
-
     AccessNumber *viewController1 = [[AccessNumber alloc] initWithNibName:@"AccessNumber" bundle:nil];    
     UINavigationController *navCntrl1 = [[UINavigationController alloc] initWithRootViewController:viewController1];
-   self.window.rootViewController = navCntrl1;
-    
-//    self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-//    self.window.rootViewController = self.viewController;
+    self.window.rootViewController = navCntrl1;
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+void uncaughtExceptionHandler(NSException *exception) {
+
+    NSArray *backtrace = [exception callStackSymbols];
+    NSString *version = [[UIDevice currentDevice] systemVersion];
+    NSString *message = [NSString stringWithFormat:@"CRASH! OS: %@. Backtrace:\n%@",version, backtrace];
+
+    
+    [FlurryAnalytics logError:@"Uncaught" message:message exception:exception];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

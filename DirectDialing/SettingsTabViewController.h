@@ -17,7 +17,7 @@
 @end
 
 
-@interface SettingsTabViewController : UIViewController <UITextFieldDelegate, ABPeoplePickerNavigationControllerDelegate, SettingsTabViewControllerDelegate> {
+@interface SettingsTabViewController : UIViewController <UITextFieldDelegate, ABPeoplePickerNavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource, SettingsTabViewControllerDelegate> {
     
     UITextField *textField;
     UITextField *nameTextField;
@@ -28,6 +28,10 @@
     NSString *accessNumberName;
     
      id <SettingsTabViewControllerDelegate> delegate;
+    
+    IBOutlet UITableView *tblSimpleTable;
+    NSMutableArray *listOfItems;
+
 }
 
 @property (nonatomic, retain) id delegate;
@@ -38,6 +42,8 @@
 @property (nonatomic, retain) NSString *number;
 @property (nonatomic, retain) NSString *accessNumberName;
 
+@property (nonatomic, retain) IBOutlet UITableView *tblSimpleTable;
+@property (nonatomic, retain) NSMutableArray *listOfItems;
 
 - (IBAction)showPicker:(id)sender;
 - (IBAction)cancelView:(id)sender;

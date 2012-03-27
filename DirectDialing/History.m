@@ -42,8 +42,9 @@
     
     
     //NAV TITLE
-    self.navigationItem.title = @"History";
-    
+    //self.navigationItem.title = @"History";
+    self.title = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+
     //NAV ITEMS
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(done:)];      
     self.navigationItem.rightBarButtonItem = rightButton;
