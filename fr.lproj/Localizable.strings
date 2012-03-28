@@ -6,27 +6,27 @@
   Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 */
 
-
 //AccessNumber.m
 "TITLE" = "Step 1: Select Your Access Number";
-"AccessNumberName" = "Access Number Name";
-"AccessNumber" = "Access Number";
-"AddNewAccessNumber" = "Add new access number";
-"AddressBook" = "                         Address Book";
-"DialingConfirmation" = "Please confirm dialing to:\n%@ \nwith the access code:\n%@";
-"EnterAccessNumberAndTryAgain" = "Please enter an Access Number and try again";
+"AccessNumberName" = "Accès Nom Nombre";
+"AccessNumber" = "Accès Nombre";
+"AddNewAccessNumber" = "Ajouter nouveau numéro d'accès";
+"AddressBook" = "                         Carnet D'adresses";
+"DialingConfirmation" = "S'il vous plaît confirmer numérotation:\n%@ \navec le code d'accès:\n%@";
+"EnterAccessNumberAndTryAgain" = "S'il vous plaît entrer un numéro d'accès et essayez à nouveau";
 "Ok" = "Ok";
-"Cancel" = "Cancel";
-"SelectAccessNumber" = "1. Select your access number";
-"SelectPasscode" = "2. Select direct/passcode number";
-"Delete" = "Delete";
+"Cancel" = "annuler";
+"SelectAccessNumber" = "1. Sélectionnez votre numéro d'accès";
+"SelectPasscode" = "2. Sélectionnez directe numéro";
+"Delete" = "Effacer";
 
 //SettingsTabViewController.m
-"ContactName" = "contact name";
-"AccessNumber" = "access number";
-"Continue" = "Continue";
-"EnterAccessNumber" = "Enter your access number";
-"EnterInstructions" = "Enter here the name and the number of your contact's access number";
-
+"ContactName" = "le nom du contact";
+"AccessNumber" = "numéro d'accès";
+"Continue" = "continuer";
+"EnterAccessNumber" = "Entrez votre numéro d'accès";
+"EnterInstructions" = "Entrez ici le nom et le nombre de numéro d'accès de votre contact";
+"ContactNameCaps" = "Nom du contact";
+"AccessNumberCaps" = "Numéro d'accès";
 
 //NSLocalizedString(@"EnterInstructions", nil)

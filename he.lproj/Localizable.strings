@@ -6,4 +6,25 @@
   Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 */
 
-"TITLE" = "למה מה 'רקה??";
+//AccessNumber.m
+"TITLE" = "Step 1: Select Your Access Number";
+"AccessNumberName" = "שם של מספר הגישה";
+"AccessNumber" = "מספר הגישה";
+"AddNewAccessNumber" = "הוסף מספר גישה חדש";
+"AddressBook" = "                         ספר טלפונים";
+"DialingConfirmation" = "אנא אשר חיוג ל: \n%@ \nעם מספר הגישה: \n%@";
+"EnterAccessNumberAndTryAgain" = "אנא הכנס מספר גישה ונסה שנית";
+"Ok" = "אוקיי";
+"Cancel" = "ביטול";
+"SelectAccessNumber" = "1. בחר את מספר הגישה";
+"SelectPasscode" = "2. בחר את המספר הישיר";
+"Delete" = "מחק";
+
+//SettingsTabViewController.m
+"ContactName" = "שם איש הקשר";
+"AccessNumber" = "מספר הגישה";
+"Continue" = "המשך";
+"EnterAccessNumber" = "הכנס את מספר הגישה";
+"EnterInstructions" = "הכנס כאן את מספר הגישה ושם מספר הגישה";
+"ContactNameCaps" = "שם איש הקשר";
+"AccessNumberCaps" = "מספר הגישה";

@@ -6,4 +6,28 @@
   Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 */
 
+
+//AccessNumber.m
 "TITLE" = "Step 1: Select Your Access Number";
+"AccessNumberName" = "Access Number Name";
+"AccessNumber" = "Access Number";
+"AddNewAccessNumber" = "Add new access number";
+"AddressBook" = "                         Address Book";
+"DialingConfirmation" = "Please confirm dialing to:\n%@ \nwith the access code:\n%@";
+"EnterAccessNumberAndTryAgain" = "Please enter an Access Number and try again";
+"Ok" = "Ok";
+"Cancel" = "Cancel";
+"SelectAccessNumber" = "1. Select your access number";
+"SelectPasscode" = "2. Select direct/passcode number";
+"Delete" = "Delete";
+
+//SettingsTabViewController.m
+"ContactName" = "contact name";
+"AccessNumber" = "access number";
+"Continue" = "Continue";
+"EnterAccessNumber" = "Enter your access number";
+"EnterInstructions" = "Enter here the name and the number of your contact's access number";
+"ContactNameCaps" = "Contact Name";
+"AccessNumberCaps" = "Access Number";
+
+//NSLocalizedString(@"AccessNumberCaps", nil)

@@ -10,6 +10,9 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "NumberDataObj.h"
+#import <MessageUI/MessageUI.h>
+#import "FBConnect.h"
+#import "Facebook.h"
 //#import "History.h"
 
 
@@ -20,7 +23,7 @@
 //@end
 
 
-@interface AccessNumber : UIViewController < UITableViewDelegate, UITableViewDataSource, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate> {
+@interface AccessNumber : UIViewController < MFMailComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate, FBSessionDelegate, FBRequestDelegate> {
     
     NSString *selectedAccessNumber;
     NSString *directNumber;
@@ -42,12 +45,14 @@
     NumberDataObj *accessObj;
     
     NSIndexPath *lastIndexPath;
-    NSIndexPath *selectedIndexPath;
     
     UILabel *cellLabel1;
     UILabel *cellLabel2;
 
+    BOOL login;
    // id <AddItemHistoryDelegate> delegate;
+   	//Facebook 
+    Facebook *facebook;
 
 }
 //@property (nonatomic, retain) id delegate;
@@ -66,15 +71,19 @@
 @property (nonatomic, retain) NumberDataObj *accessObj;
 @property (nonatomic, retain) UIScrollView *mainScrollView;
 @property (nonatomic, retain) NSIndexPath *lastIndexPath;
-@property (nonatomic, retain) NSIndexPath *selectedIndexPath;
 @property (nonatomic, retain) UILabel *cellLabel1;
 @property (nonatomic, retain) UILabel *cellLabel2;
 @property (nonatomic, retain) NumberDataObj *numDataObj;
+
+@property (nonatomic, retain) Facebook *facebook;
 
 - (IBAction)dialNumber:(NSString *)phoneNum;
 - (IBAction)launchDialer:(id)sender;
 - (IBAction)addAccessNumber:(id)sender;
 - (IBAction)launchAB:(id)sender;
 - (UITableViewCell *) getCellContentView:(NSString *)cellIdentifier;
+
+-(IBAction) postMessage:(id) sender;
+
 
 @end

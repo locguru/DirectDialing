@@ -10,6 +10,10 @@
 #import "ViewController.h"
 #import "SettingsTabViewController.h"
 #import "History.h"
+#import "FlurryAnalytics.h"
+#import <Twitter/Twitter.h>
+
+static NSString* kAppId = @"349376771765571";
 
 @implementation AccessNumber
 
@@ -28,9 +32,9 @@
 @synthesize fullNumber;
 @synthesize accessObj;
 @synthesize lastIndexPath;
-@synthesize selectedIndexPath;
 @synthesize cellLabel1;
 @synthesize cellLabel2;
+@synthesize facebook;
 
 //@synthesize delegate;
 
@@ -65,57 +69,43 @@
     [super viewDidLoad];
     
     //NAVIGATION BAR
-    self.title = @"Direct Dialing";
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    //self.title = @"Direct Dialing";
+    self.title = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+    self.view.backgroundColor = [UIColor clearColor];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"smartphonebackground.png"]];
 
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"History" style:UIBarButtonItemStylePlain target:self action:@selector(history:)];      
+    //left BUTTON 
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Options" style:UIBarButtonItemStylePlain target:self action:@selector(ShareOptions:)];      
     self.navigationItem.leftBarButtonItem = leftButton;
+    
+//    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"History" style:UIBarButtonItemStylePlain target:self action:@selector(history:)];      
+//    self.navigationItem.leftBarButtonItem = leftButton;
     //    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.navigationItem.rightBarButtonItem = nil;
     
-    cellLabel1.text = @"Access Number Name";
-    cellLabel2.text = @"Access Number";
+    cellLabel1.text = NSLocalizedString(@"AccessNumberName", nil);
+    cellLabel2.text = NSLocalizedString(@"AccessNumber", nil);
     
-//    //ADDING BACKGROUND IMAGE 
+    //ADDING BACKGROUND IMAGE 
 //    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-//    imgView.image = [UIImage imageNamed:@"newbackground.png"];
+////    imgView.image = [UIImage imageNamed:@"smartphonebackground.png"];
+//    imgView.image = [UIImage imageNamed:@"caller-background.png"];
+//
 //    [self.view addSubview: imgView];
 //    [self.view sendSubviewToBack:imgView];
-
-//    //ADDING SCROLL VIEW
-//    mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 640)];   
-//    [self.view addSubview:mainScrollView];    
-//    CGSize scrollViewContentSize = CGSizeMake(280, 380);
-//    [mainScrollView setContentSize:scrollViewContentSize];
-//    //scrollview.bounces = NO;
-
-    //STEP 1 LABEL
-//    UILabel *myLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 280, 20)];
-////	myLabel.text = NSLocalizedString(@"Step 1: Select Your Access Number", @"localized step 1");
-//    myLabel.text = NSLocalizedString(@"TITLE", nil);
-//	myLabel.backgroundColor = [UIColor clearColor]; // [UIColor brownColor];
-//    myLabel.font = [UIFont boldSystemFontOfSize:16];
-//    myLabel.textColor =  [UIColor colorWithRed:0.265 green:0.294 blue:0.367 alpha:1.0];
-//    myLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-//    myLabel.shadowOffset = CGSizeMake(0, 1);
-//	[self.view addSubview:myLabel];
-
-//    //STEP 2 LABEL
-//    UILabel *myLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 240, 280, 40)];
-//	myLabel1.text = @"2. Select the direct/ID number";
-//	myLabel1.backgroundColor = [UIColor clearColor]; // [UIColor brownColor];
-//    myLabel1.font = [UIFont boldSystemFontOfSize:16];;
-//    myLabel1.textColor =  [UIColor colorWithRed:0.265 green:0.294 blue:0.367 alpha:1.0];
-//    myLabel1.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-//    myLabel1.shadowOffset = CGSizeMake(0, 1);
-//	//[self.view addSubview:myLabel1];
-//	[mainView addSubview:myLabel1];
     
-    //CREATING THE TABLE 
+    //CREATING UITABLEVIEW 
     tblSimpleTable = [[UITableView alloc]  initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped ];
+
+    NSLog(@"self.view.frame.size.width is %@", self.view.frame.size.width);
+    NSLog(@"self.view.frame.size.height is %@", self.view.frame.size.height);
+    
  //   tblSimpleTable = [[UITableView alloc] init];
 //    tblSimpleTable.backgroundColor = [UIColor clearColor];
      tblSimpleTable.scrollEnabled = YES;
+//    tblSimpleTable.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"smartphonebackground.png"]];
+    tblSimpleTable.backgroundColor = [UIColor clearColor];
+
 //   tblSimpleTable.bounces = YES;
     tblSimpleTable.dataSource = self;
     tblSimpleTable.delegate = self;
@@ -130,20 +120,10 @@
     archivedSavedData = [defaults dataForKey:@"listOfAccessNumbers"];
     archivedlastIndexPath = [defaults dataForKey:@"lastIndexPath"];
     accessNumberChecked = [defaults boolForKey:@"accessNumberChecked"];
-
+    
     lastIndexPath = [NSKeyedUnarchiver unarchiveObjectWithData:archivedlastIndexPath];
     
-    NSLog(@"lastIndexPath lastIndexPath  %@", lastIndexPath );
-    NSLog(@"lastIndexPath lastIndexPath.row  %d", lastIndexPath.row );
-
-    
-    NSNumber *number = [defaults objectForKey:@"lastIndexPathRow"];
-    NSLog(@"number  %@", number );
-    
-    
-//    NSLog(@"accessNumbers %@", accessNumbers);
-//    NSLog(@"archivedSavedData %@", archivedSavedData);
-    NSLog(@"archivedSavedData length %d", [archivedSavedData length] );
+    //NSNumber *number = [defaults objectForKey:@"lastIndexPathRow"];
 
     if ([archivedSavedData length] == 0 ){
 
@@ -152,19 +132,12 @@
     //Unarchieve 
     else  
     {
-
         NSMutableArray *savedArray = [[NSMutableArray alloc] init];
         savedArray = [NSKeyedUnarchiver unarchiveObjectWithData:archivedSavedData];
         accessNumbers = savedArray;
-     //   NSLog(@"oldSavedArray %@", oldSavedArray);    
     }
     
-   //  NSLog(@"accessNumbers %@", accessNumbers);
-    
-    
-    //NSLog(@"accessNumbers  %@", accessNumbers);
-//    NSLog(@"accessNumbers size %d", [accessNumbers count]);
-
+    //DONT SHOW EDIT BUTTON ON NAV BAR IF THERE ARE NO ACCESS NUMBERS
     if (accessNumbers == NULL || [accessNumbers count] == 0 )
     {
         self.navigationItem.rightBarButtonItem = nil;
@@ -177,25 +150,30 @@
         sectionIndicator = YES;
     }
     
+    //INITIALIZING DATA SOURCE
     listOfItems = [[NSMutableArray alloc] init];
-    NSMutableArray *addNewAccessNumberLabel = [NSMutableArray arrayWithObjects:@"Add new access number", nil];
-    NSMutableArray *launchABArray = [NSMutableArray arrayWithObjects:@"                         Address Book", nil];
+    NSMutableArray *addNewAccessNumberLabel = [NSMutableArray arrayWithObjects:NSLocalizedString(@"AddNewAccessNumber", nil), nil];
+    NSMutableArray *launchABArray = [NSMutableArray arrayWithObjects:NSLocalizedString(@"AddressBook", nil), nil];
 
-    
-    if ( sectionIndicator == YES) {
+    //ADDING ACCESS NUMBER SECTION TO THE DATA SOURCE ONLY IF NOT EMPTY
+    if (sectionIndicator == YES) {
         [listOfItems addObject:accessNumbers];
     }
     
     [listOfItems addObject:addNewAccessNumberLabel];
     [listOfItems addObject:launchABArray];
 
-    selectedIndexPath = nil;
+    
+    facebook = [[Facebook alloc] initWithAppId:@"349376771765571" andDelegate:self];
     
 }
 
 
+//UI METHODS
 - (IBAction)addAccessNumber:(id)sender {  
     
+    [FlurryAnalytics logEvent:@"Enter addAccessNumber method"];
+
     SettingsTabViewController *addNewAccessNumberVC = [[SettingsTabViewController alloc] initWithNibName:nil bundle:nil];
     addNewAccessNumberVC.delegate = self;
     UINavigationController *addNewAccessNumberVCNav = [[UINavigationController alloc] initWithRootViewController:addNewAccessNumberVC];
@@ -206,6 +184,8 @@
 
 - (IBAction)launchDialer:(id)sender {  
     
+    [FlurryAnalytics logEvent:@"LAUCNING DIALER"];
+    
     ViewController *dialerController = [[ViewController alloc] initWithNibName:nil bundle:nil];
     UINavigationController *dialerControllerNav = [[UINavigationController alloc] initWithRootViewController:dialerController];
     dialerControllerNav.modalTransitionStyle = UIModalTransitionStyleCoverVertical;    
@@ -214,12 +194,16 @@
 
 - (IBAction)launchAB:(id)sender{
     
+    [FlurryAnalytics logEvent:@"LAUNCHING ADDRESS BOOK"];
+    
     ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
     picker.peoplePickerDelegate = self;
     [self presentModalViewController:picker animated:YES];
 }
 
 - (IBAction)history:(id)sender {  
+    
+     [FlurryAnalytics logEvent:@"LAUNCHING HISTORY"];
     
 //    History *historytemp = [[History alloc] initWithNibName:@"History" bundle:[NSBundle mainBundle]];
 //    [historytemp setDelegate:self];
@@ -235,7 +219,292 @@
     [self presentModalViewController:historyNavigationController animated:YES];
 }
 
+-(IBAction)ShareOptions:(id)sender {
+    
+    [FlurryAnalytics logEvent:@"SELECTING OPTIONS"];
+    
+    //ACTION SHEET
+    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Share and Contact Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Contact Us", @"Post to Twitter", @"Share on Facebook", nil];  
+//    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Post to Facebook", @"Share on Twitter", @"Contact Us", nil];  
 
+    popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    [popupQuery showInView:self.view];    
+}
+
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 0)
+    {
+        [FlurryAnalytics logEvent:@"CLICK ON CONTACT US"];
+        NSLog(@"buttonIndex %@", buttonIndex);
+        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+        controller.mailComposeDelegate = self;
+        [controller setToRecipients:[NSArray arrayWithObject:@"support@delengo.com"]];
+        [controller setSubject:@"Inquiry Re: iPhone Smart Phone application"];
+        [controller setMessageBody:nil isHTML:NO]; 
+        if (controller) [self presentModalViewController:controller animated:YES];
+        
+        return;
+    } 
+    else if (buttonIndex == 1) 
+    {
+        
+        [FlurryAnalytics logEvent:@"CLICK ON SHARE ON TWITTER"];
+
+        NSString* versionNumber = [[UIDevice currentDevice] systemVersion];
+        int version;
+        version = [versionNumber intValue];
+        NSLog(@"versionNumber %d", version);
+        
+        if (version < 5)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Smart Phone" message:@"Youd OS version doesn't support Twitter on this app. Please upgrade your OS an try again" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
+            [alert show];
+        }
+        else    
+        {
+            TWTweetComposeViewController *twitter = [[TWTweetComposeViewController alloc] init];
+            [twitter setInitialText:@"Enjoy using @Delengo recent app - Smart Phone, what a great application! #iphone #appstore"];
+            [self presentModalViewController:twitter animated:YES];
+            
+            // Called when the tweet dialog has been closed
+            twitter.completionHandler = ^(TWTweetComposeViewControllerResult result) 
+            {
+                NSString *title = @"Smart Phone";
+                NSString *msg; 
+                
+                if (result == TWTweetComposeViewControllerResultCancelled)
+                    msg = @"Tweet compostion was canceled";
+                else if (result == TWTweetComposeViewControllerResultDone)
+                    msg = @"Your tweet has been posted!";
+                
+                UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:msg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alertView show];
+                
+                [self dismissModalViewControllerAnimated:YES];
+            };
+
+            return;
+
+        }
+        
+    } 
+    else if (buttonIndex == 2)
+    {
+
+        [FlurryAnalytics logEvent:@"POSTING ON FACEBOOK"];
+
+        [self postMessage:nil];
+        
+//        FBStreamDialog* dialog = [[FBStreamDialog alloc] init];
+//        dialog.userMessagePrompt = @"Enter your message:";
+//        dialog.attachment = [NSString stringWithFormat:@"{\"name\":\"%@ got straight A's!\",\"href\":\"http://www.raywenderlich.com/\",\"caption\":\"%@ must have gotten real lucky this time!\",\"description\":\"\",\"media\":[{\"type\":\"image\",\"src\":\"http://www.raywenderlich.com/wp-content/themes/raywenderlich/images/logo.jpg\",\"href\":\"http://www.raywenderlich.com/\"}]}",
+//                             _facebookName, _facebookName];
+//        dialog.actionLinks = @"[{\"text\":\"Get MyGrades!\",\"href\":\"http://www.raywenderlich.com/\"}]";
+//        [dialog show];
+        
+        
+//        Facebook *facebook = [[Facebook alloc] initWithAppId:@"210645928948875"];
+//        [facebook authorize:nil delegate:self];
+//        
+//        NSMutableString *facebookMessage = [NSMutableString stringWithString:@"I scored a whopping "];
+//        [facebookMessage appendString: [NSMutableString stringWithString:@".  Can you beat me?"]];
+//        
+//        NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+//                                       @"210645928948875", @"app_id",
+//                                       @"http://duncan.co.uk/", @"link",
+//                                       @"http://d.yimg.com/gg/goran_anicic/dunc.jpeg", @"picture",
+//                                       @"dunc", @"name",
+//                                       //@"Reference Documentation", @"caption",
+//                                       @"Download the app NOW from the App Store", @"description",
+//                                       facebookMessage,  @"message",
+//                                       nil];
+//        
+//        [facebook dialog:@"stream.publish" andParams:params andDelegate:self];
+        
+//        Facebook *facebook = [[Facebook alloc] initWithAppId:@"YOUR_APP_ID"];
+//        NSArray* permissions =  [NSArray arrayWithObjects:@"read_stream", @"publish_stream", nil];
+//        [facebook authorize:permissions delegate:self];
+//        
+//        NSMutableDictionary* params = [[NSMutableDictionary alloc] initWithCapacity:1]
+//        [params setObject:@"Testing" forKey:@"name"];
+//        [params setObject:@"IMAGE_URL" forKey:@"picture"];
+//        [params setObject:@"Description" forKey:@"description"];
+//        [facebook requestWithGraphPath:@"me/feed" andParams:params andHttpMethod:@"POST" andDelegate:self];
+
+    } 
+    
+    [FlurryAnalytics logEvent:@"CANCELING ACTION SHEET"];
+
+}
+
+
+//FACEBOOK API
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [facebook handleOpenURL:url]; 
+}
+
+- (void)fbDidLogin {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[facebook accessToken] forKey:@"FBAccessTokenKey"];
+    [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
+    
+}
+
+- (void)fbSessionInvalidated{
+    NSLog(@"fbSessionInvalidated");
+}
+
+- (void)fbDidLogout{
+    NSLog(@"fbDidLogout");
+}
+
+- (void)fbDidExtendToken:(NSString*)accessToken expiresAt:(NSDate*)expiresAt{
+    NSLog(@"fbDidExtendToken");
+}
+
+- (void)fbDidNotLogin:(BOOL)cancelled{
+    NSLog(@"fbDidNotLogin");
+}
+
+- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response{
+    NSLog(@"didReceiveResponse: %@", response);
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error{
+    NSLog(@"didFailWithError: %@", [error description]);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Share on Facebook" 
+                                                    message:@"An error occured" 
+                                                   delegate:nil 
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+
+//FACEBOOK METHODS
+-(IBAction) postMessage:(id) sender 
+{
+
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+        NSLog(@"AccessToken: %@ ExpirationDate: %@", facebook.accessToken, facebook.expirationDate);
+    }else{
+        NSLog(@"No AccessToken or ExpirationDate");
+    }
+    if (![facebook isSessionValid]) {
+        [facebook authorize:[NSArray arrayWithObjects:@"publish_stream", nil]];
+    }
+
+    NSString *link = @"http://www.foo.com";
+    NSString *linkName = @"Bar";
+    NSString *linkCaption = @"Foo Bar";
+    NSString *linkDescription = @"Fooooooo Bar";
+    NSString *message = @"Message";
+    
+    
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   kAppId, @"api_key",
+                                   message, @"message",
+                                   linkName, @"name",
+                                   linkDescription, @"description",
+                                   link, @"link",
+                                   linkCaption, @"caption",
+                                   nil];
+    
+    
+    
+    [facebook requestWithGraphPath: @"me/feed"
+                          andParams: params 
+                      andHttpMethod: @"POST" 
+                        andDelegate: self];
+    
+//	if (login == NO) 
+//    {
+//		NSArray* permissions =  [NSArray arrayWithObjects: @"read_stream", @"publish_stream", nil];
+//        [facebook authorize:permissions];
+//	} 
+//    else 
+//    {
+//        NSLog(@"Posting message");
+//        NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:nil];
+//        [params setObject:@"Testing" forKey:@"name"];
+//        [params setObject:@"Some junk description" forKey:@"description"];
+//        [facebook requestWithGraphPath:@"me/feed" andParams:params andHttpMethod:@"POST" andDelegate:self];
+//	}
+}
+
+//- (void)fbDidLogin 
+//{
+//
+////    Facebook *facebook = [[Facebook alloc] initWithAppId:@"210645928948875"];
+////    [facebook authorize:nil delegate:self];
+////    
+////    NSMutableString *facebookMessage = [NSMutableString stringWithString:@"I scored a whopping "];
+////    [facebookMessage appendString: [NSMutableString stringWithFormat:@"%d", currentScore]];
+////    [facebookMessage appendString: [NSMutableString stringWithString:@".  Can you beat me?"]];
+////    
+////    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+////                                   @"210645928948875", @"app_id",
+////                                   @"http://duncan.co.uk/", @"link",
+////                                   @"http://d.yimg.com/gg/goran_anicic/dunc.jpeg", @"picture",
+////                                   @"dunc", @"name",
+////                                   //@"Reference Documentation", @"caption",
+////                                   @"Download the app NOW from the App Store", @"description",
+////                                   facebookMessage,  @"message",
+////                                   nil];
+////    
+////    [facebook dialog:@"stream.publish" andParams:params andDelegate:self];
+//
+////    NSString *kAppId;
+////    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+////                                   kAppId, @"109133762519851", @"http://developers.facebook.com/docs/reference/dialogs/", @"link",
+////                                   @"http://fbrell.com/f8.jpg", @"picture", @"Facebook Dialogs", @"name", @"Reference Documentation", @"caption", @"Dialogs provide a simple, consistent interface for apps to interact with users.", @"description", @"Facebook Dialogs are so easy!",  @"message", nil];
+////    
+////    [facebook dialog: @"stream.publish" andParams: params andDelegate:self];
+//    
+//    NSLog(@"logged in");
+//	//login = YES;
+//}
+//
+//- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
+//	NSLog(@"received response");
+//}
+
+
+
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{ 
+    // Notifies users about errors associated with the interface
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            break;
+        case MFMailComposeResultSaved:
+            break;
+        case MFMailComposeResultSent:
+            break;
+        case MFMailComposeResultFailed:
+            break;
+            
+        default:
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Email" message:@"Sending Failed - Unknown Error :-("
+                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+        }
+            
+            break;
+    }
+    [self dismissModalViewControllerAnimated:YES];
+}
 
 //***** PHONE DIAL METHOD METHOD *****//
 
@@ -258,28 +527,40 @@
     NSLog(@"fullNumber %@", fullNumber);
     NSLog(@"accessNumber %@", accessObj.inputName);
     NSLog(@"phoneNumber %@", phoneNumber);
+    NSLog(@"accessObj.inputNum %@", accessObj.inputNum);
+
 
     
     fullNumber = [NSString stringWithFormat:@"%@%@%@%@", @"tel:", accessObj.inputNum, @",", strippedString];
-    NSString *myMessage = [NSString stringWithFormat:@"Please confirm dialing to:%@ with the access code:%@", phoneNumber , accessObj.inputNum];
+    NSString *myMessage = [NSString stringWithFormat:NSLocalizedString(@"DialingConfirmation", nil), phoneNumber , accessObj.inputNum];
     UIAlertView *alert;
     
-    if([accessObj.inputNum length] == 0 | [phoneNumber length] == 0)
+    NSLog(@"accessObj.inputNu %@", accessObj.inputNum);
+    NSLog(@"phoneNumber %@", phoneNumber);
+
+    
+    if( accessNumberChecked == NO | [phoneNumber length] == 0 )
     {
-        alert = [[UIAlertView alloc] initWithTitle:@"Direct Dialing" 
-                                                        message:@"Please enter an Access Number and try again"
+        NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:myMessage, @"My Message", nil];
+        [FlurryAnalytics logEvent:@"MISSING ACCESS NUMBER ALERT" withParameters:dictionary];
+        
+        alert = [[UIAlertView alloc] initWithTitle:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"] 
+                                                        message:NSLocalizedString(@"EnterAccessNumberAndTryAgain", nil)
                                                        delegate:self 
-                                              cancelButtonTitle:@"Ok" 
+                                              cancelButtonTitle:NSLocalizedString(@"Ok", nil) 
                                               otherButtonTitles:nil, nil];
  
     }
     else
     {
-        alert = [[UIAlertView alloc] initWithTitle:@"Direct Dialing" 
+        NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:myMessage, @"My Message", nil];
+        [FlurryAnalytics logEvent:@"CONFIRM DIALING ALERT" withParameters:dictionary];
+
+        alert = [[UIAlertView alloc] initWithTitle:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"] 
                                        message:myMessage
                                       delegate:self 
-                             cancelButtonTitle:@"Cancel" 
-                             otherButtonTitles:@"Ok", nil];
+                             cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
+                             otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
     }
     
     [alert show];
@@ -297,13 +578,12 @@
         NSLog(@"ok");
         NSURL *url = [NSURL URLWithString:fullNumber];
         [[UIApplication sharedApplication] openURL:url];
-
     }
 }
 
 //***** CUSTOME TABLE METHOD *****//
 
-- (void) refreshTableView:(NSString *) trasnferedNumber: (NSString *) transferedNumberName{
+- (void)refreshTableView:(NSString *) trasnferedNumber:(NSString *) transferedNumberName{
 
     //Adding data to history
   //  [[self delegate] processSuccessful];
@@ -315,10 +595,21 @@
 //    NSLog(@"listOfItems %@", listOfItems);    
 //    NSLog(@"trasnferedNumber.length: %d", trasnferedNumber.length);
 
+    NSLog(@"trasnferedNumber %@", trasnferedNumber);
+
     numDataObj = [[NumberDataObj alloc] init];
     
     if (trasnferedNumber.length != 0) 
     {        
+        
+        //REMOVE ALL NON DIGITS FROM INPUT NUMBER
+        
+        NSString *newString = [[trasnferedNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+        NSLog(@"newString %@", newString);
+        trasnferedNumber = newString;
+
+        
+        
         if (trasnferedNumber.length < 9)
         {
             NSString *formattedString = trasnferedNumber;
@@ -348,10 +639,6 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; 
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:accessNumbers];
        [defaults setObject:data forKey:@"listOfAccessNumbers"];    
-//        NSData *dataRepresentingSavedArray = [defaults objectForKey:@"listOfAccessNumbers"];
-//        NSMutableArray *oldSavedArray = [NSKeyedUnarchiver unarchiveObjectWithData:dataRepresentingSavedArray];
-//        NSLog(@"dataRepresentingSavedArray %@", dataRepresentingSavedArray);
-//        NSLog(@"objectArray %@", oldSavedArray);
          
         self.navigationItem.rightBarButtonItem = self.editButtonItem;
         
@@ -413,7 +700,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"****************** entering cellForRowAtIndexPath at Section %d", indexPath.section);
+  //  NSLog(@"****************** entering cellForRowAtIndexPath at Section %d", indexPath.section);
 
    // static NSString *CellIdentifier = @"Cell";
     
@@ -438,12 +725,7 @@
             cellLabel1.text = tempObj.inputName;
             cellLabel2.text = tempObj.inputNum;
             
-            NSLog(@" lastIndexPath is: %d", lastIndexPath.row);
-            NSLog(@" indexpath.row is: %d", indexPath.row);
-
-
-            if (lastIndexPath != nil)
-            {
+            if (lastIndexPath != nil){
                 if (indexPath.row == lastIndexPath.row && accessNumberChecked == YES)
                     cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }
@@ -470,136 +752,23 @@
         cell.textLabel.textColor = [UIColor colorWithRed:.196 green:0.3098 blue:0.52 alpha:1.0];
 
     }
-
-//    UITableViewCell *cell; // = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    if (cell == nil) {
-//        
-////          if (indexPath.section == 0 && sectionIndicator == YES) {
-//              cell = [self getCellContentView:CellIdentifier];
-////          }
-////          else {
-////              cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier]; //try here diff styles
-////          }
-//
-//    }
-//    
-//  //  NSLog(@"cell %@", cell);
-//
-//        //cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier]; //try here diff styles
-//        //cell = [self getCellContentView:CellIdentifier];
-////    
-// //       NSLog(@"sectionIndicator: %d", sectionIndicator);
-////        NSLog(@"indexPath.section %d", indexPath.section);
-//        
-//        //3 Section case
-//    if ( sectionIndicator == YES ) 
-//    {
-//        
-//        if (indexPath.section == 0) {      
-//
-////            NSArray *array = [[NSArray alloc] init];
-////            array = [listOfItems objectAtIndex:indexPath.section];
-////            cell.textLabel.text = [array objectAtIndex:indexPath.row];
-////            cell.textLabel.font = [UIFont systemFontOfSize:14];
-////            cell.textLabel.textColor = [UIColor colorWithRed:.196 green:0.3098 blue:0.52 alpha:1.0];
-//            
-//            
-//           // cell = [self getCellContentView:CellIdentifier];
-////            cellLabel1 = [[UILabel alloc] init];
-////            cellLabel2 = [[UILabel alloc] init];
-//
-////            NSLog(@"cellLabel1.text %@", cellLabel1.text);
-////            NSLog(@"cellLabel2.text %@", cellLabel2.text);
-//            cellLabel1 = (UILabel *)[cell viewWithTag:1];
-//            NSLog(@"cellLabel1 %@", cellLabel1);
-//
-//            cellLabel2 = (UILabel *)[cell viewWithTag:2];
-//            cellLabel1.text = @"Sub Value1";
-//            cellLabel2.text = @"Sub Value2";
-//            NSLog(@"cellLabel1.text %@", cellLabel1.text);
-//             NSLog(@"cellLabel2.text %@", cellLabel2.text);
-//
-////            NSArray *array = [[NSArray alloc] init];
-////            array = [listOfItems objectAtIndex:indexPath.section];
-////
-////             NSLog(@"array array is: %@", array);
-//////             NSLog(@"indexPath: %d", indexPath.row);
-//////             NSLog(@"indexPath.section %d", indexPath.section);
-////            
-////            cellLabel1.text = @"Sub Value1";
-////            cellLabel2.text = @"Sub Value2";
-//////            cellLabel1.text = [array objectAtIndex:indexPath.row];
-//////            cellLabel2.text = [array objectAtIndex:indexPath.row];
-////
-////         //   NSLog(@"cell %@", cell);
-////            NSLog(@"[array objectAtIndex:indexPath.row] %@", [array objectAtIndex:indexPath.row]);
-//            
-//////            cellLabel1.textColor = [UIColor colorWithRed:.196 green:0.3098 blue:0.52 alpha:1.0];
-//////            cellLabel2.textColor = [UIColor colorWithRed:.196 green:0.3098 blue:0.52 alpha:1.0];
-////           
-////            cellLabel1.backgroundColor = [UIColor clearColor];
-////            cellLabel2.backgroundColor = [UIColor clearColor];
-//
-//        }   
-//        else //sections 1 and 2
-//        {    
-//            //cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier]; 
-//            NSArray *array = [[NSArray alloc] init];
-//            array = [listOfItems objectAtIndex:indexPath.section];
-//            cell.textLabel.text = [array objectAtIndex:indexPath.row];
-//            cell.textLabel.font = [UIFont systemFontOfSize:14];
-//            cell.textLabel.textColor = [UIColor colorWithRed:.196 green:0.3098 blue:0.52 alpha:1.0];
-//            
-////            cellLabel1 = (UILabel *)[cell viewWithTag:1];            
-////            cellLabel2 = (UILabel *)[cell viewWithTag:2];
-////            cellLabel1.text = [array objectAtIndex:indexPath.row];
-////            cellLabel2.text = [array objectAtIndex:indexPath.row];
-//
-//        }
-//        
-//    }
-//        
-//    //2 Section Case
-//    else
-//    {
-//        NSArray *array = [[NSArray alloc] init];
-//        array = [listOfItems objectAtIndex:indexPath.section];
-////        cell.textLabel.text = [array objectAtIndex:indexPath.row];
-////        cell.textLabel.font = [UIFont systemFontOfSize:14];
-////        cell.textLabel.textColor = [UIColor colorWithRed:.196 green:0.3098 blue:0.52 alpha:1.0];
-//
-//        cellLabel1 = (UILabel *)[cell viewWithTag:1];            
-//        cellLabel2 = (UILabel *)[cell viewWithTag:2];
-//        cellLabel1.text = [array objectAtIndex:indexPath.row];
-//        cellLabel2.text = [array objectAtIndex:indexPath.row];
-//
-//    }
-
-
     
     //Determine accessory touch selection 
     if (sectionIndicator == YES){
 
-        if (indexPath.section == 0) 
-        {
+        if (indexPath.section == 0) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        //    cell.accessoryType = UITableViewCellAccessoryNone;
         }
-        else if (indexPath.section == 1) 
-        {
+        else if (indexPath.section == 1) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     }
     else
     {
-        if (indexPath.section == 0) 
-        {
+        if (indexPath.section == 0) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-           // cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        else 
-        {
-           // cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        else {
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
     }
@@ -610,7 +779,7 @@
 
 - (UITableViewCell *) getCellContentView:(NSString *)cellIdentifier {
 	
-    NSLog(@"****************** entering getCellContentView");
+   // NSLog(@"****************** entering getCellContentView");
     
  //   CGRect CellFrame = CGRectMake(0, 0, 300, 60);
 	CGRect Label1Frame = CGRectMake(10, 10, 290, 20);
@@ -643,30 +812,65 @@
 	
 //    NSLog(@"****************** entering commitEditingStyle:forRowAtIndexPath");
 
+    [FlurryAnalytics logEvent:@"ENTERING COMMIT EDITING"];
+
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
-         NSMutableArray * section = [listOfItems objectAtIndex:indexPath.section];    
+  //      NSLog(@"listOfItems is %@", listOfItems);
+        NSLog(@"accessnumbers is %@", accessNumbers);
 
-        //UPDATING USERS DEFAULTS
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];            
+        
+         //REMOVING OBJECT FROM SECTION   
+         NSMutableArray *section = [listOfItems objectAtIndex:indexPath.section];    
+        NSLog(@"section is %@", section);
+
         [section removeObjectAtIndex:indexPath.row];
-        [defaults setObject:section forKey:@"listOfAccessNumbers"];
         [tblSimpleTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
-		[tblSimpleTable reloadData];
-     //   NSLog(@"section is %@", section);
 
+        NSLog(@"section is %@", section);
+
+        //UPDATING/SAVING USERS DEFAULTS
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];            
+//        [defaults setObject:section forKey:@"listOfAccessNumbers"];
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:accessNumbers];
+        [defaults setObject:data forKey:@"listOfAccessNumbers"];    
+
+
+//        NSLog(@"listOfItems is %@", listOfItems);
+//        NSLog(@"accessnumbers is %@", accessNumbers);
+
+        
+        //REMOVE LAST ROW FROM TABLE VIEW
         if ([section count] == 0) {
+            
+            lastIndexPath = nil;
             //self.navigationItem.rightBarButtonItem = nil;
             //        self.navigationItem.rightBarButtonItem.enabled = NO;  
             sectionIndicator = NO;
-            [listOfItems removeObject:accessNumbers];            
-            [tblSimpleTable reloadData];
+            [listOfItems removeObject:accessNumbers];    
+            tblSimpleTable.editing = NO;
+//            self.navigationItem.rightBarButtonItem = nil;
+  //          [tblSimpleTable reloadData];
+            [self setEditing:NO animated:YES];
+            
+            [self.navigationItem setRightBarButtonItem:nil animated:YES];
+            
+            accessNumberChecked = NO;
+
+            //SAVE DATA IN NSUSERDEFAULTS
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; 
+            [defaults setBool:accessNumberChecked  forKey:@"accessNumberChecked"];  
+            
         }
         else
         {
-            sectionIndicator = YES;
+            NSLog(@"ALERT ALERT!!!!");
+            NSLog(@"sectionIndicator is %d", sectionIndicator);
+
+           // sectionIndicator = YES;
         }
-    }     
+    }  
+    
     //Inserting an element to the table 
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
 //        NSMutableArray * section = [listOfItems objectAtIndex:indexPath.section];    
@@ -681,7 +885,9 @@
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    //    NSLog(@"****************** entering willSelectRowAtIndexPath");
+    [FlurryAnalytics logEvent:@"ROW SELECTED IN SECTION 0"];
+
+    //NSLog(@"****************** entering willSelectRowAtIndexPath");
     
     int newRow = [indexPath row];
     int oldRow = [lastIndexPath row];
@@ -701,34 +907,24 @@
             NSArray *array = [[NSArray alloc] init];
             array = [listOfItems objectAtIndex:indexPath.section];
             
-//            NSLog(@" array is: %@", array);
-            
-            
+            NSLog(@" array is: %@", array);
+
             
             NSString *cellValue = [array objectAtIndex:indexPath.row];
-            
-//            NSLog(@" cellValue is: %@", cellValue);
-            
             selectedAccessNumber = cellValue;
             accessObj = (NumberDataObj *)cellValue;
-            
-//            NSLog(@" accessObj is: %@", accessObj.inputNum);
-//            NSLog(@" accessObj is: %@", accessObj.inputName);
-            
             lastIndexPath = indexPath;
             
+            NSLog(@" accessObj.inputNum is: %@", accessObj.inputNum);
+            NSLog(@" accessObj.inputName is: %@", accessObj.inputName);
+            
             //SAVE DATA IN NSUSERDEFAULTS
-
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; 
             NSData *data = [NSKeyedArchiver archivedDataWithRootObject:indexPath];
             NSNumber *number = [NSNumber numberWithInt:indexPath.row];
             [defaults setObject:data forKey:@"lastIndexPath"];    
             [defaults setObject:number  forKey:@"lastIndexPathRow"];  
             [defaults setBool:accessNumberChecked  forKey:@"accessNumberChecked"];  
-
-            
-
-
         }
         //Switching a checked cell 
         else  if (accessNumberChecked == YES && (newRow != oldRow))     
@@ -736,6 +932,12 @@
             selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
             UITableViewCell *oldCell = [tableView cellForRowAtIndexPath: lastIndexPath];
             oldCell.accessoryType = UITableViewCellAccessoryNone;
+
+            NSArray *array = [[NSArray alloc] init];
+            array = [listOfItems objectAtIndex:indexPath.section];
+            NSString *cellValue = [array objectAtIndex:indexPath.row];
+            selectedAccessNumber = cellValue;
+            accessObj = (NumberDataObj *)cellValue;
 
             lastIndexPath = indexPath;
             
@@ -760,7 +962,9 @@
             selectedCell.accessoryType = UITableViewCellAccessoryNone;
             accessNumberChecked = NO;
             lastIndexPath = nil;
-            
+//            accessObj.inputNum = @"";
+            accessObj = nil;
+
             //SAVE DATA IN NSUSERDEFAULTS
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; 
             NSData *data = [NSKeyedArchiver archivedDataWithRootObject:indexPath];
@@ -779,33 +983,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
  // NSLog(@"****************** entering tableView:didSelectRowAtIndexPath");
-   
-//    NSLog(@" sectionIndicator %d", sectionIndicator);
-//    NSLog(@" indexPath.section %d", indexPath.section);
-//    NSLog(@" lastIndexPath %@", lastIndexPath);
-//
-//    //Selecting Checkmark based on selection
-//    if (indexPath.section == 0 && sectionIndicator == YES) {
-//          
-//        int newRow = [indexPath row];
-//        int oldRow = [lastIndexPath row];
-//        
-//        NSLog(@" newRow is: %d", newRow);
-//        NSLog(@" oldRow is: %d", oldRow);
-//
-//        
-//        if (newRow != oldRow)
-//        {
-//            UITableViewCell *newCell = [tableView cellForRowAtIndexPath: indexPath];
-//            newCell.accessoryType = UITableViewCellAccessoryCheckmark;
-//            
-//            UITableViewCell *oldCell = [tableView cellForRowAtIndexPath: lastIndexPath];
-//            oldCell.accessoryType = UITableViewCellAccessoryNone;
-//            
-//            lastIndexPath = indexPath;
-//        }
-//    }
-    
+       
     //Delesect selected cell 
    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -902,32 +1080,22 @@
     
   //  NSLog(@"****************** entering setEditing:animated");
     
+    NSLog(@"editing is: %d, and animated is %d", editing, animated);
+    
     [super setEditing:editing animated:animated];
     [tblSimpleTable setEditing:editing animated:animated];
-    
-    
-    //self.navigationItem.rightBarButtonItem = nil;
-    
-//    if (editing) {
-//         editButton.enabled = NO;
-//    } else {
-//        editButton.enabled = YES;
-//    }
 }
-
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
   //  NSLog(@"****************** entering tableView:titleForHeaderInSection");
-//    NSLog(@"section is %d", section);
-//    NSLog(@"sectionIndicator %d", sectionIndicator);
 
         if(section == 0) 
-            return @"1. Select your access number";
+            return NSLocalizedString(@"SelectAccessNumber", nil);
         else if (section == 2 && sectionIndicator == YES)
-            return @"2. Select the direct/ID number";
+            return NSLocalizedString(@"SelectPasscode", nil);
         else if (section == 1 && sectionIndicator == NO)
-            return @"2. Select the direct/ID number";
+            return NSLocalizedString(@"SelectPasscode", nil);
         else    
             return nil;
 }
@@ -950,7 +1118,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return @"Delete";
+    return NSLocalizedString(@"Delete", nil);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

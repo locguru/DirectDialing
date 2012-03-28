@@ -6,4 +6,26 @@
   Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 */
 
-"TITLE" = "hola!!!";
+//AccessNumber.m
+"AccessNumberName" = "Nombre Número de acceso";
+"AccessNumber" = "Número de Acceso";
+"AddNewAccessNumber" = "Añadir nuevo número de acceso";
+"AddressBook" = "                   Libreta de direcciones";
+"DialingConfirmation" = "Por favor, confirme que marcar:\n%@ \ncon el código de acceso:\n%@";
+"EnterAccessNumberAndTryAgain" = "Por favor, introduzca un número de acceso y vuelva a intentarlo";
+"Ok" = "Ok";
+"Cancel" = "cancelar";
+"SelectAccessNumber" = "1. Seleccione número de acceso";
+"SelectPasscode" = "2. Seleccione directa/código de acceso número";
+"Delete" = "borrar";
+
+//SettingsTabViewController.m
+"ContactName" = "contacto nombre";
+"AccessNumber" = "Número Acceso";
+"Continue" = "continuar";
+"EnterAccessNumber" = "Ingrese su número de acceso";
+"EnterInstructions" = "Escriba aquí el nombre y el número de número de acceso de tu contacto";
+"ContactNameCaps" = "contacto nombre";
+"AccessNumberCaps" = "Número Acceso";
+
+//NSLocalizedString(@"EnterInstructions", nil)
