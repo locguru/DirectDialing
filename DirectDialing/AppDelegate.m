@@ -7,16 +7,15 @@
 //
 
 #import "AppDelegate.h"
-//#import "ViewController.h"
-//#import "SettingsTabViewController.h"
-#import "AccessNumber.h"
 #import "FlurryAnalytics.h"
+#import "AccessNumber.h"
+#import "Settings.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
-@synthesize viewController = _viewController;
-@synthesize tabBarController = _tabBarController;
+@synthesize accessNumber = _accessNumber;
+@synthesize settingsvc = _settingsvc;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -25,8 +24,9 @@
     [FlurryAnalytics startSession:@"TQUTDLIUNA8LEXWIQMJN"];
         
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    AccessNumber *viewController1 = [[AccessNumber alloc] initWithNibName:@"AccessNumber" bundle:nil];    
-    UINavigationController *navCntrl1 = [[UINavigationController alloc] initWithRootViewController:viewController1];
+ //   AccessNumber *viewController1 = [[AccessNumber alloc] initWithNibName:@"AccessNumber" bundle:nil];    
+    _accessNumber = [[AccessNumber alloc] initWithNibName:@"AccessNumber" bundle:nil];    
+    UINavigationController *navCntrl1 = [[UINavigationController alloc] initWithRootViewController:_accessNumber];
     self.window.rootViewController = navCntrl1;
     [self.window makeKeyAndVisible];
     return YES;
@@ -40,6 +40,10 @@ void uncaughtExceptionHandler(NSException *exception) {
 
     
     [FlurryAnalytics logError:@"Uncaught" message:message exception:exception];
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [[_settingsvc facebook] handleOpenURL:url];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

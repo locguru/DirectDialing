@@ -30,4 +30,8 @@
 "ContactNameCaps" = "Contact Name";
 "AccessNumberCaps" = "Access Number";
 
+//Settings.m
+"NumberInstructions" = "Turn this option ON to allow the app to autimatically remove international prefixes";
+
+
 //NSLocalizedString(@"AccessNumberCaps", nil)

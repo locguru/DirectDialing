@@ -11,9 +11,8 @@
 #import "SettingsTabViewController.h"
 #import "History.h"
 #import "FlurryAnalytics.h"
-#import <Twitter/Twitter.h>
+#import "Settings.h"
 
-static NSString* kAppId = @"349376771765571";
 
 @implementation AccessNumber
 
@@ -34,7 +33,6 @@ static NSString* kAppId = @"349376771765571";
 @synthesize lastIndexPath;
 @synthesize cellLabel1;
 @synthesize cellLabel2;
-@synthesize facebook;
 
 //@synthesize delegate;
 
@@ -75,7 +73,7 @@ static NSString* kAppId = @"349376771765571";
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"smartphonebackground.png"]];
 
     //left BUTTON 
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Options" style:UIBarButtonItemStylePlain target:self action:@selector(ShareOptions:)];      
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Options" style:UIBarButtonItemStylePlain target:self action:@selector(SettingsVC:)];      
     self.navigationItem.leftBarButtonItem = leftButton;
     
 //    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"History" style:UIBarButtonItemStylePlain target:self action:@selector(history:)];      
@@ -164,8 +162,6 @@ static NSString* kAppId = @"349376771765571";
     [listOfItems addObject:launchABArray];
 
     
-    facebook = [[Facebook alloc] initWithAppId:@"349376771765571" andDelegate:self];
-    
 }
 
 
@@ -219,292 +215,31 @@ static NSString* kAppId = @"349376771765571";
     [self presentModalViewController:historyNavigationController animated:YES];
 }
 
--(IBAction)ShareOptions:(id)sender {
+-(IBAction)SettingsVC:(id)sender {
     
-    [FlurryAnalytics logEvent:@"SELECTING OPTIONS"];
+    [FlurryAnalytics logEvent:@"CLICK ON SETTINGS"];
     
-    //ACTION SHEET
-    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Share and Contact Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Contact Us", @"Post to Twitter", @"Share on Facebook", nil];  
-//    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Post to Facebook", @"Share on Twitter", @"Contact Us", nil];  
+    Settings *SettingsVC = [[Settings alloc] initWithNibName:nil bundle:nil];
+    UINavigationController *SettingsNavigationController = [[UINavigationController alloc] initWithRootViewController:SettingsVC];
+    SettingsNavigationController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;    
+    [self presentModalViewController:SettingsNavigationController animated:YES];
 
-    popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
-    [popupQuery showInView:self.view];    
+    
+//    //ACTION SHEET
+//    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Share and Contact Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Share on Facebook", @"Post to Twitter", @"Contact Us", nil];  
+////    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Post to Facebook", @"Share on Twitter", @"Contact Us", nil];  
+//
+//    popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+//    [popupQuery showInView:self.view];    
 }
 
 
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    if (buttonIndex == 0)
-    {
-        [FlurryAnalytics logEvent:@"CLICK ON CONTACT US"];
-        NSLog(@"buttonIndex %@", buttonIndex);
-        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
-        controller.mailComposeDelegate = self;
-        [controller setToRecipients:[NSArray arrayWithObject:@"support@delengo.com"]];
-        [controller setSubject:@"Inquiry Re: iPhone Smart Phone application"];
-        [controller setMessageBody:nil isHTML:NO]; 
-        if (controller) [self presentModalViewController:controller animated:YES];
-        
-        return;
-    } 
-    else if (buttonIndex == 1) 
-    {
-        
-        [FlurryAnalytics logEvent:@"CLICK ON SHARE ON TWITTER"];
-
-        NSString* versionNumber = [[UIDevice currentDevice] systemVersion];
-        int version;
-        version = [versionNumber intValue];
-        NSLog(@"versionNumber %d", version);
-        
-        if (version < 5)
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Smart Phone" message:@"Youd OS version doesn't support Twitter on this app. Please upgrade your OS an try again" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
-            [alert show];
-        }
-        else    
-        {
-            TWTweetComposeViewController *twitter = [[TWTweetComposeViewController alloc] init];
-            [twitter setInitialText:@"Enjoy using @Delengo recent app - Smart Phone, what a great application! #iphone #appstore"];
-            [self presentModalViewController:twitter animated:YES];
-            
-            // Called when the tweet dialog has been closed
-            twitter.completionHandler = ^(TWTweetComposeViewControllerResult result) 
-            {
-                NSString *title = @"Smart Phone";
-                NSString *msg; 
-                
-                if (result == TWTweetComposeViewControllerResultCancelled)
-                    msg = @"Tweet compostion was canceled";
-                else if (result == TWTweetComposeViewControllerResultDone)
-                    msg = @"Your tweet has been posted!";
-                
-                UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:msg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-                [alertView show];
-                
-                [self dismissModalViewControllerAnimated:YES];
-            };
-
-            return;
-
-        }
-        
-    } 
-    else if (buttonIndex == 2)
-    {
-
-        [FlurryAnalytics logEvent:@"POSTING ON FACEBOOK"];
-
-        [self postMessage:nil];
-        
-//        FBStreamDialog* dialog = [[FBStreamDialog alloc] init];
-//        dialog.userMessagePrompt = @"Enter your message:";
-//        dialog.attachment = [NSString stringWithFormat:@"{\"name\":\"%@ got straight A's!\",\"href\":\"http://www.raywenderlich.com/\",\"caption\":\"%@ must have gotten real lucky this time!\",\"description\":\"\",\"media\":[{\"type\":\"image\",\"src\":\"http://www.raywenderlich.com/wp-content/themes/raywenderlich/images/logo.jpg\",\"href\":\"http://www.raywenderlich.com/\"}]}",
-//                             _facebookName, _facebookName];
-//        dialog.actionLinks = @"[{\"text\":\"Get MyGrades!\",\"href\":\"http://www.raywenderlich.com/\"}]";
-//        [dialog show];
-        
-        
-//        Facebook *facebook = [[Facebook alloc] initWithAppId:@"210645928948875"];
-//        [facebook authorize:nil delegate:self];
-//        
-//        NSMutableString *facebookMessage = [NSMutableString stringWithString:@"I scored a whopping "];
-//        [facebookMessage appendString: [NSMutableString stringWithString:@".  Can you beat me?"]];
-//        
-//        NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-//                                       @"210645928948875", @"app_id",
-//                                       @"http://duncan.co.uk/", @"link",
-//                                       @"http://d.yimg.com/gg/goran_anicic/dunc.jpeg", @"picture",
-//                                       @"dunc", @"name",
-//                                       //@"Reference Documentation", @"caption",
-//                                       @"Download the app NOW from the App Store", @"description",
-//                                       facebookMessage,  @"message",
-//                                       nil];
-//        
-//        [facebook dialog:@"stream.publish" andParams:params andDelegate:self];
-        
-//        Facebook *facebook = [[Facebook alloc] initWithAppId:@"YOUR_APP_ID"];
-//        NSArray* permissions =  [NSArray arrayWithObjects:@"read_stream", @"publish_stream", nil];
-//        [facebook authorize:permissions delegate:self];
-//        
-//        NSMutableDictionary* params = [[NSMutableDictionary alloc] initWithCapacity:1]
-//        [params setObject:@"Testing" forKey:@"name"];
-//        [params setObject:@"IMAGE_URL" forKey:@"picture"];
-//        [params setObject:@"Description" forKey:@"description"];
-//        [facebook requestWithGraphPath:@"me/feed" andParams:params andHttpMethod:@"POST" andDelegate:self];
-
-    } 
-    
-    [FlurryAnalytics logEvent:@"CANCELING ACTION SHEET"];
-
-}
-
-
-//FACEBOOK API
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [facebook handleOpenURL:url]; 
-}
-
-- (void)fbDidLogin {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[facebook accessToken] forKey:@"FBAccessTokenKey"];
-    [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
-    [defaults synchronize];
-    
-}
-
-- (void)fbSessionInvalidated{
-    NSLog(@"fbSessionInvalidated");
-}
-
-- (void)fbDidLogout{
-    NSLog(@"fbDidLogout");
-}
-
-- (void)fbDidExtendToken:(NSString*)accessToken expiresAt:(NSDate*)expiresAt{
-    NSLog(@"fbDidExtendToken");
-}
-
-- (void)fbDidNotLogin:(BOOL)cancelled{
-    NSLog(@"fbDidNotLogin");
-}
-
-- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response{
-    NSLog(@"didReceiveResponse: %@", response);
-}
-
-- (void)request:(FBRequest *)request didFailWithError:(NSError *)error{
-    NSLog(@"didFailWithError: %@", [error description]);
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Share on Facebook" 
-                                                    message:@"An error occured" 
-                                                   delegate:nil 
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-}
-
-
-//FACEBOOK METHODS
--(IBAction) postMessage:(id) sender 
-{
-
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-        NSLog(@"AccessToken: %@ ExpirationDate: %@", facebook.accessToken, facebook.expirationDate);
-    }else{
-        NSLog(@"No AccessToken or ExpirationDate");
-    }
-    if (![facebook isSessionValid]) {
-        [facebook authorize:[NSArray arrayWithObjects:@"publish_stream", nil]];
-    }
-
-    NSString *link = @"http://www.foo.com";
-    NSString *linkName = @"Bar";
-    NSString *linkCaption = @"Foo Bar";
-    NSString *linkDescription = @"Fooooooo Bar";
-    NSString *message = @"Message";
-    
-    
-    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   kAppId, @"api_key",
-                                   message, @"message",
-                                   linkName, @"name",
-                                   linkDescription, @"description",
-                                   link, @"link",
-                                   linkCaption, @"caption",
-                                   nil];
-    
-    
-    
-    [facebook requestWithGraphPath: @"me/feed"
-                          andParams: params 
-                      andHttpMethod: @"POST" 
-                        andDelegate: self];
-    
-//	if (login == NO) 
-//    {
-//		NSArray* permissions =  [NSArray arrayWithObjects: @"read_stream", @"publish_stream", nil];
-//        [facebook authorize:permissions];
-//	} 
-//    else 
-//    {
-//        NSLog(@"Posting message");
-//        NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:nil];
-//        [params setObject:@"Testing" forKey:@"name"];
-//        [params setObject:@"Some junk description" forKey:@"description"];
-//        [facebook requestWithGraphPath:@"me/feed" andParams:params andHttpMethod:@"POST" andDelegate:self];
-//	}
-}
-
-//- (void)fbDidLogin 
+//-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex 
 //{
 //
-////    Facebook *facebook = [[Facebook alloc] initWithAppId:@"210645928948875"];
-////    [facebook authorize:nil delegate:self];
-////    
-////    NSMutableString *facebookMessage = [NSMutableString stringWithString:@"I scored a whopping "];
-////    [facebookMessage appendString: [NSMutableString stringWithFormat:@"%d", currentScore]];
-////    [facebookMessage appendString: [NSMutableString stringWithString:@".  Can you beat me?"]];
-////    
-////    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-////                                   @"210645928948875", @"app_id",
-////                                   @"http://duncan.co.uk/", @"link",
-////                                   @"http://d.yimg.com/gg/goran_anicic/dunc.jpeg", @"picture",
-////                                   @"dunc", @"name",
-////                                   //@"Reference Documentation", @"caption",
-////                                   @"Download the app NOW from the App Store", @"description",
-////                                   facebookMessage,  @"message",
-////                                   nil];
-////    
-////    [facebook dialog:@"stream.publish" andParams:params andDelegate:self];
-//
-////    NSString *kAppId;
-////    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-////                                   kAppId, @"109133762519851", @"http://developers.facebook.com/docs/reference/dialogs/", @"link",
-////                                   @"http://fbrell.com/f8.jpg", @"picture", @"Facebook Dialogs", @"name", @"Reference Documentation", @"caption", @"Dialogs provide a simple, consistent interface for apps to interact with users.", @"description", @"Facebook Dialogs are so easy!",  @"message", nil];
-////    
-////    [facebook dialog: @"stream.publish" andParams: params andDelegate:self];
-//    
-//    NSLog(@"logged in");
-//	//login = YES;
-//}
-//
-//- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
-//	NSLog(@"received response");
 //}
 
 
-
-
-- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
-{ 
-    // Notifies users about errors associated with the interface
-    switch (result)
-    {
-        case MFMailComposeResultCancelled:
-            break;
-        case MFMailComposeResultSaved:
-            break;
-        case MFMailComposeResultSent:
-            break;
-        case MFMailComposeResultFailed:
-            break;
-            
-        default:
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Email" message:@"Sending Failed - Unknown Error :-("
-                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-        }
-            
-            break;
-    }
-    [self dismissModalViewControllerAnimated:YES];
-}
 
 //***** PHONE DIAL METHOD METHOD *****//
 
@@ -578,6 +313,8 @@ static NSString* kAppId = @"349376771765571";
         NSLog(@"ok");
         NSURL *url = [NSURL URLWithString:fullNumber];
         [[UIApplication sharedApplication] openURL:url];
+   //     [self dismissModalViewControllerAnimated:YES];    
+
     }
 }
 
@@ -1125,5 +862,6 @@ static NSString* kAppId = @"349376771765571";
     // Return YES for supported orientations
     return interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown ;
 }
+
 
 @end

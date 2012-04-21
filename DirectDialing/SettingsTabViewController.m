@@ -137,7 +137,7 @@
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissKeyboard:)];
     self.navigationItem.rightBarButtonItem = doneButton;
     
-    self.navigationItem.leftBarButtonItem.enabled = NO;
+  //  self.navigationItem.leftBarButtonItem.enabled = NO;
 }
 
 - (IBAction)dismissKeyboard:(UITextField *)textField1 {

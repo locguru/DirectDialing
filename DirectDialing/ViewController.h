@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface ViewController : UIViewController <UITextFieldDelegate> {
     
 //@private
@@ -46,7 +45,6 @@
     UILabel *action;
     UITextField *textField;
     NSString *phoneNumber; 
-
 }
 
 @property (nonatomic, retain) UILabel *action;

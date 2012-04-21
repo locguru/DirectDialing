@@ -8,13 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@class ViewController;
+//@class ViewController;
+@class AccessNumber;
+@class Settings;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> 
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) ViewController *viewController;
-@property (strong, nonatomic) UITabBarController *tabBarController;
+//@property (strong, nonatomic) ViewController *viewController;
+@property (strong, nonatomic) AccessNumber *accessNumber;
+@property (strong, nonatomic) Settings *settingsvc;
 
 void uncaughtExceptionHandler(NSException *exception);
 

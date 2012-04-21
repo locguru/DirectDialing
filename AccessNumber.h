@@ -10,9 +10,6 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "NumberDataObj.h"
-#import <MessageUI/MessageUI.h>
-#import "FBConnect.h"
-#import "Facebook.h"
 //#import "History.h"
 
 
@@ -23,7 +20,7 @@
 //@end
 
 
-@interface AccessNumber : UIViewController < MFMailComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate, FBSessionDelegate, FBRequestDelegate> {
+@interface AccessNumber : UIViewController <UITableViewDelegate, UITableViewDataSource, ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate> {
     
     NSString *selectedAccessNumber;
     NSString *directNumber;
@@ -49,10 +46,7 @@
     UILabel *cellLabel1;
     UILabel *cellLabel2;
 
-    BOOL login;
-   // id <AddItemHistoryDelegate> delegate;
-   	//Facebook 
-    Facebook *facebook;
+    // id <AddItemHistoryDelegate> delegate;
 
 }
 //@property (nonatomic, retain) id delegate;
@@ -75,7 +69,6 @@
 @property (nonatomic, retain) UILabel *cellLabel2;
 @property (nonatomic, retain) NumberDataObj *numDataObj;
 
-@property (nonatomic, retain) Facebook *facebook;
 
 - (IBAction)dialNumber:(NSString *)phoneNum;
 - (IBAction)launchDialer:(id)sender;

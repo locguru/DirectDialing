@@ -10,6 +10,8 @@
 		7C1C3B4D1517D65300B3B1B2 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1C3B4C1517D65300B3B1B2 /* libFlurryAnalytics.a */; };
 		7C1C3B50151A9DB700B3B1B2 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C1C3B4F151A9DB700B3B1B2 /* icon@2x.png */; };
 		7C2B40251492EA2E00D09F93 /* AccessNumber.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2B40231492EA2E00D09F93 /* AccessNumber.xib */; };
+		7C36D7E21533E5A900822564 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C36D7E01533E5A900822564 /* Settings.m */; };
+		7C36D7E31533E5A900822564 /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C36D7E11533E5A900822564 /* Settings.xib */; };
 		7C3896F8151AC9260035B846 /* AccessNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3896FA151AC9260035B846 /* AccessNumber.m */; };
 		7C41E96414DE1E3A000036F9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C41E96614DE1E3A000036F9 /* Localizable.strings */; };
 		7C4927B414912333007A0AFA /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C4927B214912333007A0AFA /* AddressBook.framework */; };
@@ -73,6 +75,9 @@
 		7C1C3B4F151A9DB700B3B1B2 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		7C2B40211492EA2E00D09F93 /* AccessNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AccessNumber.h; path = ../AccessNumber.h; sourceTree = "<group>"; };
 		7C2B40231492EA2E00D09F93 /* AccessNumber.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AccessNumber.xib; path = ../AccessNumber.xib; sourceTree = "<group>"; };
+		7C36D7DF1533E5A900822564 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		7C36D7E01533E5A900822564 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		7C36D7E11533E5A900822564 /* Settings.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Settings.xib; sourceTree = "<group>"; };
 		7C3896F9151AC9260035B846 /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = en; path = en.lproj/AccessNumber.m; sourceTree = "<group>"; };
 		7C3896FC151AC94A0035B846 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C41E96514DE1E3A000036F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -303,6 +308,9 @@
 				7CE9D83F148FBB8D006FC6B7 /* SettingsTabViewController.h */,
 				7CE9D840148FBB8D006FC6B7 /* SettingsTabViewController.m */,
 				7CE9D841148FBB8D006FC6B7 /* SettingsTabViewController.xib */,
+				7C36D7DF1533E5A900822564 /* Settings.h */,
+				7C36D7E01533E5A900822564 /* Settings.m */,
+				7C36D7E11533E5A900822564 /* Settings.xib */,
 				7CE59DD3150EA77E005BCC29 /* History.h */,
 				7CE59DD4150EA77E005BCC29 /* History.m */,
 				7CE59DD5150EA77E005BCC29 /* History.xib */,
@@ -409,6 +417,7 @@
 				7CBABFA5152101C600E729B1 /* Default@2x.png in Resources */,
 				7CBABFA71521024900E729B1 /* smartphonebackground.png in Resources */,
 				7CBAC0801521498200E729B1 /* FBDialog.bundle in Resources */,
+				7C36D7E31533E5A900822564 /* Settings.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +446,7 @@
 				7CBAC0881521498200E729B1 /* SBJsonBase.m in Sources */,
 				7CBAC0891521498200E729B1 /* SBJsonParser.m in Sources */,
 				7CBAC08A1521498200E729B1 /* SBJsonWriter.m in Sources */,
+				7C36D7E21533E5A900822564 /* Settings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,8 +498,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: ITAI RAM (C8VWQ56ELU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ITAI RAM (C8VWQ56ELU)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Itai Ram";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Itai Ram";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -505,8 +515,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "BE408E1E-7A1F-406E-A383-AB3F84A34FD6";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BE408E1E-7A1F-406E-A383-AB3F84A34FD6";
+				PROVISIONING_PROFILE = "E6EBEC8D-7748-490E-B535-B0E53655EB74";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -517,8 +526,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: ITAI RAM (C8VWQ56ELU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ITAI RAM (C8VWQ56ELU)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Itai Ram";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Itai Ram";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -528,8 +537,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "BE408E1E-7A1F-406E-A383-AB3F84A34FD6";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BE408E1E-7A1F-406E-A383-AB3F84A34FD6";
+				PROVISIONING_PROFILE = "E6EBEC8D-7748-490E-B535-B0E53655EB74";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -538,8 +546,8 @@
 		7CE9D803148FB9CD006FC6B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: ITAI RAM (C8VWQ56ELU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ITAI RAM (C8VWQ56ELU)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Itai Ram";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Itai Ram";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DirectDialing/DirectDialing-Prefix.pch";
 				INFOPLIST_FILE = "DirectDialing/DirectDialing-Info.plist";
@@ -548,8 +556,7 @@
 					"\"$(SRCROOT)/FlurryAnalytics\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "BE408E1E-7A1F-406E-A383-AB3F84A34FD6";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BE408E1E-7A1F-406E-A383-AB3F84A34FD6";
+				PROVISIONING_PROFILE = "E6EBEC8D-7748-490E-B535-B0E53655EB74";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -557,8 +564,8 @@
 		7CE9D804148FB9CD006FC6B7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: ITAI RAM (C8VWQ56ELU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ITAI RAM (C8VWQ56ELU)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Itai Ram";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Itai Ram";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DirectDialing/DirectDialing-Prefix.pch";
 				INFOPLIST_FILE = "DirectDialing/DirectDialing-Info.plist";
@@ -567,8 +574,8 @@
 					"\"$(SRCROOT)/FlurryAnalytics\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "BE408E1E-7A1F-406E-A383-AB3F84A34FD6";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BE408E1E-7A1F-406E-A383-AB3F84A34FD6";
+				PROVISIONING_PROFILE = "E6EBEC8D-7748-490E-B535-B0E53655EB74";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E6EBEC8D-7748-490E-B535-B0E53655EB74";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
