@@ -13,7 +13,6 @@
 #import "FlurryAnalytics.h"
 #import "Settings.h"
 
-
 @implementation AccessNumber
 
 @synthesize selectedAccessNumber;
@@ -73,7 +72,7 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"smartphonebackground.png"]];
 
     //left BUTTON 
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Options" style:UIBarButtonItemStylePlain target:self action:@selector(SettingsVC:)];      
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Options", nil) style:UIBarButtonItemStylePlain target:self action:@selector(SettingsVC:)];      
     self.navigationItem.leftBarButtonItem = leftButton;
     
 //    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"History" style:UIBarButtonItemStylePlain target:self action:@selector(history:)];      
@@ -83,32 +82,14 @@
     
     cellLabel1.text = NSLocalizedString(@"AccessNumberName", nil);
     cellLabel2.text = NSLocalizedString(@"AccessNumber", nil);
-    
-    //ADDING BACKGROUND IMAGE 
-//    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-////    imgView.image = [UIImage imageNamed:@"smartphonebackground.png"];
-//    imgView.image = [UIImage imageNamed:@"caller-background.png"];
-//
-//    [self.view addSubview: imgView];
-//    [self.view sendSubviewToBack:imgView];
-    
+        
     //CREATING UITABLEVIEW 
     tblSimpleTable = [[UITableView alloc]  initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped ];
-
-    NSLog(@"self.view.frame.size.width is %@", self.view.frame.size.width);
-    NSLog(@"self.view.frame.size.height is %@", self.view.frame.size.height);
-    
- //   tblSimpleTable = [[UITableView alloc] init];
-//    tblSimpleTable.backgroundColor = [UIColor clearColor];
-     tblSimpleTable.scrollEnabled = YES;
-//    tblSimpleTable.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"smartphonebackground.png"]];
+    tblSimpleTable.scrollEnabled = YES;
     tblSimpleTable.backgroundColor = [UIColor clearColor];
-
-//   tblSimpleTable.bounces = YES;
     tblSimpleTable.dataSource = self;
     tblSimpleTable.delegate = self;
     [self.view addSubview:tblSimpleTable];
- //   [mainView addSubview:tblSimpleTable];
 
     //LOAD DATA FROM NSUSERDEFAULTS
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];     
@@ -121,7 +102,6 @@
     
     lastIndexPath = [NSKeyedUnarchiver unarchiveObjectWithData:archivedlastIndexPath];
     
-    //NSNumber *number = [defaults objectForKey:@"lastIndexPathRow"];
 
     if ([archivedSavedData length] == 0 ){
 
@@ -162,8 +142,22 @@
     [listOfItems addObject:launchABArray];
 
     
-}
+    if (![defaults objectForKey:@"firstRun"]) {
+        
+        [defaults setObject:[NSDate date] forKey:@"firstRun"];
+        NSLog(@"firstRun");
 
+        [defaults setBool:YES forKey:@"DialNotificationAlertState"];
+        dialAlertSwitch = YES;
+    }
+    else
+    {
+        dialAlertSwitch = [defaults boolForKey:@"DialNotificationAlertState"];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
 
 //UI METHODS
 - (IBAction)addAccessNumber:(id)sender {  
@@ -175,7 +169,6 @@
     UINavigationController *addNewAccessNumberVCNav = [[UINavigationController alloc] initWithRootViewController:addNewAccessNumberVC];
     addNewAccessNumberVCNav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;    
     [self presentModalViewController:addNewAccessNumberVCNav animated:YES];
-
 }
 
 - (IBAction)launchDialer:(id)sender {  
@@ -216,7 +209,8 @@
 }
 
 -(IBAction)SettingsVC:(id)sender {
-    
+
+
     [FlurryAnalytics logEvent:@"CLICK ON SETTINGS"];
     
     Settings *SettingsVC = [[Settings alloc] initWithNibName:nil bundle:nil];
@@ -240,7 +234,6 @@
 //}
 
 
-
 //***** PHONE DIAL METHOD METHOD *****//
 
 - (IBAction)dialNumber:(NSString *)phoneNum {
@@ -259,10 +252,10 @@
         }
     }
     
-    NSLog(@"fullNumber %@", fullNumber);
-    NSLog(@"accessNumber %@", accessObj.inputName);
-    NSLog(@"phoneNumber %@", phoneNumber);
-    NSLog(@"accessObj.inputNum %@", accessObj.inputNum);
+//    NSLog(@"fullNumber %@", fullNumber);
+//    NSLog(@"accessNumber %@", accessObj.inputName);
+//    NSLog(@"phoneNumber %@", phoneNumber);
+//    NSLog(@"accessObj.inputNum %@", accessObj.inputNum);
 
 
     
@@ -284,7 +277,8 @@
                                                        delegate:self 
                                               cancelButtonTitle:NSLocalizedString(@"Ok", nil) 
                                               otherButtonTitles:nil, nil];
- 
+        [alert show];
+
     }
     else
     {
@@ -295,10 +289,22 @@
                                        message:myMessage
                                       delegate:self 
                              cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
-                             otherButtonTitles:NSLocalizedString(@"Ok", nil), nil];
+                             otherButtonTitles:NSLocalizedString(@"Dial", nil), nil];
+
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];     
+        dialAlertSwitch = [defaults boolForKey:@"DialNotificationAlertState"];
+        
+//        NSLog(@"dialAlertSwitch %d", dialAlertSwitch);
+//        NSLog(@"fullNumber %@", fullNumber);
+        
+        if (dialAlertSwitch == 1){
+            [alert show];
+        }
+        else {
+            NSURL *url = [NSURL URLWithString:fullNumber];
+            [[UIApplication sharedApplication] openURL:url];
+        }
     }
-    
-    [alert show];
 }
 
 
@@ -319,7 +325,6 @@
 }
 
 //***** CUSTOME TABLE METHOD *****//
-
 - (void)refreshTableView:(NSString *) trasnferedNumber:(NSString *) transferedNumberName{
 
     //Adding data to history
@@ -331,6 +336,9 @@
 //    NSLog(@"Process completed");
 //    NSLog(@"listOfItems %@", listOfItems);    
 //    NSLog(@"trasnferedNumber.length: %d", trasnferedNumber.length);
+    
+    NSDictionary *dictionaryTrasnferedNumber = [NSDictionary dictionaryWithObjectsAndKeys:trasnferedNumber, @"TrasnferedNumber", nil];
+    [FlurryAnalytics logEvent:@"ACCESS NUMBER ENTERED" withParameters:dictionaryTrasnferedNumber];
 
     NSLog(@"trasnferedNumber %@", trasnferedNumber);
 
@@ -342,7 +350,7 @@
         //REMOVE ALL NON DIGITS FROM INPUT NUMBER
         
         NSString *newString = [[trasnferedNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
-        NSLog(@"newString %@", newString);
+      //  NSLog(@"newString %@", newString);
         trasnferedNumber = newString;
 
         
@@ -355,9 +363,7 @@
             
          //   [accessNumbers addObject:formattedString];
             [accessNumbers addObject:numDataObj];
-            NSLog(@"numDataObj %@", numDataObj);
-
-            
+          //  NSLog(@"numDataObj %@", numDataObj);
         }
         else
         {
@@ -369,7 +375,6 @@
             numDataObj.inputName = transferedNumberName;
             numDataObj.inputNum = formattedString;
             [accessNumbers addObject:numDataObj];
-
         }
 
         //Saving/Updating NSUserDefaults 
@@ -389,6 +394,8 @@
     }
     //else do nothing
 
+//    NSLog(@"accessNumbers %@", accessNumbers);
+//    NSLog(@"listOfItems %@", listOfItems);
 }
 
 //***** ADDRESS BOOK DELEGATE METHODS *****//
@@ -399,11 +406,10 @@
 
     NSString* name = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
     self.firstName = name;
-    NSLog(@"first name is: %@", name);
+//    NSLog(@"first name is: %@", name);
     name = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
     self.lastName = name;
-    NSLog(@"last name is: %@", name);
-
+//    NSLog(@"last name is: %@", name);
     
     if (property == kABPersonPhoneProperty) {
         ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
@@ -414,12 +420,12 @@
                 phoneNumber = (__bridge NSString *) phoneNumberRef;
                 CFRelease(phoneNumberRef);
                 //txtPhoneNumber.text = [NSString stringWithFormat:@"%@", phoneNumber];
-                NSLog(@" phoneNumber is: %@", phoneNumber);
+               // NSLog(@" phoneNumber is: %@", phoneNumber);
             }
         }
     }
     
-    [self dismissModalViewControllerAnimated:YES];    
+    [self dismissModalViewControllerAnimated:NO]; //no   
     
     [self dialNumber:phoneNumber];
     return NO;
@@ -434,12 +440,9 @@
 }
 
 //***** TABLE VIEW DELEGATE METHODS *****//
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
   //  NSLog(@"****************** entering cellForRowAtIndexPath at Section %d", indexPath.section);
-
-   // static NSString *CellIdentifier = @"Cell";
     
     static NSString *CellIdentifier1 = @"Cell_Section_1";
 	static NSString *CellIdentifier2 = @"Cell_Section_2";
@@ -466,7 +469,6 @@
                 if (indexPath.row == lastIndexPath.row && accessNumberChecked == YES)
                     cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }
-            
         }   
         else //sections 1 and 2
         {    
@@ -554,18 +556,29 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
   //      NSLog(@"listOfItems is %@", listOfItems);
-        NSLog(@"accessnumbers is %@", accessNumbers);
+    //    NSLog(@"accessnumbers is %@", accessNumbers);
 
         
          //REMOVING OBJECT FROM SECTION   
          NSMutableArray *section = [listOfItems objectAtIndex:indexPath.section];    
         NSLog(@"section is %@", section);
+        NSLog(@"listOfItems is %@", listOfItems);
 
         [section removeObjectAtIndex:indexPath.row];
         [tblSimpleTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
 
-        NSLog(@"section is %@", section);
+        NSLog(@"indexPath.row is %d", indexPath.row);
+        
+        NSLog(@"lastIndexPath is %d", lastIndexPath.row);
+        
+        if (indexPath.row == lastIndexPath.row){
+            accessNumberChecked = NO;
+        }
 
+        NSLog(@"section is %@", section);
+        NSLog(@"listOfItems is %@", listOfItems);
+
+        
         //UPDATING/SAVING USERS DEFAULTS
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];            
 //        [defaults setObject:section forKey:@"listOfAccessNumbers"];
@@ -581,23 +594,22 @@
         if ([section count] == 0) {
             
             lastIndexPath = nil;
-            //self.navigationItem.rightBarButtonItem = nil;
-            //        self.navigationItem.rightBarButtonItem.enabled = NO;  
             sectionIndicator = NO;
-            [listOfItems removeObject:accessNumbers];    
+            
+            [listOfItems removeObject:accessNumbers];  
+            
+         //   NSLog(@"listOfItems is %@", listOfItems);
+          //  NSLog(@"accessNumbers is %@", accessNumbers);
+
             tblSimpleTable.editing = NO;
 //            self.navigationItem.rightBarButtonItem = nil;
   //          [tblSimpleTable reloadData];
             [self setEditing:NO animated:YES];
-            
             [self.navigationItem setRightBarButtonItem:nil animated:YES];
             
-            accessNumberChecked = NO;
-
             //SAVE DATA IN NSUSERDEFAULTS
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; 
             [defaults setBool:accessNumberChecked  forKey:@"accessNumberChecked"];  
-            
         }
         else
         {
@@ -799,8 +811,6 @@
     }
 }
 
-
-
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
 
    // NSLog(@"****************** entering tableView:canEditRowAtIndexPath");
@@ -817,7 +827,7 @@
     
   //  NSLog(@"****************** entering setEditing:animated");
     
-    NSLog(@"editing is: %d, and animated is %d", editing, animated);
+   // NSLog(@"editing is: %d, and animated is %d", editing, animated);
     
     [super setEditing:editing animated:animated];
     [tblSimpleTable setEditing:editing animated:animated];

@@ -8,8 +8,7 @@
 
 #import "Settings.h"
 #import <Twitter/Twitter.h>
-
-static NSString* kAppId = @"349376771765571";
+#import "AppDelegate.h"
 
 @interface Settings ()
 
@@ -19,7 +18,7 @@ static NSString* kAppId = @"349376771765571";
 
 @synthesize listOfItems;
 @synthesize tblSimpleTable;
-@synthesize facebook;
+@synthesize switch1;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -27,6 +26,7 @@ static NSString* kAppId = @"349376771765571";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        switch1 = [[UISwitch alloc] initWithFrame:CGRectZero];
     }
     return self;
 }
@@ -36,12 +36,12 @@ static NSString* kAppId = @"349376771765571";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.title = @"Settings";
+    self.title = NSLocalizedString(@"Settings", nil);
     self.view.backgroundColor = [UIColor clearColor];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"smartphonebackground.png"]];
 
     //left BUTTON 
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(dismissVC:)];      
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(dismissVC:)];      
     self.navigationItem.leftBarButtonItem = leftButton;
 
     //CREATING UITABLEVIEW 
@@ -56,85 +56,25 @@ static NSString* kAppId = @"349376771765571";
     //INITIALIZING DATA SOURCE
     listOfItems = [[NSMutableArray alloc] init];
     NSMutableArray *enableIntNumbers = [NSMutableArray arrayWithObjects:@"Enable", nil];
-    NSMutableArray *addNewAccessNumberLabel = [NSMutableArray arrayWithObjects:@"Share on Facebook", @"Post to Twitter", nil];
-    NSMutableArray *launchABArray = [NSMutableArray arrayWithObjects:@"Send us feedback", nil];
+    NSMutableArray *disableConfirmationAlert = [NSMutableArray arrayWithObjects:NSLocalizedString(@"DialConfirmationAlert", nil), nil];
+    NSMutableArray *addNewAccessNumberLabel = [NSMutableArray arrayWithObjects:NSLocalizedString(@"ShareFacebook", nil), NSLocalizedString(@"PostTwitter", nil), nil];
+    NSMutableArray *launchABArray = [NSMutableArray arrayWithObjects:NSLocalizedString(@"SendFeedback", nil), nil];
 
  //   [listOfItems addObject:enableIntNumbers];
+    [listOfItems addObject:disableConfirmationAlert];
     [listOfItems addObject:addNewAccessNumberLabel];
     [listOfItems addObject:launchABArray];
 
-    //FACEBOOK INIT
-    facebook = [[Facebook alloc] initWithAppId:@"349376771765571" andDelegate:self];
 }
 
 - (IBAction)dismissVC:(id)sender 
 {
-//    [FlurryAnalytics logEvent:@"CLICK ON 'CONTINUE' - LEAVING SECOND SCREEN"];
-//    NSLog(@"entering continueView disimssing manual number ");
+    [FlurryAnalytics logEvent:@"CLICK ON 'CONTINUE' - LEAVING SECOND SCREEN"];
+    //NSLog(@"entering continueView disimssing manual number ");
     [self dismissModalViewControllerAnimated:YES];
 }
 
-//FACEBOOK API
-- (void)fbDidLogin {
-
-    //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    //    [defaults setObject:[facebook accessToken] forKey:@"FBAccessTokenKey"];
-    //    [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
-    //    [defaults synchronize];
-    
-    NSLog(@"entering fbDidLogin");
-    
-    NSString *link = @"http://itunes.apple.com/us/app/smart-phone/id511179270?ls=1&mt=8";
-    NSString *linkName = @"Smart Phone app By Delengo";
-    NSString *linkCaption = @"Check it out on the App Store!";
-    NSString *linkDescription = @"";
-    NSString *message = @"Love using Smart Phone app for the iPhone by Delengo";
-    
-    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   kAppId, @"api_key",
-                                   message, @"message",
-                                   linkName, @"name",
-                                   linkDescription, @"description",
-                                   link, @"link",
-                                   linkCaption, @"caption",
-                                   nil];
-    
-    [facebook requestWithGraphPath: @"me/feed" andParams: params andHttpMethod: @"POST" andDelegate: self];
-    
-}
-
--(void)fbDidNotLogin:(BOOL)cancelled {
-	NSLog(@"did not login");
-}
-
-- (void)request:(FBRequest *)request didLoad:(id)result {
-	
-    if ([result isKindOfClass:[NSArray class]]) {
-		result = [result objectAtIndex:0];
-	}
-	
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Smart Phone" 
-                                                    message:@"You successfully shared Smart Phone app on your Facebook wall!" 
-                                                   delegate:nil 
-                                          cancelButtonTitle:@"Dismiss"
-                                          otherButtonTitles:nil];
-    [alert show];
-    
-    NSLog(@"Result of API call: %@", result);
-}
-
-- (void)request:(FBRequest *)request didFailWithError:(NSError *)error{
-    
-    NSLog(@"didFailWithError: %@", [error description]);
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Share on Facebook" 
-                                                    message:@"An error occured" 
-                                                   delegate:nil 
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-}
-
-
+//MAIL DELEGATE METHODS
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 { 
     // Notifies users about errors associated with the interface
@@ -151,8 +91,8 @@ static NSString* kAppId = @"349376771765571";
             
         default:
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Email" message:@"Sending Failed - Unknown Error :-("
-                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Email", nil) message:NSLocalizedString(@"SendingFailed", nil)
+                                                           delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles: nil];
             [alert show];
         }
             
@@ -165,9 +105,7 @@ static NSString* kAppId = @"349376771765571";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     //  NSLog(@"****************** entering cellForRowAtIndexPath at Section %d", indexPath.section);
-    
-    // static NSString *CellIdentifier = @"Cell";
-    
+        
     static NSString *CellIdentifier1 = @"Cell_Section_1";
     UITableViewCell *cell;
       
@@ -175,43 +113,75 @@ static NSString* kAppId = @"349376771765571";
         NSArray *array = [[NSArray alloc] init];
         array = [listOfItems objectAtIndex:indexPath.section];
         cell.textLabel.text = [array objectAtIndex:indexPath.row];
+        cell.textLabel.adjustsFontSizeToFitWidth = YES;
 
-//    if(indexPath.section == 0)
-//    {
-//        UISwitch *switch1 = [[UISwitch alloc] initWithFrame:CGRectZero];
-//        [cell addSubview:switch1];
-//        cell.accessoryView = switch1;
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    }
-    
+    if(indexPath.section == 0)
+    {
+        //UISwitch *switch1 = [[UISwitch alloc] initWithFrame:CGRectZero];
+        [cell addSubview:switch1];
+        cell.accessoryView = switch1;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];     
+        BOOL tempBool;
+        //NSLog(@"tempBool %d", tempBool);
+
+        tempBool = [defaults boolForKey:@"DialNotificationAlertState"];
+        [switch1 setOn:tempBool animated:YES];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [switch1 addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+
+    }
+    else if(indexPath.section == 1)
+    {
+       if(indexPath.row == 0)
+           cell.imageView.image = [UIImage imageNamed:@"facebookicon.png"];
+        else if(indexPath.row == 1)
+            cell.imageView.image = [UIImage imageNamed:@"twittericon.png"];
+        else 
+            NSLog(@"Do Nothing");
+    }
+
+
     return cell;
+}
+
+- (IBAction)switchAction:(id)sender {
+    
+    //SAVE SWITCH STATE IN NSUSERDEFAULTS
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; 
+
+    if (switch1.on == 0) { //Gets in when swtiche turns OFF
+      //  NSLog(@"switch1.state row %d", switch1.on);
+        [defaults setBool:NO forKey:@"DialNotificationAlertState"];
+    }
+    else { //Gets in when switch turns ON
+      //  NSLog(@"switch1.state row %d", switch1.on);
+        [defaults setBool:YES forKey:@"DialNotificationAlertState"];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // NSLog(@"****************** entering tableView:didSelectRowAtIndexPath");
-    
-   // NSLog(@"touched row %d", indexPath.row);
     
     [tblSimpleTable deselectRowAtIndexPath:indexPath animated:YES];
 
-    
-//    if(indexPath.section == 0) 
-    if(0)
+    if(indexPath.section == 0)
     {
-        //NSLog(@"touched row %d", indexPath.row);
+        NSLog(@"touched row %d", indexPath.row);
     }
-    else if (indexPath.section == 0)
+    //Facebook and Twitter Section
+    else if (indexPath.section == 1)
     {
-        //NSLog(@"touched row %d", indexPath.row);
-        
-        if (indexPath.row == 0)
+        if (indexPath.row == 0) //Facebook
         {
             [FlurryAnalytics logEvent:@"POSTING ON FACEBOOK"];
-            NSLog(@"entering POSTING ON FACEBOOK");
-            [facebook authorize:[NSArray arrayWithObjects:@"publish_stream", nil]];
+         //   NSLog(@"entering POSTING ON FACEBOOK");
+            
+            AppDelegate *appDelegateObj = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            [appDelegateObj.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", nil]]; 
+
+            return;
         }
-        else if (indexPath.row == 1)
+        else if (indexPath.row == 1) //Twitter 
         {
             [FlurryAnalytics logEvent:@"CLICK ON SHARE ON TWITTER"];
 
@@ -222,13 +192,13 @@ static NSString* kAppId = @"349376771765571";
             
             if (version < 5)
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Smart Phone" message:@"Youd OS version doesn't support Twitter on this app. Please upgrade your OS an try again" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles: nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Smart Phone" message:NSLocalizedString(@"TwitterOSVersion", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Dismiss", nil) otherButtonTitles: nil];
                 [alert show];
             }
             else    
             {
                 TWTweetComposeViewController *twitter = [[TWTweetComposeViewController alloc] init];
-                [twitter setInitialText:@"Enjoying using @Delengo recent app - Smart Phone, what a great application! #iphone #appstore #business"];
+                [twitter setInitialText:@"Enjoying using @Delengo recent app - Smart Phone, check it out! http://itunes.apple.com/us/app/smart-phone/id511179270?ls=1&mt=8 #iphone #appstore #business"];
                 [self presentModalViewController:twitter animated:YES];
                 
                 // Called when the tweet dialog has been closed
@@ -236,13 +206,13 @@ static NSString* kAppId = @"349376771765571";
                 {
                     NSString *title = @"Smart Phone";
                     NSString *msg; 
-                    
+                                        
                     if (result == TWTweetComposeViewControllerResultCancelled)
-                        msg = @"Tweet compostion was canceled";
+                        msg = NSLocalizedString(@"TweetCancelled", nil);
                     else if (result == TWTweetComposeViewControllerResultDone)
-                        msg = @"Your tweet has been posted!";
+                        msg = NSLocalizedString(@"TweetPosted", nil);
                     
-                    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:msg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:msg delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", nil) otherButtonTitles:nil];
                     [alertView show];
                     
                     [self dismissModalViewControllerAnimated:YES];
@@ -251,7 +221,8 @@ static NSString* kAppId = @"349376771765571";
 
         }
     }
-    else if (indexPath.section == 1)
+    //Contact us section
+    else if (indexPath.section == 2)
     {
         [FlurryAnalytics logEvent:@"CLICK ON CONTACT US"];
         MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
@@ -268,38 +239,41 @@ static NSString* kAppId = @"349376771765571";
  
  }
 
-//-(CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section
-//{
-//        if (section == 0) {        
-//            return 60;
-//        }   
-//        else if (section == 1) {
-//            return 20;
-//        }     
-//        else
-//            return 30;
-//
-//}
+-(CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section
+{
+        if (section == 0) {        
+            return 40;
+        }   
+        else if (section == 1) {
+            return 20;
+        }     
+        else
+            return 30;
+}
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section 
 {    
     if(0) 
         return @"Support International Numbers";
     else if (section == 0)
-        return @"Sharing Options";
+        return NSLocalizedString(@"NotificationSettings", nil);
     else if (section == 1)
-        return @"Contact Us";
+        return NSLocalizedString(@"SharingOptions", nil);
+    else if (section == 2)
+        return NSLocalizedString(@"ContactUs", nil);
     else    
         return nil;
 }
 
-//- (NSString *)tableView:(UITableView *)tv titleForFooterInSection:(NSInteger)section
-//{
-//    if (section == 0)
+- (NSString *)tableView:(UITableView *)tv titleForFooterInSection:(NSInteger)section
+{
+    if (section == 0)
 //        return NSLocalizedString(@"NumberInstructions", nil);
-//    else 
-//        return nil;
-//}
+        return NSLocalizedString(@"DialConfirmationAlertFooter", nil);
+
+    else 
+        return nil;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [listOfItems count];    

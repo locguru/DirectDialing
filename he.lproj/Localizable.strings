@@ -6,6 +6,10 @@
   Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 */
 
+//App Delegate
+"AnErrorOccured" = "אראה שגיאה";
+"SuccessfullySharedFacebook" = "פרסמת את האפליקציה בפייסבוק בהצלחה";
+
 //AccessNumber.m
 "TITLE" = "Step 1: Select Your Access Number";
 "AccessNumberName" = "שם של מספר הגישה";
@@ -13,18 +17,39 @@
 "AddNewAccessNumber" = "הוסף מספר גישה חדש";
 "AddressBook" = "                         ספר טלפונים";
 "DialingConfirmation" = "אנא אשר חיוג ל: \n%@ \nעם מספר הגישה: \n%@";
-"EnterAccessNumberAndTryAgain" = "אנא הכנס מספר גישה ונסה שנית";
+"EnterAccessNumberAndTryAgain" = "אנא בחר/הכנס מספר גישה ונסה שנית";
 "Ok" = "אוקיי";
 "Cancel" = "ביטול";
 "SelectAccessNumber" = "1. בחר את מספר הגישה";
 "SelectPasscode" = "2. בחר את המספר הישיר";
 "Delete" = "מחק";
+"Dial" = "חייג";
+"Options" = "אפשרויות";
 
 //SettingsTabViewController.m
 "ContactName" = "שם איש הקשר";
 "AccessNumber" = "מספר הגישה";
 "Continue" = "המשך";
 "EnterAccessNumber" = "הכנס את מספר הגישה";
-"EnterInstructions" = "הכנס כאן את מספר הגישה ושם מספר הגישה";
+"EnterInstructions" = "הכנס כאן את מספר הגישה ושם איש הקשר";
 "ContactNameCaps" = "שם איש הקשר";
 "AccessNumberCaps" = "מספר הגישה";
+"ImportContactFromAB" = "בחר מספר הטלפונים";
+
+//Settings.m
+"DialConfirmationAlertFooter" = "שאל אותי תמיד לפני החיוג";
+"Settings" = "הגדרות";
+"Done" = "סיים";
+"Email" = "דואר אלקטרוני";
+"SendingFailed" = "שליחה נכשלה";
+"TwitterOSVersion" = "מערכת ההפעלה של המכשיר שלך אינה תומכת בטוויטר המובנה באייפון. אנא שדרג את מערכת ההפעלה";
+"Dismiss" = "ביטול";
+"TweetCancelled" = "כתיבת ההודעה בוטלה";
+"TweetPosted" = "ההודעה התפרסמה בהצלחה";
+"NotificationSettings" = "הגדרות התרעה";
+"SharingOptions" = "רשתות חברתיות";
+"ContactUs" = "צור קשר";
+"DialConfirmationAlert" = "אשר חיוג";
+"ShareFacebook" = "פרסם בפייסבוק";
+"PostTwitter" = "פרסם בטוויטר";
+"SendFeedback" = "שלח חוות דעת";

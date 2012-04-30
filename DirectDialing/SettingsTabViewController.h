@@ -45,7 +45,7 @@
 @property (nonatomic, retain) IBOutlet UITableView *tblSimpleTable;
 @property (nonatomic, retain) NSMutableArray *listOfItems;
 
-- (IBAction)showPicker:(id)sender;
+- (IBAction)importContactFromAddressBook:(id)sender;
 - (IBAction)cancelView:(id)sender;
 - (IBAction)continueView:(id)sender;
 - (IBAction)dismissKeyboard:(UITextField *)textField1;

@@ -9,13 +9,14 @@
 #import "AppDelegate.h"
 #import "FlurryAnalytics.h"
 #import "AccessNumber.h"
-#import "Settings.h"
+
+static NSString* kAppId = @"349376771765571";
 
 @implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize accessNumber = _accessNumber;
-@synthesize settingsvc = _settingsvc;
+@synthesize facebook;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -23,6 +24,9 @@
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     [FlurryAnalytics startSession:@"TQUTDLIUNA8LEXWIQMJN"];
         
+    //FACEBOOK
+    facebook = [[Facebook alloc] initWithAppId:@"349376771765571" andDelegate:self];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
  //   AccessNumber *viewController1 = [[AccessNumber alloc] initWithNibName:@"AccessNumber" bundle:nil];    
     _accessNumber = [[AccessNumber alloc] initWithNibName:@"AccessNumber" bundle:nil];    
@@ -32,18 +36,96 @@
     return YES;
 }
 
+//FLURRY METHOD
 void uncaughtExceptionHandler(NSException *exception) {
 
     NSArray *backtrace = [exception callStackSymbols];
     NSString *version = [[UIDevice currentDevice] systemVersion];
     NSString *message = [NSString stringWithFormat:@"CRASH! OS: %@. Backtrace:\n%@",version, backtrace];
 
-    
     [FlurryAnalytics logError:@"Uncaught" message:message exception:exception];
 }
 
+//FACEBOOK API
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [[_settingsvc facebook] handleOpenURL:url];
+    return [self.facebook handleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [self.facebook handleOpenURL:url]; 
+}
+
+- (void)fbDidLogin {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[facebook accessToken] forKey:@"FBAccessTokenKey"];
+    [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
+    
+    NSLog(@"entering fbDidLogin");
+    [FlurryAnalytics logEvent:@"ENTERING fbDidLogin - POST SUCCESSFULLY"];
+    
+ //   NSString *link = @"http://itunes.apple.com/us/app/smart-phone/id511179270?ls=1&mt=8"; //itunes store
+    NSString *link = @"http://itunes.apple.com/us/app/smart-phone/id511179270?mt=8";
+    NSString *linkName = @"Smart Phone app By Delengo";
+    NSString *linkCaption = @"Check it out on the App Store!";
+    NSString *linkDescription = @"";
+    NSString *message = @"Love using Smart Phone app for the iPhone by Delengo";
+    
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   kAppId, @"api_key",
+                                   message, @"message",
+                                   linkName, @"name",
+                                   linkDescription, @"description",
+                                   link, @"link",
+                                   linkCaption, @"caption",
+                                   nil];
+    
+    [facebook requestWithGraphPath:@"me/feed" andParams: params andHttpMethod:@"POST" andDelegate:self];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Smart Phone" 
+                                                    message:NSLocalizedString(@"SuccessfullySharedFacebook", nil) 
+                                                   delegate:nil 
+                                          cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
+                                          otherButtonTitles:nil];
+    [alert show];
+    
+}
+
+-(void)fbDidNotLogin:(BOOL)cancelled {
+	NSLog(@"did not login");
+}
+
+- (void)requestLoading:(FBRequest *)request{
+    NSLog(@"enter requestLoading");
+}
+
+- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response{
+    NSLog(@"enter didReceiveResponse");
+}
+
+- (void)request:(FBRequest *)request didLoadRawResponse:(NSData *)data {
+    NSLog(@"enter didLoadRawResponse");
+}
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+	
+    if ([result isKindOfClass:[NSArray class]]) {
+		result = [result objectAtIndex:0];
+	}    
+    NSLog(@"Result of API call: %@", result);
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error{
+    
+    NSLog(@"didFailWithError: %@", [error description]);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ShareFacebook", nil) 
+                                                    message:NSLocalizedString(@"AnErrorOccured", nil) 
+                                                   delegate:nil 
+                                          cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

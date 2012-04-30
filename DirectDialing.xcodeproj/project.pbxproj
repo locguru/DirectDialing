@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C70E4BF154D7F87005C8022 /* AccessNumber.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C70E4BD154D7F87005C8022 /* AccessNumber.xib */; };
+		2C70E4C0154D7F87005C8022 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C70E4BE154D7F87005C8022 /* ViewController.xib */; };
+		2C70E4CC154D9E0B005C8022 /* FacebookController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C70E4CB154D9E0A005C8022 /* FacebookController.m */; };
+		2C70E4D2154DD926005C8022 /* facebookicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C70E4D1154DD926005C8022 /* facebookicon.png */; };
+		2C70E4D4154DDA36005C8022 /* twittericon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C70E4D3154DDA36005C8022 /* twittericon.png */; };
 		7C1C3B4D1517D65300B3B1B2 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1C3B4C1517D65300B3B1B2 /* libFlurryAnalytics.a */; };
 		7C1C3B50151A9DB700B3B1B2 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C1C3B4F151A9DB700B3B1B2 /* icon@2x.png */; };
-		7C2B40251492EA2E00D09F93 /* AccessNumber.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2B40231492EA2E00D09F93 /* AccessNumber.xib */; };
 		7C36D7E21533E5A900822564 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C36D7E01533E5A900822564 /* Settings.m */; };
 		7C36D7E31533E5A900822564 /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C36D7E11533E5A900822564 /* Settings.xib */; };
 		7C3896F8151AC9260035B846 /* AccessNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3896FA151AC9260035B846 /* AccessNumber.m */; };
@@ -53,6 +57,7 @@
 		7CBAC0891521498200E729B1 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAC0791521498200E729B1 /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7CBAC08A1521498200E729B1 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBAC07B1521498200E729B1 /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7CC6EA8F150C1C2900F20ED2 /* NumberDataObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC6EA8E150C1C2900F20ED2 /* NumberDataObj.m */; };
+		7CD90D171544A909007FCB8C /* smartphonebackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CD90D161544A909007FCB8C /* smartphonebackground@2x.png */; };
 		7CE59DD6150EA77E005BCC29 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE59DD4150EA77E005BCC29 /* History.m */; };
 		7CE59DD7150EA77E005BCC29 /* History.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE59DD5150EA77E005BCC29 /* History.xib */; };
 		7CE9D7E9148FB9CD006FC6B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE9D7E8148FB9CD006FC6B7 /* UIKit.framework */; };
@@ -62,7 +67,6 @@
 		7CE9D7F5148FB9CD006FC6B7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE9D7F4148FB9CD006FC6B7 /* main.m */; };
 		7CE9D7F9148FB9CD006FC6B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE9D7F8148FB9CD006FC6B7 /* AppDelegate.m */; };
 		7CE9D7FC148FB9CD006FC6B7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE9D7FB148FB9CD006FC6B7 /* ViewController.m */; };
-		7CE9D7FF148FB9CD006FC6B7 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE9D7FD148FB9CD006FC6B7 /* ViewController.xib */; };
 		7CE9D842148FBB8D006FC6B7 /* SettingsTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE9D840148FBB8D006FC6B7 /* SettingsTabViewController.m */; };
 		7CE9D843148FBB8D006FC6B7 /* SettingsTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE9D841148FBB8D006FC6B7 /* SettingsTabViewController.xib */; };
 		7CEF60C51520E4C000C35BEF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CEF60C41520E4C000C35BEF /* MessageUI.framework */; };
@@ -70,11 +74,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C70E4BD154D7F87005C8022 /* AccessNumber.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccessNumber.xib; sourceTree = "<group>"; };
+		2C70E4BE154D7F87005C8022 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		2C70E4C1154D7FA2005C8022 /* AccessNumber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccessNumber.h; sourceTree = "<group>"; };
+		2C70E4CA154D9E0A005C8022 /* FacebookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookController.h; sourceTree = "<group>"; };
+		2C70E4CB154D9E0A005C8022 /* FacebookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookController.m; sourceTree = "<group>"; };
+		2C70E4D1154DD926005C8022 /* facebookicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebookicon.png; sourceTree = "<group>"; };
+		2C70E4D3154DDA36005C8022 /* twittericon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twittericon.png; sourceTree = "<group>"; };
 		7C1C3B4C1517D65300B3B1B2 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurryAnalytics.a; path = FlurryAnalytics/libFlurryAnalytics.a; sourceTree = "<group>"; };
 		7C1C3B4E1517D66800B3B1B2 /* FlurryAnalytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
 		7C1C3B4F151A9DB700B3B1B2 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
-		7C2B40211492EA2E00D09F93 /* AccessNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AccessNumber.h; path = ../AccessNumber.h; sourceTree = "<group>"; };
-		7C2B40231492EA2E00D09F93 /* AccessNumber.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AccessNumber.xib; path = ../AccessNumber.xib; sourceTree = "<group>"; };
 		7C36D7DF1533E5A900822564 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		7C36D7E01533E5A900822564 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		7C36D7E11533E5A900822564 /* Settings.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Settings.xib; sourceTree = "<group>"; };
@@ -136,6 +145,7 @@
 		7CBAC07B1521498200E729B1 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		7CC6EA8D150C1C2900F20ED2 /* NumberDataObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberDataObj.h; sourceTree = "<group>"; };
 		7CC6EA8E150C1C2900F20ED2 /* NumberDataObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberDataObj.m; sourceTree = "<group>"; };
+		7CD90D161544A909007FCB8C /* smartphonebackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smartphonebackground@2x.png"; sourceTree = "<group>"; };
 		7CE59DD3150EA77E005BCC29 /* History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
 		7CE59DD4150EA77E005BCC29 /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
 		7CE59DD5150EA77E005BCC29 /* History.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = History.xib; sourceTree = "<group>"; };
@@ -151,7 +161,6 @@
 		7CE9D7F8148FB9CD006FC6B7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7CE9D7FA148FB9CD006FC6B7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		7CE9D7FB148FB9CD006FC6B7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		7CE9D7FE148FB9CD006FC6B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		7CE9D83F148FBB8D006FC6B7 /* SettingsTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTabViewController.h; sourceTree = "<group>"; };
 		7CE9D840148FBB8D006FC6B7 /* SettingsTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTabViewController.m; sourceTree = "<group>"; };
 		7CE9D841148FBB8D006FC6B7 /* SettingsTabViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsTabViewController.xib; sourceTree = "<group>"; };
@@ -183,7 +192,10 @@
 			isa = PBXGroup;
 			children = (
 				7CB9F406149002FB00F9F804 /* caller-background.png */,
+				2C70E4D1154DD926005C8022 /* facebookicon.png */,
+				2C70E4D3154DDA36005C8022 /* twittericon.png */,
 				7CBABFA61521024900E729B1 /* smartphonebackground.png */,
+				7CD90D161544A909007FCB8C /* smartphonebackground@2x.png */,
 				7C6871EC14DF9BAC0033F4E9 /* newbackground.png */,
 				7CB9F4081490030900F9F804 /* tab-contacts.png */,
 				7CB9F3E4148FFC9A00F9F804 /* tab-keypad.png */,
@@ -258,6 +270,8 @@
 				7CE9D7F8148FB9CD006FC6B7 /* AppDelegate.m */,
 				7CC6EA8D150C1C2900F20ED2 /* NumberDataObj.h */,
 				7CC6EA8E150C1C2900F20ED2 /* NumberDataObj.m */,
+				2C70E4CA154D9E0A005C8022 /* FacebookController.h */,
+				2C70E4CB154D9E0A005C8022 /* FacebookController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -302,9 +316,8 @@
 			isa = PBXGroup;
 			children = (
 				7CE59DCD150D807C005BCC29 /* Classes */,
-				7C2B40211492EA2E00D09F93 /* AccessNumber.h */,
+				2C70E4C1154D7FA2005C8022 /* AccessNumber.h */,
 				7C3896FA151AC9260035B846 /* AccessNumber.m */,
-				7C2B40231492EA2E00D09F93 /* AccessNumber.xib */,
 				7CE9D83F148FBB8D006FC6B7 /* SettingsTabViewController.h */,
 				7CE9D840148FBB8D006FC6B7 /* SettingsTabViewController.m */,
 				7CE9D841148FBB8D006FC6B7 /* SettingsTabViewController.xib */,
@@ -316,7 +329,8 @@
 				7CE59DD5150EA77E005BCC29 /* History.xib */,
 				7CE9D7FA148FB9CD006FC6B7 /* ViewController.h */,
 				7CE9D7FB148FB9CD006FC6B7 /* ViewController.m */,
-				7CE9D7FD148FB9CD006FC6B7 /* ViewController.xib */,
+				2C70E4BD154D7F87005C8022 /* AccessNumber.xib */,
+				2C70E4BE154D7F87005C8022 /* ViewController.xib */,
 				7CE9D7EF148FB9CD006FC6B7 /* Supporting Files */,
 			);
 			path = DirectDialing;
@@ -387,7 +401,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CE9D7F3148FB9CD006FC6B7 /* InfoPlist.strings in Resources */,
-				7CE9D7FF148FB9CD006FC6B7 /* ViewController.xib in Resources */,
 				7CE9D843148FBB8D006FC6B7 /* SettingsTabViewController.xib in Resources */,
 				7CB9F3E5148FFC9A00F9F804 /* tab-keypad.png in Resources */,
 				7CB9F3F6149002C200F9F804 /* tel-0-pressed.png in Resources */,
@@ -407,7 +420,6 @@
 				7CB9F405149002D900F9F804 /* tel-normal.png in Resources */,
 				7CB9F407149002FB00F9F804 /* caller-background.png in Resources */,
 				7CB9F4091490030900F9F804 /* tab-contacts.png in Resources */,
-				7C2B40251492EA2E00D09F93 /* AccessNumber.xib in Resources */,
 				7C41E96414DE1E3A000036F9 /* Localizable.strings in Resources */,
 				7C6871ED14DF9BAC0033F4E9 /* newbackground.png in Resources */,
 				7CE59DD7150EA77E005BCC29 /* History.xib in Resources */,
@@ -418,6 +430,11 @@
 				7CBABFA71521024900E729B1 /* smartphonebackground.png in Resources */,
 				7CBAC0801521498200E729B1 /* FBDialog.bundle in Resources */,
 				7C36D7E31533E5A900822564 /* Settings.xib in Resources */,
+				7CD90D171544A909007FCB8C /* smartphonebackground@2x.png in Resources */,
+				2C70E4BF154D7F87005C8022 /* AccessNumber.xib in Resources */,
+				2C70E4C0154D7F87005C8022 /* ViewController.xib in Resources */,
+				2C70E4D2154DD926005C8022 /* facebookicon.png in Resources */,
+				2C70E4D4154DDA36005C8022 /* twittericon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +464,7 @@
 				7CBAC0891521498200E729B1 /* SBJsonParser.m in Sources */,
 				7CBAC08A1521498200E729B1 /* SBJsonWriter.m in Sources */,
 				7C36D7E21533E5A900822564 /* Settings.m in Sources */,
+				2C70E4CC154D9E0B005C8022 /* FacebookController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,14 +499,6 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		7CE9D7FD148FB9CD006FC6B7 /* ViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7CE9D7FE148FB9CD006FC6B7 /* en */,
-			);
-			name = ViewController.xib;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -498,8 +508,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Itai Ram";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Itai Ram";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ITAI RAM (C8VWQ56ELU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ITAI RAM (C8VWQ56ELU)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -515,7 +525,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "E6EBEC8D-7748-490E-B535-B0E53655EB74";
+				PROVISIONING_PROFILE = "BE408E1E-7A1F-406E-A383-AB3F84A34FD6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BE408E1E-7A1F-406E-A383-AB3F84A34FD6";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -526,8 +537,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Itai Ram";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Itai Ram";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ITAI RAM (C8VWQ56ELU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ITAI RAM (C8VWQ56ELU)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -537,7 +548,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "E6EBEC8D-7748-490E-B535-B0E53655EB74";
+				PROVISIONING_PROFILE = "BE408E1E-7A1F-406E-A383-AB3F84A34FD6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BE408E1E-7A1F-406E-A383-AB3F84A34FD6";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -557,6 +569,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "E6EBEC8D-7748-490E-B535-B0E53655EB74";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E6EBEC8D-7748-490E-B535-B0E53655EB74";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

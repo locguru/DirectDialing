@@ -44,13 +44,6 @@
     self.view.backgroundColor = [UIColor clearColor];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"smartphonebackground.png"]];
     
-////    UIButton *testb = [[UIButton alloc] init];
-////    testb.frame = CGRectMake(40, 140, 240, 30);
-//    
-////    testb = [UIButton buttonWithType:UIButtonTypeRoundedRect]; 
-//    testb.backgroundColor = [UIColor blueColor];
-//    [self.view addSubview:testb];
-
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelView:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
@@ -102,17 +95,23 @@
 
     listOfItems = [NSMutableArray arrayWithObjects:NSLocalizedString(@"ContactNameCaps", nil), NSLocalizedString(@"AccessNumberCaps", nil), nil];
         
-//    //ADDING DIAL BUTTON
-//    UIButton *dialButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    [dialButton addTarget:self action:@selector(showPicker:) forControlEvents:UIControlEventTouchUpInside];
-//    dialButton.frame = CGRectMake(70, 280, 180, 40.0);
-//    dialButton.contentMode = UIViewContentModeScaleToFill;
-//    [self.view addSubview:dialButton];
+    //ADDING IMPORT CONTACT FROM AB BUTTON
+    UIButton *addContactFromAB = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [addContactFromAB addTarget:self action:@selector(importContactFromAddressBook:) forControlEvents:UIControlEventTouchUpInside];
+    addContactFromAB.frame = CGRectMake(20, 220, 280, 40.0);
+    addContactFromAB.contentMode = UIViewContentModeScaleToFill;
+    [addContactFromAB setTitle:NSLocalizedString(@"ImportContactFromAB", nil) forState: UIControlStateNormal];
+    addContactFromAB.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+    addContactFromAB.titleLabel.adjustsFontSizeToFitWidth = TRUE;
+
+    [self.view addSubview:addContactFromAB];
     
 }
 
-- (IBAction)showPicker:(id)sender 
+- (IBAction)importContactFromAddressBook:(id)sender 
 {
+    [FlurryAnalytics logEvent:@"LAUNCHING ADDRESS BOOK TO IMPORT CONTACT"];
+    
     ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
     picker.peoplePickerDelegate = self;
     [self presentModalViewController:picker animated:YES];
@@ -150,8 +149,8 @@
     number = textField.text;
     accessNumberName = nameTextField.text;
 
-    //Adding new info to main view controller 
-    [self.delegate refreshTableView:number:accessNumberName];
+//    //Adding new info to main view controller 
+//    [self.delegate refreshTableView:number:accessNumberName];
     
     self.navigationItem.leftBarButtonItem.enabled = YES;
     self.navigationItem.rightBarButtonItem = nil;
@@ -164,58 +163,135 @@
 {
     [FlurryAnalytics logEvent:@"CLICK ON 'CONTINUE' - LEAVING SECOND SCREEN"];
     NSLog(@"entering continueView disimssing manual number ");
+    
+    //Adding new info to main view controller 
+    [self.delegate refreshTableView:number:accessNumberName];
+
     [self dismissModalViewControllerAnimated:YES];
+    
 }
 
+//***** ADDRESS BOOK DELEGATE METHODS *****//
 
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person {
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier{
     
-//    NSString* name = (NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
-//    NSString *name = [[NSString alloc] init];
-//    ABMultiValueRef *phones = (ABMultiValueRef *) ABRecordCopyValue(person, kABPersonFirstNameProperty);
+    //    NSLog(@"****************** entering peoplePickerNavigationController");
     
-//    CFStringRef name = (CFStringRef)ABRecordCopyValue(person, kABPersonFirstNameProperty);
-//    
-//    NSLog(@"self.firstName.text is: %@", name);
-//    
-//    self.lastName.text = (__bridge_transfer  NSString *) name;
-//    
-//    NSLog(@"self.firstName.text is: %@", self.lastName.text);
+    NSString *importedContactFirstName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+  //  NSLog(@"first name is: %@", importedContactFirstName);
+    NSString *importedContactLastName = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
+    //self.lastName = name;
+  //  NSLog(@"last name is: %@", importedContactLastName);
+    
+    NSString *importedContactFullName = [[NSString alloc] init];
+    
+    if (importedContactFirstName == nil){
+        importedContactFullName = [NSString stringWithFormat:@"%@", importedContactLastName]; 
+    }
+    else if (importedContactLastName == nil)   {
+        importedContactFullName = [NSString stringWithFormat:@"%@", importedContactFirstName]; 
+    }
+    else {
+        importedContactFullName = [NSString stringWithFormat:@"%@ %@", importedContactFirstName, importedContactLastName]; 
+    }
+
+        
+    NSString *phoneNumber = [[NSString alloc] initWithString:@""];
 
     
-    NSString* name = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+    if (property == kABPersonPhoneProperty) {
+        ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
+        for(CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++) {
+            if(identifier == ABMultiValueGetIdentifierAtIndex (multiPhones, i)) {
+                CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, i);
+                CFRelease(multiPhones);
+                phoneNumber = (__bridge NSString *) phoneNumberRef;
+                CFRelease(phoneNumberRef);
+                //txtPhoneNumber.text = [NSString stringWithFormat:@"%@", phoneNumber];
+               // NSLog(@" phoneNumber is: %@", phoneNumber);
+            }
+        }
+    }
     
-    NSString *temp = [[NSString alloc] init];
-    
-    temp = name;
-    
-    self.lastName.text = name;
-    
-    
-    NSLog(@"self.firstName.text is: %@", self.lastName.text);
-    NSLog(@"temp is: %@", temp);
-    NSLog(@"name is: %@", name);
-    
-//    name = ( NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
-//    self.firstName.text = name;
-//    
-//    NSLog(@"self.firstName.text is: %@", self.firstName.text);
-//
-//    name = (NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
-//    self.lastName.text = name;
-//    
-//    NSLog(@" self.lastName.text is: %@",  self.lastName.text);
-//
-    [self dismissModalViewControllerAnimated:YES];
+    number = textField.text;
+    accessNumberName = nameTextField.text;
+//    NSString *formattedString = [NSString stringWithFormat:@"%@ %@", importedContactFirstName, importedContactLastName];
+
+    nameTextField.text = importedContactFullName;
+    textField.text = phoneNumber;
+    accessNumberName = importedContactFullName;
+    number = phoneNumber;
+
+//    //Adding new info to main view controller 
+//    [self.delegate refreshTableView:number:accessNumberName];
+
+    UIBarButtonItem *continueButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Continue", nil) style:UIBarButtonItemStyleDone target:self action:@selector(continueView:)];
+    self.navigationItem.rightBarButtonItem = continueButton;
+
+    [self dismissModalViewControllerAnimated:YES];    
     
     return NO;
 }
 
-- (void)peoplePickerNavigationControllerDidCancel: (ABPeoplePickerNavigationController *)peoplePicker 
-{    
+- (void)peoplePickerNavigationControllerDidCancel: (ABPeoplePickerNavigationController *)peoplePicker {
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person {
+    return YES;
+}
+
+
+//- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person {
+//    
+////    NSString* name = (NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+////    NSString *name = [[NSString alloc] init];
+////    ABMultiValueRef *phones = (ABMultiValueRef *) ABRecordCopyValue(person, kABPersonFirstNameProperty);
+//    
+////    CFStringRef name = (CFStringRef)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+////    
+////    NSLog(@"self.firstName.text is: %@", name);
+////    
+////    self.lastName.text = (__bridge_transfer  NSString *) name;
+////    
+////    NSLog(@"self.firstName.text is: %@", self.lastName.text);
+//
+//    
+//    NSString* name = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+//    
+//    NSString *temp = [[NSString alloc] init];
+//    
+//    temp = name;
+//    
+//    self.lastName.text = name;
+//    
+//    
+//    NSLog(@"self.firstName.text is: %@", self.lastName.text);
+//    NSLog(@"temp is: %@", temp);
+//    NSLog(@"name is: %@", name);
+//    
+////    name = ( NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+////    self.firstName.text = name;
+////    
+////    NSLog(@"self.firstName.text is: %@", self.firstName.text);
+////
+////    name = (NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
+////    self.lastName.text = name;
+////    
+////    NSLog(@" self.lastName.text is: %@",  self.lastName.text);
+////
+//    [self dismissModalViewControllerAnimated:YES];
+//    
+//    return NO;
+//}
+//
+//- (void)peoplePickerNavigationControllerDidCancel: (ABPeoplePickerNavigationController *)peoplePicker 
+//{    
+//    [self dismissModalViewControllerAnimated:YES];
+//}
+
+
+//***** TEXT FIELD DELEGATE METHODS *****//
 - (BOOL)textFieldShouldReturn:(UITextField *)textField1 {
 
     if (textField1 == nameTextField) {

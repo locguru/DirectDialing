@@ -6,6 +6,9 @@
   Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 */
 
+//App Delegate
+"AnErrorOccured" = "An error occurred";
+"SuccessfullySharedFacebook" = "You successfully shared Smart Phone on Facebook";
 
 //AccessNumber.m
 "TITLE" = "Step 1: Select Your Access Number";
@@ -14,12 +17,14 @@
 "AddNewAccessNumber" = "Add new access number";
 "AddressBook" = "                         Address Book";
 "DialingConfirmation" = "Please confirm dialing to:\n%@ \nwith the access code:\n%@";
-"EnterAccessNumberAndTryAgain" = "Please enter an Access Number and try again";
+"EnterAccessNumberAndTryAgain" = "Please enter/select an Access Number and try again";
 "Ok" = "Ok";
 "Cancel" = "Cancel";
 "SelectAccessNumber" = "1. Select your access number";
 "SelectPasscode" = "2. Select direct/passcode number";
 "Delete" = "Delete";
+"Dial" = "Dial";
+"Options" = "Options";
 
 //SettingsTabViewController.m
 "ContactName" = "contact name";
@@ -29,9 +34,29 @@
 "EnterInstructions" = "Enter here the name and the number of your contact's access number";
 "ContactNameCaps" = "Contact Name";
 "AccessNumberCaps" = "Access Number";
+"ImportContactFromAB" = "Import Contact from Address Book";
 
 //Settings.m
-"NumberInstructions" = "Turn this option ON to allow the app to autimatically remove international prefixes";
+"DialConfirmationAlertFooter" = "Always ask me before dialing";
+"Settings" = "Settings";
+"Done" = "Done";
+"Email" = "Email";
+"SendingFailed" = "Sending Failed - Unknown Error";
+"TwitterOSVersion" = "Your OS version doesn't support Twitter on this app. Please upgrade your OS and try again";
+"Dismiss" = "Dismiss";
+"TweetCancelled" = "Tweet composition was canceled";
+"TweetPosted" = "Your tweet has been posted!";
+"NotificationSettings" = "Notification Settings";
+"SharingOptions" = "Sharing Options";
+"ContactUs" = "Contact Us";
+"DialConfirmationAlert" = "Dial Confirmation Alert";
+"ShareFacebook" = "Share on Facebook";
+"PostTwitter" = "Post to Twitter";
+"SendFeedback" = "Send us feedback";
 
 
-//NSLocalizedString(@"AccessNumberCaps", nil)
+//"DialConfirmationAlert" = "Turn this alert off to dial immediately after selecting your number without confirming";
+//"NumberInstructions" = "Turn this option ON to allow the app to autimatically remove international prefixes";
+
+
+//NSLocalizedString(@"SuccessfullySharedFacebook", nil)

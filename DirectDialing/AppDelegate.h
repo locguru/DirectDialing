@@ -7,17 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FBConnect.h"
 
-//@class ViewController;
 @class AccessNumber;
 @class Settings;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate> 
+@interface AppDelegate : UIResponder <UIApplicationDelegate, FBSessionDelegate, FBRequestDelegate> {
+    
+    Facebook *facebook;
+}
 
 @property (strong, nonatomic) UIWindow *window;
-//@property (strong, nonatomic) ViewController *viewController;
 @property (strong, nonatomic) AccessNumber *accessNumber;
-@property (strong, nonatomic) Settings *settingsvc;
+@property (nonatomic, retain) Facebook *facebook;
 
 void uncaughtExceptionHandler(NSException *exception);
 

@@ -6,26 +6,53 @@
   Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 */
 
+//App Delegate
+"AnErrorOccured" = "Se produjo un error";
+"SuccessfullySharedFacebook" = "Usted éxito compartido en Facebook Smart Phone";
+
 //AccessNumber.m
-"AccessNumberName" = "Nombre Número de acceso";
+"TITLE" = "Step 1: Select Your Access Number";
+"AccessNumberName" = "Nombre del número de acceso";
 "AccessNumber" = "Número de Acceso";
 "AddNewAccessNumber" = "Añadir nuevo número de acceso";
 "AddressBook" = "                   Libreta de direcciones";
-"DialingConfirmation" = "Por favor, confirme que marcar:\n%@ \ncon el código de acceso:\n%@";
+"DialingConfirmation" = "Por favor, confirme marcar a:\n%@ \ncon el código de acceso:\n%@";
 "EnterAccessNumberAndTryAgain" = "Por favor, introduzca un número de acceso y vuelva a intentarlo";
 "Ok" = "Ok";
-"Cancel" = "cancelar";
+"Cancel" = "Cancelar";
 "SelectAccessNumber" = "1. Seleccione número de acceso";
-"SelectPasscode" = "2. Seleccione directa/código de acceso número";
-"Delete" = "borrar";
+"SelectPasscode" = "2. Seleccione directa/número de código de acceso";
+"Delete" = "Borrar";
+"Dial" = "Llamar";
+"Options" = "Opciones";
 
 //SettingsTabViewController.m
-"ContactName" = "contacto nombre";
+"ContactName" = "Nombre de Contacto";
 "AccessNumber" = "Número Acceso";
-"Continue" = "continuar";
+"Continue" = "Continuar";
 "EnterAccessNumber" = "Ingrese su número de acceso";
 "EnterInstructions" = "Escriba aquí el nombre y el número de número de acceso de tu contacto";
-"ContactNameCaps" = "contacto nombre";
+"ContactNameCaps" = "Nombre Contacto";
 "AccessNumberCaps" = "Número Acceso";
+"ImportContactFromAB" = "Importar contacto de la Libreta de Direcciónes";
+
+//Settings.m
+"DialConfirmationAlertFooter" = "Preguntar siempre antes de marcar";
+"Settings" = "Configuración";
+"Done" = "Hecho";
+"Email" = "E-mail";
+"SendingFailed" = "Envió Fallido - error desconocido";
+"TwitterOSVersion" = "Su versión del OS no es compatible con la aplicación de Twitter. Por favor, actualice su OS y vuelva a intentarlo";
+"Dismiss" = "Ignorar";
+"TweetCancelled" = "Composicion Tweet fue cancelada";
+"TweetPosted" = "Su tweet-ha sido publicado!";
+"NotificationSettings" = "Configuración de notificaciones";
+"SharingOptions" = "Opciones para compartir";
+"ContactUs" = "Contáctenos";
+"DialConfirmationAlert" = "Marque la alerta de Confirmación";
+"ShareFacebook" = "Compartir en Facebook";
+"PostTwitter" = "Publicar en Twitter";
+"SendFeedback" = "Envíenos sus comentarios";
+
 
 //NSLocalizedString(@"EnterInstructions", nil)

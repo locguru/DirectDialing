@@ -7,23 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Facebook.h"
 #import <MessageUI/MessageUI.h>
 #import "FlurryAnalytics.h"
+#import "AccessNumber.h"
 
-@interface Settings : UIViewController <UITableViewDelegate, UITableViewDataSource, FBSessionDelegate, FBRequestDelegate, MFMailComposeViewControllerDelegate> {
+
+@interface Settings : UIViewController <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate> {
     
     IBOutlet UITableView *tblSimpleTable;
     NSMutableArray *listOfItems;
-
-   	//Facebook 
-    Facebook *facebook;
+    UISwitch *switch1;
 
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *tblSimpleTable;
 @property (nonatomic, retain) NSMutableArray *listOfItems;
+@property (nonatomic, retain) UISwitch *switch1;
 
-@property (nonatomic, retain) Facebook *facebook;
+- (IBAction)switchAction:(id)sender;
 
 @end

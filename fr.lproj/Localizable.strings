@@ -6,27 +6,50 @@
   Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 */
 
+//App Delegate
+"AnErrorOccured" = "Une erreur s'est produite";
+"SuccessfullySharedFacebook" = "Vous avez réussi à partager Smart Phone sur Facebook";
+
 //AccessNumber.m
 "TITLE" = "Step 1: Select Your Access Number";
 "AccessNumberName" = "Accès Nom Nombre";
-"AccessNumber" = "Accès Nombre";
+"AccessNumber" = "Numéro D'accès";
 "AddNewAccessNumber" = "Ajouter nouveau numéro d'accès";
-"AddressBook" = "                         Carnet D'adresses";
-"DialingConfirmation" = "S'il vous plaît confirmer numérotation:\n%@ \navec le code d'accès:\n%@";
-"EnterAccessNumberAndTryAgain" = "S'il vous plaît entrer un numéro d'accès et essayez à nouveau";
+"AddressBook" = "                      Carnet D'adresses";
+"DialingConfirmation" = "Merci de confirmer la numérotation:\n%@ \navec le code d'accès:\n%@";
+"EnterAccessNumberAndTryAgain" = "Merci d'entrer un numéro d'accès et de réessayer";
 "Ok" = "Ok";
-"Cancel" = "annuler";
+"Cancel" = "Annuler";
 "SelectAccessNumber" = "1. Sélectionnez votre numéro d'accès";
-"SelectPasscode" = "2. Sélectionnez directe numéro";
+"SelectPasscode" = "2. Sélectionnez numéro direct/code d'accès";
 "Delete" = "Effacer";
+"Dial" = "Appeler";
+"Options" = "Options";
 
 //SettingsTabViewController.m
-"ContactName" = "le nom du contact";
-"AccessNumber" = "numéro d'accès";
-"Continue" = "continuer";
+"ContactName" = "Le nom du contact";
+"AccessNumber" = "Numéro d'accès";
+"Continue" = "Continuer";
 "EnterAccessNumber" = "Entrez votre numéro d'accès";
-"EnterInstructions" = "Entrez ici le nom et le nombre de numéro d'accès de votre contact";
+"EnterInstructions" = "Entrez ici le nom et le numéro du numéro d'accès de votre contact";
 "ContactNameCaps" = "Nom du contact";
 "AccessNumberCaps" = "Numéro d'accès";
+"ImportContactFromAB" = "Importer le contact à partir du carnet d'adresse";
 
-//NSLocalizedString(@"EnterInstructions", nil)
+//Settings.m
+"DialConfirmationAlertFooter" = "Toujours me demander avant d'appeler";
+"Settings" = "Paramètres";
+"Done" = "Fait";
+"Email" = "Email";
+"SendingFailed" = "L'envoi a échoué - Erreur inconnue";
+"TwitterOSVersion" = "Votre version d'OS ne supporte pas Twitter sur cette application. Merci de mettre à jour votre OS et de réessayer";
+"Dismiss" = "Rejeter";
+"TweetCancelled" = "La compostion tweet a été annulée";
+"TweetPosted" = "Votre tweet a été posté!";
+"NotificationSettings" = "Paramètres de notification";
+"SharingOptions" = "Options de partage";
+"ContactUs" = "Contactez-nous";
+"DialConfirmationAlert" = "Composez l'alerte de confirmation";
+"ShareFacebook" = "Partager sur Facebook";
+"PostTwitter" = "Publier sur Twitter";
+"SendFeedback" = "Envoyer nous vos commentaires";
